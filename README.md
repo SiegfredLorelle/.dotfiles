@@ -59,8 +59,6 @@ Before you begin, ensure you have the following installed:
 
 ### Installation Steps
 
----
-
 1.  **Clone the Repository**
 
     Clone the dotfiles repository into within your home directory (e.g., `~/.dotfiles`). Using **SSH for cloning is generally preferred** for security and convenience after initial setup.
