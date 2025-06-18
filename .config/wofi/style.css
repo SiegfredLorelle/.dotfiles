@@ -1,0 +1,37 @@
+window {
+  background-color: #2e3440;     /* Window background */
+  color: #d8dee9;                /* Default text color */
+  border-radius: 12px;           /* Rounded corners */
+}
+
+#input {
+  background-color: #3b4252;     /* Search bar background */
+  color: #eceff4;                /* Search text color */
+  border: 2px solid #434c5e;     /* Border color */
+  padding: 8px;
+}
+
+#inner-box {
+  background-color: transparent; /* Inner content area */
+}
+
+#outer-box {
+  margin: 10px;                 /* Window margins */
+}
+
+#scroll {
+  margin: 5px 0;
+}
+
+#entry {
+  padding: 6px;
+}
+
+#entry:selected {               /* Highlighted item */
+  background-color: #4c566a;
+  border-radius: 8px;
+}
+
+#text {                         /* Item text */
+  padding: 2px 4px;
+}
