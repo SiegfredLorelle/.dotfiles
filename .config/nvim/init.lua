@@ -44,6 +44,9 @@ require('lazy').setup({
 	filesystem = {
 		filtered_items = {
 			visible = true,
+			never_show = {
+				".git"
+			},
 		}
 	},
     -- fill any relevant options here
