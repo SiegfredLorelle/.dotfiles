@@ -52,10 +52,7 @@ require('lazy').setup({
     -- fill any relevant options here
   },
 },
-{
-  "olimorris/onedarkpro.nvim",
-  priority = 1000, -- Ensure it loads first
-},
+require 'plugins.colortheme'
 })
 
 vim.cmd("colorscheme onedark")
