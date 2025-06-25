@@ -2,4 +2,7 @@
 	email = siegfredlorelle09@gmail.com
 	name = Siegfred Lorelle Mina
 [core]
-	editor = code --wait
+    # for VSCode
+    # editor = code --wait
+    # for neovim
+    editor = nvim
