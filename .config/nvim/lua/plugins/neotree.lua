@@ -381,7 +381,7 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<leader>e", ":Neotree toggle position=left<CR>")
+--      vim.keymap.set("n", "<leader>e", ":Neotree toggle position=left<CR>")
     end,
   },
 }
