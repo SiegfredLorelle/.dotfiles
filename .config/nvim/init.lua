@@ -34,4 +34,5 @@ require('lazy').setup({
   require 'plugins.nekovim',
   require 'plugins.wakatime',
   require 'plugins.smartopen',
+  require 'plugins.treesitter',
 })
