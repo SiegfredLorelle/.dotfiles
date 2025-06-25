@@ -58,6 +58,7 @@ return {
         -- pcall(require('telescope').load_extension, 'fzf')
         -- pcall(require('telescope').load_extension, 'ui-select')
         pcall(require('telescope').load_extension, 'file_browser')
+        pcall(require('telescope').load_extension, 'smart_open')
         -- See `:help telescope.builtin`
         local builtin = require 'telescope.builtin'
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
@@ -71,8 +72,9 @@ return {
             })
         end, {})
 
-        vim.keymap.set('n', '<leader>e', ':Telescope file_browser<CR>', { desc = 'File explorer' }) 
-        vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Git files' }) 
+        vim.keymap.set('n', '<leader>pe', ':Telescope file_browser<CR>', { desc = 'File explorer' }) 
+        vim.keymap.set('n', '<leader>pd', builtin.git_files, { desc = 'Git files' }) 
         vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
+        vim.keymap.set('n', '<leader>p', ':Telescope smart_open<CR>', {desc = 'Smart open'})
     end
 }    

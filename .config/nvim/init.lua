@@ -33,4 +33,5 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.nekovim',
   require 'plugins.wakatime',
+  require 'plugins.smartopen',
 })
