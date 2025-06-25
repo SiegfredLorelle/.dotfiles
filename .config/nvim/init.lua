@@ -32,4 +32,5 @@ require('lazy').setup({
   require 'plugins.colortheme',
   require 'plugins.telescope',
   require 'plugins.nekovim',
+  require 'plugins.wakatime',
 })
