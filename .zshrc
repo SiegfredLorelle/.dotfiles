@@ -33,8 +33,9 @@ if [[ -d "$HOME/.pyenv" ]]; then
     eval "$(pyenv init -)"
 fi
 
-# Theme (for Qt applications on KDE)
-export QT_QPA_PLATFORMTHEME=kde
+if uwsm check may-start; then
+    exec uwsm start hyprland.desktop
+fi
 
 # Additional common Zsh setup (Highly Recommended)
 # This is a good place to put additional setup you'd typically find in a Zsh config.
