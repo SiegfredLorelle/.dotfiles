@@ -8,8 +8,11 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- For conciseness
 local opts = { noremap = true, silent = true }
 
+-- move selection up/down
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- save file
--- vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
+vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
 
 -- save file without auto-formatting
 -- vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
@@ -34,8 +37,7 @@ vim.keymap.set('n', '<Down>', ':resize +2<CR>', opts)
 vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', opts)
 vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
 
--- Buffers
--- vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
+-- Buffers vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts) 
 -- vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
 -- vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', opts) -- close buffer
 -- vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer

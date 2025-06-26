@@ -1,0 +1,27 @@
+# Cursor
+export XCURSOR_SIZE=24
+export HYPRCURSOR_SIZE=24
+
+# Wayland toolkit variables (essential)
+export GDK_BACKEND=wayland,x11
+export QT_QPA_PLATFORM=wayland;xcb
+export SDL_VIDEODRIVER=wayland
+export CLUTTER_BACKEND=wayland
+
+# Qt specific
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_QPA_PLATFORMTHEME=kde
+
+# Theme variables
+export XCURSOR_THEME=Adwaita
+export GTK_THEME=Adwaita:dark
+export QT_STYLE_OVERRIDE=Fusion
+export COLOR_SCHEME=prefer-dark
+
+# Electron apps
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+export ELECTRON_ENABLE_WAYLAND=1
+
+# Add UWSM finalize variables
+export UWSM_FINALIZE_VARNAMES="XCURSOR_THEME GTK_THEME QT_STYLE_OVERRIDE"

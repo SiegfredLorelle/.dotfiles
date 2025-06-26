@@ -29,12 +29,13 @@ vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default (default: 'auto')
 
 vim.o.updatetime = 100 -- Decrease update time (default: 4000)
 vim.opt.colorcolumn = "80"
--- vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. (default: '')
+
+vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. (default: '')
 -- vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
--- vim.o.mouse = 'a' -- Enable mouse mode (default: '')
+vim.o.mouse = 'a' -- Enable mouse mode (default: '')
 -- vim.o.autoindent = true -- Copy indent from current line when starting new one (default: true)
--- vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search (default: false)
--- vim.o.smartcase = true -- Smart case (default: false)
+vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search (default: false)
+vim.o.smartcase = true -- Smart case (default: false)
 -- vim.o.sidescrolloff = 8 -- Minimal number of screen columns either side of cursor if wrap is `false` (default: 0)
 -- vim.o.cursorline = false -- Highlight the current line (default: false)
 -- vim.o.splitbelow = true -- Force all horizontal splits to go below current window (default: false)
