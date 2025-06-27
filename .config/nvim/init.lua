@@ -36,4 +36,5 @@ require("lazy").setup({
     require("plugins.smartopen"),
     require("plugins.treesitter"),
     require("plugins.lsp"),
+    require("plugins.undotree"),
 })
