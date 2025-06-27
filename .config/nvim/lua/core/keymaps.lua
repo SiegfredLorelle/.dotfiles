@@ -56,7 +56,20 @@ vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
 vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
--- -- Tabs
+-- Indent current line right (<C-]>)
+-- Indent current line left (<C-[>)
+-- Use the indent commands directly
+vim.keymap.set('n', '<C-[>', '<cmd>><CR>', opts)
+vim.keymap.set('n', '<C-]>', '<cmd><<CR>', opts)
+
+
+-- "True delete" versions (don't yank)
+vim.keymap.set('n', '<leader>dd', '"_dd', opts)  -- delete line
+vim.keymap.set('n', '<leader>dw', '"_dw', opts)  -- delete word
+vim.keymap.set('n', '<leader>x', '"_x', opts)    -- delete char
+vim.keymap.set('v', '<leader>d', '"_d', opts)    -- delete selection
+
+-- Tabs
 -- vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
 -- vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
 -- vim.keymap.set('n', '<leader>tn', ':tabn<CR>', opts) --  go to next tab
