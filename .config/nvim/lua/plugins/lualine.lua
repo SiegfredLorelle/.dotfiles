@@ -1,20 +1,20 @@
 return {
-    'nvim-lualine/lualine.nvim',
+'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
 
     config = function ()
         local colors = {
-            bg = "#1e1e2e",
+            bg = "#282C34",
+            lbg = "#3F4451",
             fg = "#cdd6f4",
-            yellow = "#f9e2af",
-            cyan = "#89dceb",
-            darkblue = "#89b4fa",
-            green = "#a6e3a1",
-            orange = "#fab387",
-            violet = "#f5c2e7",
-            magenta = "#cba6f7",
-            blue = "#74c7ec",
-            red = "#f38ba8",
+            lfg = "#abb2bf",
+            yellow = "#e5c07b",
+            cyan = "#56b6c2",
+            green = "#98c379",
+            magenta = "#c678dd",
+            violet = "#cba6f7",
+            blue = "#61afef",
+            red = "#e06c75",
         }
         local theme = {
             normal = {
@@ -68,26 +68,26 @@ return {
         }
 
         local mode_color = {
-            n = colors.red,
-            i = colors.green,
-            v = colors.blue,
-            [""] = colors.blue,
-            V = colors.blue,
-            c = colors.magenta,
-            no = colors.red,
+            n = colors.magenta,
+            i = colors.red,
+            v = colors.green,
+            [""] = colors.green,
+            V = colors.green,
+            c = colors.blue,
+            no = colors.magenta,
             s = colors.orange,
             S = colors.orange,
             [""] = colors.orange,
             ic = colors.yellow,
             R = colors.violet,
             Rv = colors.violet,
-            cv = colors.red,
-            ce = colors.red,
+            cv = colors.magenta,
+            ce = colors.magenta,
             r = colors.cyan,
             rm = colors.cyan,
             ["r?"] = colors.cyan,
-            ["!"] = colors.red,
-            t = colors.red,
+            ["!"] = colors.magenta,
+            t = colors.magenta,
         }
 
         local mode = {
@@ -119,7 +119,7 @@ return {
             return icon_part .. " " .. filepath
         end,
         separator = { right = "" },
-        color = { bg = colors.magenta, fg = colors.bg, gui = "bold" },
+        color = { bg = colors.lbg, fg = colors.lfg, gui = "bold" },
     }
     
     local lsp_status = {
@@ -129,9 +129,9 @@ return {
 
     local location = {
         "location",
-        color = { bg = colors.magenta, fg = colors.bg, gui = "bold" },
+        color = { bg = colors.lbg, fg = colors.lfg, gui = "bold" },
         separator = { left = "", right = "" },
-        left_padding = 2,
+        padding = { left = 2, right = 1 } 
     }
     
     require('lualine').setup {
