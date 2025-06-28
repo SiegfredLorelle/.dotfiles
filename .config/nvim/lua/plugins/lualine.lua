@@ -92,6 +92,7 @@ return {
 
         local mode = {
             "mode",
+            icon = {""},
             separator = { left = "", right = "" },
             right_padding = 2,
             color = function ()
@@ -101,6 +102,11 @@ return {
 
         local space = {
             "       ",
+        }
+
+        local branch = {
+            "branch",
+            icon = {""},
         }
 
 local filename_with_icon = {
@@ -154,10 +160,10 @@ local filename_with_icon = {
       },
   sections = {
         lualine_a = { mode },
-        lualine_b = { filename_with_icon },
-        lualine_c= {  'branch', 'diff', 'diagnostics'},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {'progress'},
+        lualine_b = { space, filename_with_icon },
+        lualine_c= {  branch, 'diff', },
+        lualine_x = { 'diagnostics' },
+        lualine_y = {''},
         lualine_z = {'location'}
       },
       inactive_sections = {
