@@ -96,35 +96,32 @@ return {
             separator = { left = "", right = "" },
             right_padding = 2,
             color = function ()
-               return { bg = mode_color[vim.fn.mode()], fg = colors.bg }
+             return { bg = mode_color[vim.fn.mode()], fg = colors.bg, gui = "bold"}
+          end,
+      }
+
+      local branch = {
+          "branch",
+          icon = {""},
+      }
+
+    local filename_with_icon = {
+        function()
+            local devicons = require('nvim-web-devicons')
+            local fname = vim.fn.expand('%:t')
+            if fname == '' or fname == '[no name]' then
+                return ""
             end
-        }
+            local icon, _ = devicons.get_icon(fname)
+            local icon_part = icon and icon or ""
+            local filepath = vim.fn.expand('%:.')
 
-        local space = {
-            "       ",
-        }
+            return icon_part .. " " .. filepath
+        end,
+        separator = { right = "" },
+        color = { bg = colors.magenta, fg = colors.bg, gui = "bold" },
+    }
 
-        local branch = {
-            "branch",
-            icon = {""},
-        }
-
-local filename_with_icon = {
-    function()
-        local devicons = require('nvim-web-devicons')
-        local fname = vim.fn.expand('%:t')
-        if fname == '' or fname == '[no name]' then
-            return ""
-        end
-        local icon, _ = devicons.get_icon(fname)
-        local icon_part = icon and icon or ""
-        local filepath = vim.fn.expand('%:.')
-        
-        return icon_part .. " " .. filepath
-    end,
-    separator = { right = "" },
-    color = { bg = colors.magenta, fg = colors.bg },
-}
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -160,7 +157,7 @@ local filename_with_icon = {
       },
   sections = {
         lualine_a = { mode },
-        lualine_b = { space, filename_with_icon },
+        lualine_b = { filename_with_icon },
         lualine_c= {  branch, 'diff', },
         lualine_x = { 'diagnostics' },
         lualine_y = {''},
