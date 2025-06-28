@@ -98,70 +98,80 @@ return {
                return { bg = mode_color[vim.fn.mode()], fg = colors.bg }
             end
         }
-        local filename = {
-            "filename",
-            separator = { right = "" },
-            color = { bg = colors.magenta, fg = colors.bg },
-            cond = function()
-                local fname = vim.fn.expand('%:t')
-                return fname ~= '' and fname ~= '[no name]'
-            end,
-            path = 1,                -- 0: Just the filename
+
+        local space = {
+            "       ",
         }
 
-        require('lualine').setup {
-          options = {
-            icons_enabled = true,
-            theme = theme,
-            component_separators = { left = '', right = ' '},
-            section_separators = { left = '', right = ''},
-            disabled_filetypes = {
-              statusline = {},
-              winbar = {},
-            },
-            ignore_focus = {},
-            always_divide_middle = true,
-            always_show_tabline = true,
-            globalstatus = false,
-            refresh = {
-              statusline = 1000,
-              tabline = 1000,
-              winbar = 1000,
-              refresh_time = 16, -- ~60fps
-              events = {
-                'WinEnter',
-                'BufEnter',
-                'BufWritePost',
-                'SessionLoadPost',
-                'FileChangedShellPost',
-                'VimResized',
-                'Filetype',
-                'CursorMoved',
-                'CursorMovedI',
-                'ModeChanged',
-              },
-            }
-          },
-          sections = {
-            lualine_a = { mode },
-            lualine_b = { filename },
-            lualine_c= {  'branch', 'diff', 'diagnostics'},
-            lualine_x = {'encoding', 'fileformat', 'filetype'},
-            lualine_y = {'progress'},
-            lualine_z = {'location'}
-          },
-          inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = {'filename'},
-            lualine_x = {'location'},
-            lualine_y = {},
-            lualine_z = {}
-          },
-          tabline = {},
+local filename_with_icon = {
+    function()
+        local devicons = require('nvim-web-devicons')
+        local fname = vim.fn.expand('%:t')
+        if fname == '' or fname == '[no name]' then
+            return ""
+        end
+        local icon, _ = devicons.get_icon(fname)
+        local icon_part = icon and icon or ""
+        local filepath = vim.fn.expand('%:.')
+        
+        return icon_part .. " " .. filepath
+    end,
+    separator = { right = "" },
+    color = { bg = colors.magenta, fg = colors.bg },
+}
+    require('lualine').setup {
+      options = {
+        icons_enabled = true,
+        theme = theme,
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        disabled_filetypes = {
+          statusline = {},
           winbar = {},
-          inactive_winbar = {},
-          extensions = {}
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        always_show_tabline = true,
+        globalstatus = false,
+        refresh = {
+          statusline = 1000,
+          tabline = 1000,
+          winbar = 1000,
+          refresh_time = 16, -- ~60fps
+          events = {
+            'winenter',
+            'bufenter',
+            'bufwritepost',
+            'sessionloadpost',
+            'filechangedshellpost',
+            'vimresized',
+            'filetype',
+            'cursormoved',
+            'cursormovedi',
+            'modechanged',
+          },
         }
-    end
+      },
+  sections = {
+        lualine_a = { mode },
+        lualine_b = { filename_with_icon },
+        lualine_c= {  'branch', 'diff', 'diagnostics'},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+      },
+      tabline = {},
+      winbar = {},
+      inactive_winbar = {},
+      extensions = {}
+    }
+end
 }
