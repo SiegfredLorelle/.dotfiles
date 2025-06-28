@@ -1,4 +1,4 @@
-require("core.keymaps")
+    require("core.keymaps")
 require("core.options")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -16,7 +16,7 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
+    -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
 --    :Lazy
@@ -37,4 +37,5 @@ require("lazy").setup({
     require("plugins.treesitter"),
     require("plugins.lsp"),
     require("plugins.undotree"),
+    require("plugins.lualine"),
 })
