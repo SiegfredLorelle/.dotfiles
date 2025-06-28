@@ -121,7 +121,19 @@ return {
         separator = { right = "" },
         color = { bg = colors.magenta, fg = colors.bg, gui = "bold" },
     }
+    
+    local lsp_status = {
+        "lsp_status",
+        icons_enabled = false,
+    }
 
+    local location = {
+        "location",
+        color = { bg = colors.magenta, fg = colors.bg, gui = "bold" },
+        separator = { left = "", right = "" },
+        left_padding = 2,
+    }
+    
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -160,8 +172,8 @@ return {
         lualine_b = { filename_with_icon },
         lualine_c= {  branch, 'diff', },
         lualine_x = { 'diagnostics' },
-        lualine_y = {''},
-        lualine_z = {'location'}
+        lualine_y = { lsp_status },
+        lualine_z = { location }
       },
       inactive_sections = {
         lualine_a = {},
