@@ -56,11 +56,12 @@ vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
 vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
--- Indent current line right (<C-]>)
--- Indent current line left (<C-[>)
--- Use the indent commands directly
-vim.keymap.set('n', '<C-[>', '<cmd>><CR>', opts)
-vim.keymap.set('n', '<C-]>', '<cmd><<CR>', opts)
+-- Indent current line (normal mode)
+vim.keymap.set('n', '<C-]>', '<cmd>><CR>', opts)
+vim.keymap.set('n', '<C-[>', '<cmd><<CR>', opts)
+-- Indent visually selected lines
+vim.keymap.set('v', '<C-]>', '>gv', opts)
+vim.keymap.set('v', '<C-[>', '<gv', opts)
 
 
 -- "True delete" versions (don't yank)
