@@ -22,6 +22,7 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 css = { "prettier" },
+ 				qml = { "qmlformat" },
                 html = { "prettier" },
             }
         })
@@ -49,7 +50,7 @@ return {
                 "ts_ls",
                 "ruff",
                 "html",
-
+                "qmlls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -65,7 +66,7 @@ return {
                         settings = {
                             Lua = {
                                 format = {
-                                    enable = true,
+                                enable = true,
                                     -- Put format options here
                                     -- NOTE: the value should be STRING!!
                                     defaultConfig = {
@@ -91,7 +92,7 @@ return {
                 end,
             }
         })
-
+        
         -- Helper function to check if we're in a snippet
         local has_words_before = function()
             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -103,7 +104,7 @@ return {
         cmp.setup({
             snippet = {
                 expand = function(args)
-                    require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
             mapping = cmp.mapping.preset.insert({
