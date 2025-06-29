@@ -1,4 +1,5 @@
 import Quickshell
+import QtQuick
 
 Scope {
     Variants {
@@ -7,17 +8,20 @@ Scope {
         PanelWindow {
             property var modelData
             screen: modelData
-
+            
             anchors {
                 top: true
+                bottom: true
                 left: true
-                right: true
             }
-
-            implicitHeight: 20
+            
+            implicitWidth: 50 
 
             ClockWidget {
-                anchors.centerIn: parent
+                anchors {
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                }
             }
         }
     }

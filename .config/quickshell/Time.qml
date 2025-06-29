@@ -1,12 +1,15 @@
 pragma Singleton
 
 import Quickshell
-import QtQuick
 
 Singleton {
-    id: root
-    readonly property string time: {
-        Qt.formatDateTime(clock.date , "ddd MMM hh:mm:ss AP t yyyy")
+    readonly property date date: clock.date
+    readonly property int hours: clock.hours
+    readonly property int minutes: clock.minutes
+    readonly property int seconds: clock.seconds
+
+    function format(fmt: string): string {
+        return Qt.formatDateTime(clock.date, fmt);
     }
 
     SystemClock {
