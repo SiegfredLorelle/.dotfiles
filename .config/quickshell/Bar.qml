@@ -8,14 +8,22 @@ Scope {
         PanelWindow {
             property var modelData
             screen: modelData
-            
+            color: "transparent"
+
             anchors {
                 top: true
                 bottom: true
                 left: true
             }
-            
             implicitWidth: 50 
+
+            Rectangle {
+                anchors.fill: parent
+                color: "#F5DEB3"
+
+                topRightRadius: 12  
+                bottomRightRadius: 12
+            }
 
             ClockWidget {
                 anchors {
