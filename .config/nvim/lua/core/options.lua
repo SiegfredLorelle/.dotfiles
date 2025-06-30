@@ -37,13 +37,14 @@ vim.o.smartcase = true -- Smart case (default: false)
 
 vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. (default: '')
 
+vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
+
 -- vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
 -- vim.o.autoindent = true -- Copy indent from current line when starting new one (default: true)
 -- vim.o.sidescrolloff = 8 -- Minimal number of screen columns either side of cursor if wrap is `false` (default: 0)
 -- vim.o.cursorline = false -- Highlight the current line (default: false)
 -- vim.o.splitbelow = true -- Force all horizontal splits to go below current window (default: false)
 -- vim.o.splitright = true -- Force all vertical splits to go to the right of current window (default: false)
--- vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
 -- vim.o.whichwrap = 'bs<>[]hl' -- Which "horizontal" keys are allowed to travel to prev/next line (default: 'b,s')
 -- vim.o.numberwidth = 4 -- Set number column width to 2 {default 4} (default: 4)
 -- vim.o.showtabline = 2 -- Always show tabs (default: 1)
