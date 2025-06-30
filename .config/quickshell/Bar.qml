@@ -19,12 +19,20 @@ Scope {
 
             Rectangle {
                 anchors.fill: parent
-                color: "#F5DEB3"
+                color: "#E6C871"
 
                 topRightRadius: 12  
                 bottomRightRadius: 12
             }
 
+            OsIcon {
+                anchors {
+                    top: parent.top
+                    topMargin: 14
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+            
             ClockWidget {
                 anchors {
                     bottom: parent.bottom

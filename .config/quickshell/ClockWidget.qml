@@ -9,6 +9,7 @@ Column {
             id: day 
             text: Time.format("ddd")
             font.family: "JetBrainsMono Nerd Font"
+            color: "#236376"
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 9 
         }
@@ -17,6 +18,7 @@ Column {
             text: Time.format("dd\nMM")
             font.family: "JetBrainsMono Nerd Font"
             font.pointSize: 9 
+            color: "#236376"
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
@@ -26,6 +28,7 @@ Column {
         text: "horizontal_rule"
         font.family: "Material Symbols Rounded"
         font.pointSize: 12
+        color: "#236376"
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -34,6 +37,7 @@ Column {
         text: Time.format("hh\nmm\nss")
         font.family: "JetBrainsMono Nerd Font"
         font.pointSize: 9 
+        color: "#236376"
         anchors.horizontalCenter: parent.horizontalCenter
     }
 }
