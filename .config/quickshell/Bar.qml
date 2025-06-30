@@ -21,6 +21,7 @@ Scope {
                 anchors {
                     bottom: parent.bottom
                     horizontalCenter: parent.horizontalCenter
+                    bottomMargin: 14 
                 }
             }
         }
