@@ -25,8 +25,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Vertical scroll and center
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
+vim.keymap.set('n', '<C-d>','<C-d>zz', opts)
+vim.keymap.set('n', '<C-u>','<C-u>zz', opts)
 
 -- Find and center
 vim.keymap.set('n', 'n', 'nzzzv', opts)
@@ -57,18 +57,33 @@ vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
 -- Indent current line (normal mode)
-vim.keymap.set('n', '<C-]>', '<cmd>><CR>', opts)
-vim.keymap.set('n', '<C-[>', '<cmd><<CR>', opts)
--- Indent visually selected lines
-vim.keymap.set('v', '<C-]>', '>gv', opts)
-vim.keymap.set('v', '<C-[>', '<gv', opts)
+vim.keymap.set('n', '<C-,>', '<<', opts)  -- unindent (< shape)
+vim.keymap.set('n', '<C-.>', '>>', opts)  -- indent (> shape)
+vim.keymap.set('v', '<C-,>', '<gv', opts) -- unindent and reselect
+vim.keymap.set('v', '<C-.>', '>gv', opts) -- indent and reselect
 
 
--- "True delete" versions (don't yank)
-vim.keymap.set('n', '<leader>dd', '"_dd', opts)  -- delete line
-vim.keymap.set('n', '<leader>dw', '"_dw', opts)  -- delete word
-vim.keymap.set('n', '<leader>x', '"_x', opts)    -- delete char
+-- True delete keymaps (don't yank to clipboard/registers)
+-- Character deletion
+vim.keymap.set('n', '<leader>x', '"_x', opts)    -- delete char under cursor
+vim.keymap.set('n', '<leader>X', '"_X', opts)    -- delete char before cursor
+-- Word deletion
+vim.keymap.set('n', '<leader>dw', '"_dw', opts)  -- delete from cursor to end of word
+vim.keymap.set('n', '<leader>db', '"_db', opts)  -- delete from cursor to beginning of word
+vim.keymap.set('n', '<leader>dW', '"_dW', opts)  -- delete from cursor to end of WORD (whitespace-separated)
+vim.keymap.set('n', '<leader>dB', '"_dB', opts)  -- delete from cursor to beginning of WORD
+-- Line deletion
+vim.keymap.set('n', '<leader>dd', '"_dd', opts)  -- delete entire line
+vim.keymap.set('n', '<leader>d$', '"_d$', opts)  -- delete from cursor to end of line
+vim.keymap.set('n', '<leader>D', '"_D', opts)    -- delete from cursor to end of line (alternative)
+vim.keymap.set('n', '<leader>d0', '"_d0', opts)  -- delete from cursor to beginning of line
+vim.keymap.set('n', '<leader>d^', '"_d^', opts)  -- delete from cursor to first non-blank char
+-- File range deletion
+vim.keymap.set('n', '<leader>dG', '"_dG', opts)  -- delete from cursor to end of file
+vim.keymap.set('n', '<leader>dgg', '"_dgg', opts) -- delete from cursor to beginning of file
+-- Visual mode deletion
 vim.keymap.set('v', '<leader>d', '"_d', opts)    -- delete selection
+vim.keymap.set('v', '<leader>x', '"_x', opts)    -- delete selection (alternative)
 
 -- Tabs
 -- vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
