@@ -19,7 +19,7 @@ Scope {
                 bottom: true
                 left: true
             }
-            implicitWidth: 80
+            implicitWidth: 50
             
             Rectangle {
                 id: backgroundRect
