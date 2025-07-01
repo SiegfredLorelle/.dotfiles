@@ -1,6 +1,9 @@
 import Quickshell
 import QtQuick
-import "Workspace"
+import "components/Workspace"
+import "components/ClockWidget"
+import "components"
+
 Scope {
     Variants {
         model: Quickshell.screens
