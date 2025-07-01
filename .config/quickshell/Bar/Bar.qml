@@ -3,6 +3,7 @@ import QtQuick
 import "components/Workspace"
 import "components/ClockWidget"
 import "components"
+import "root:/Theme"
 
 Scope {
     Variants {
@@ -22,16 +23,16 @@ Scope {
 
             Rectangle {
                 anchors.fill: parent
-                color: "#E6C871"
+                color: Theme.primaryColor
 
-                topRightRadius: 12  
-                bottomRightRadius: 12
+                topRightRadius: Theme.borderRadius 
+                bottomRightRadius: Theme.borderRadius 
             }
 
             OsIcon {
                 anchors {
                     top: parent.top
-                    topMargin: 14
+                    topMargin: Theme.barGap 
                     horizontalCenter: parent.horizontalCenter
                 }
             }
@@ -39,7 +40,7 @@ Scope {
             Workspace {
                 anchors {
                     top: parent.top
-                    topMargin: 50 
+                    topMargin: Theme.barGap + 40 
                     horizontalCenter: parent.horizontalCenter
                 }                
             }
@@ -48,7 +49,7 @@ Scope {
                 anchors {
                     bottom: parent.bottom
                     horizontalCenter: parent.horizontalCenter
-                    bottomMargin: 14 
+                    bottomMargin: Theme.barGap 
                 }
             }
         }

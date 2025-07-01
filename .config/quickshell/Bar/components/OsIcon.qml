@@ -1,8 +1,10 @@
 import QtQuick
+import "root:/Theme"
+
 Text {
     id: osIcon
     text: "󰣇"
-    font.family: "JetBrainsMono Nerd Font"
-    font.pointSize: 16 
-    color: "#236376"
+    font.family: Theme.normalFontSize 
+    font.pointSize: Theme.iconSize 
+    color: Theme.secondaryColor
 }

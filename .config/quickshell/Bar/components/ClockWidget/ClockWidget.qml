@@ -1,5 +1,6 @@
- 
 import QtQuick
+import "root:/Theme"
+
 Column {
     spacing: 4 
     
@@ -8,36 +9,36 @@ Column {
         Text {
             id: day 
             text: Time.format("ddd")
-            font.family: "JetBrainsMono Nerd Font"
-            color: "#236376"
+            font.family: Theme.primaryFont
+            color: Theme.secondaryColor
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 9 
+                font.pointSize: Theme.normalFontSize 
         }
         Text {
             id: date 
             text: Time.format("dd\nMM")
-            font.family: "JetBrainsMono Nerd Font"
-            font.pointSize: 9 
-            color: "#236376"
+            font.family: Theme.primaryFont
+            font.pointSize: Theme.normalFontSize 
+            color: Theme.secondaryColor
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 
     Text {
         id: timeIcon
-        text: "horizontal_rule"
-        font.family: "Material Symbols Rounded"
-        font.pointSize: 12
-        color: "#236376"
+        text: "―"
+        font.family: Theme.primaryFont 
+        font.pointSize: Theme.largeFontSize
+        color: Theme.secondaryColor
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Text {
         id: time 
         text: Time.format("hh\nmm\nss")
-        font.family: "JetBrainsMono Nerd Font"
-        font.pointSize: 9 
-        color: "#236376"
+        font.family: Theme.primaryFont
+        font.pointSize: Theme.normalFontSize 
+        color: Theme.secondaryColor
         anchors.horizontalCenter: parent.horizontalCenter
     }
 }

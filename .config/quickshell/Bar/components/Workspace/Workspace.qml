@@ -1,15 +1,16 @@
 import Quickshell
 import Quickshell.Hyprland
 import QtQuick
+import "root:/Theme"
 
 Rectangle {
     id: workspaceContainer
     
     width: 36 
     height: childrenRect.height + 16  // Auto-height based on content + padding
-    radius: 24 
-    color: "#edd89b"
-    border.color: "#edd89b"
+    radius: width / 2 
+    color: Theme.primaryLightColor 
+    border.color: Theme.primaryLightColor
     border.width: 1
 
     Column {
@@ -32,17 +33,17 @@ Rectangle {
                 radius: width / 2 
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: {
-                    return "#E6C871"
+                    return Theme.primaryColor
                 }
 
 
                 Text {
                     anchors.centerIn: parent
                     text: workspace.id == "10" ? "0" : workspace.id
-                    font.family: "JetBrainsMono Nerd Font"
-                    font.pointSize: isActive ? 11 : 8
+                    font.family: Theme.primaryFont 
+                    font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
                     color: {
-                        return "#236376"
+                        return Theme.secondaryColor 
                     }
                     font.bold: parent.isActive
                 }
