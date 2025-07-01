@@ -19,7 +19,7 @@ Scope {
                 bottom: true
                 left: true
             }
-            implicitWidth: 50
+            implicitWidth: 80
             
             Rectangle {
                 id: backgroundRect
@@ -81,7 +81,13 @@ Scope {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
-            
+
+//             ActiveWindow {
+//                 anchors {
+//                     verticalCenter: parent.verticalCenter 
+//                 }
+//             }
+//
             ClockWidget {
                 anchors {
                     bottom: parent.bottom
