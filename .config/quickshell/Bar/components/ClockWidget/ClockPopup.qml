@@ -137,12 +137,11 @@ PopupWindow {
                 // Calendar header
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: 20
-                    
                     opacity: root.animationOpacity
                     
                     Button {
-                        text: "‹"
+                        width: 40  // Set explicit width
+                        text: "arrow_left"
                         onClicked: calendar.currentDate = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() - 1, 1)
                         background: Rectangle {
                             color: "transparent"
@@ -150,8 +149,11 @@ PopupWindow {
                         contentItem: Text {
                             text: parent.text
                             color: Theme.secondaryColor
-                            font.pointSize: Theme.normalFontSize
+                            font.pointSize: Theme.iconSize
+                            font.family: Theme.iconFont
                             horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            anchors.fill: parent  // Make text fill entire button area
                         }
                     }
                     
@@ -161,10 +163,13 @@ PopupWindow {
                         font.pointSize: Theme.normalFontSize
                         color: Theme.secondaryColor
                         anchors.verticalCenter: parent.verticalCenter
+                        width: 125  // Set consistent width for month/year text
+                        horizontalAlignment: Text.AlignHCenter
                     }
                     
                     Button {
-                        text: "›"
+                        width: 40  // Set explicit width
+                        text: "arrow_right"
                         onClicked: calendar.currentDate = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() + 1, 1)
                         background: Rectangle {
                             color: "transparent"
@@ -172,8 +177,11 @@ PopupWindow {
                         contentItem: Text {
                             text: parent.text
                             color: Theme.secondaryColor
-                            font.pointSize: Theme.normalFontSize
+                            font.pointSize: Theme.iconSize
+                            font.family: Theme.iconFont
                             horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            anchors.fill: parent  // Make text fill entire button area
                         }
                     }
                 }
