@@ -7,7 +7,12 @@ PopupWindow {
     id: root
     
     property Item anchorItem
-    property alias visible: root.visible
+    property alias containsMouse: calendarMouseArea.containsMouse
+    
+    // Animation properties
+    property real animationOpacity: 0.0
+    property real animationSlideX: -width * 0.8  // Start from left, mostly hidden
+    property bool isAnimating: false
     
     anchor {
         item: anchorItem
@@ -16,10 +21,79 @@ PopupWindow {
     
     width: 300
     height: 250 
-    color: "transparent" 
-
-    // Expose mouse area for hover detection
-    readonly property alias containsMouse: calendarMouseArea.containsMouse
+    color: "transparent"
+    visible: false
+    
+    // Public methods for showing/hiding with animation
+    function showPopup() {
+        if (isAnimating && visible) return
+        
+        visible = true
+        isAnimating = true
+        showAnimation.start()
+    }
+    
+    function hidePopup() {
+        if (isAnimating && !visible) return
+        
+        isAnimating = true
+        hideAnimation.start()
+    }
+    
+    // Show animation
+    ParallelAnimation {
+        id: showAnimation
+        
+        NumberAnimation {
+            target: root
+            property: "animationOpacity"
+            from: 0.0
+            to: 1.0
+            duration: 250
+            easing.type: Easing.OutCubic
+        }
+        
+        NumberAnimation {
+            target: root
+            property: "animationSlideX"
+            from: -root.width * 0.8
+            to: 0
+            duration: 300
+            easing.type: Easing.OutQuart
+        }
+        
+        onFinished: {
+            isAnimating = false
+        }
+    }
+    
+    // Hide animation
+    ParallelAnimation {
+        id: hideAnimation
+        
+        NumberAnimation {
+            target: root
+            property: "animationOpacity"
+            from: 1.0
+            to: 0.0
+            duration: 200
+            easing.type: Easing.InCubic
+        }
+        
+        NumberAnimation {
+            target: root
+            property: "animationSlideX"
+            from: 0
+            to: -root.width * 0.6
+            duration: 200
+            easing.type: Easing.InQuart
+        }
+        
+        onFinished: {
+            visible = false
+            isAnimating = false
+        }
+    }
     
     MouseArea {
         id: calendarMouseArea
@@ -31,6 +105,30 @@ PopupWindow {
             color: Theme.primaryColor
             radius: 8
             anchors.leftMargin: 35
+            
+            // Apply animation properties
+            opacity: root.animationOpacity
+            transform: Translate {
+                x: root.animationSlideX
+            }
+            
+            // Add subtle border and background shadow effect
+            border.width: 1
+            border.color: Qt.rgba(0, 0, 0, 0.1 * root.animationOpacity)
+            
+            // Simple shadow using a background rectangle
+            Rectangle {
+                anchors.fill: parent
+                anchors.topMargin: 2
+                anchors.leftMargin: 2
+                color: Qt.rgba(0, 0, 0, 0.1 * root.animationOpacity)
+                radius: parent.radius
+                z: -1
+                transform: Translate {
+                    x: root.animationSlideX
+                }
+            }
+            
             Column {
                 anchors.fill: parent
                 anchors.margins: 10
@@ -40,6 +138,8 @@ PopupWindow {
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 20
+                    
+                    opacity: root.animationOpacity
                     
                     Button {
                         text: "‹"
@@ -78,7 +178,7 @@ PopupWindow {
                     }
                 }
                 
-                // Calendar grid
+                // Calendar grid with subtle slide effect
                 Grid {
                     id: calendar
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -87,6 +187,12 @@ PopupWindow {
                     
                     property date currentDate: new Date()
                     property date today: new Date()
+                    
+                    // Slight delay for calendar grid to create staggered effect
+                    opacity: root.animationOpacity
+                    transform: Translate {
+                        x: root.animationSlideX * 0.2  // Subtle secondary motion
+                    }
                     
                     // Day headers
                     Repeater {
@@ -118,7 +224,7 @@ PopupWindow {
                                     calendar.currentDate.getFullYear() === calendar.today.getFullYear()) {
                                     return Theme.primaryLightColor
                                 }
-                                return mouseArea.containsMouse ? (Theme.primaryLightColor) : "transparent"
+                                return "transparent"
                             }
                             radius: 4
                             
@@ -166,12 +272,6 @@ PopupWindow {
                                     }
                                     return Theme.secondaryColor
                                 }
-                            }
-                            
-                            MouseArea {
-                                id: mouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
                             }
                         }
                     }

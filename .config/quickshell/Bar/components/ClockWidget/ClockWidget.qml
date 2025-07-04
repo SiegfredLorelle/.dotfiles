@@ -56,7 +56,7 @@ Column {
         
         // Show calendar on hover
         onEntered: {
-            clockPopup.visible = true
+            clockPopup.showPopup()
         }
         
         onExited: {
@@ -71,7 +71,7 @@ Column {
         interval: 200
         onTriggered: {
             if (!clockPopup.containsMouse) {
-                clockPopup.visible = false
+                clockPopup.hidePopup()
             }
         }
     }
@@ -80,7 +80,6 @@ Column {
     ClockPopup {
         id: clockPopup
         anchorItem: root
-        visible: false
         
         // Handle mouse events for hover management
         onContainsMouseChanged: {
