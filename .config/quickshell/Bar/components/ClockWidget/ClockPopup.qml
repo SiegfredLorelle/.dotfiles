@@ -16,7 +16,6 @@ PopupWindow {
     
     anchor {
         item: anchorItem
-        adjustment: Quickshell.Anchor.Right | Quickshell.Anchor.Top
     }
     
     width: 300
@@ -100,33 +99,22 @@ PopupWindow {
         anchors.fill: parent
         hoverEnabled: true
         
-        Rectangle {
+        Item {
             anchors.fill: parent
-            color: Theme.primaryColor
-            radius: 8
             anchors.leftMargin: 35
             
-            // Apply animation properties
+            // Apply slide animation to the entire container
             opacity: root.animationOpacity
             transform: Translate {
                 x: root.animationSlideX
             }
             
-            // Add subtle border and background shadow effect
-            border.width: 1
-            border.color: Qt.rgba(0, 0, 0, 0.1 * root.animationOpacity)
-            
-            // Simple shadow using a background rectangle
-            Rectangle {
+            // Glass effects background
+            GlassEffects {
                 anchors.fill: parent
-                anchors.topMargin: 2
-                anchors.leftMargin: 2
-                color: Qt.rgba(0, 0, 0, 0.1 * root.animationOpacity)
-                radius: parent.radius
-                z: -1
-                transform: Translate {
-                    x: root.animationSlideX
-                }
+                rightRadius: true  // Only right side has radius
+                showBorder: false
+                borderRadius: Theme.borderRadius
             }
             
             Column {
