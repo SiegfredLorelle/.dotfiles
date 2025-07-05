@@ -135,53 +135,63 @@ PopupWindow {
                 spacing: 10
                 
                 // Calendar header
-                Row {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                Item {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: Math.max(monthText.height, leftArrow.height, rightArrow.height)
                     opacity: root.animationOpacity
                     
-                    Button {
-                        width: 40  // Set explicit width
-                        text: "arrow_left"
-                        onClicked: calendar.currentDate = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() - 1, 1)
-                        background: Rectangle {
-                            color: "transparent"
-                        }
-                        contentItem: Text {
-                            text: parent.text
-                            color: Theme.secondaryColor
-                            font.pointSize: Theme.iconSize
-                            font.family: Theme.iconFont
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.fill: parent  // Make text fill entire button area
-                        }
-                    }
-                    
                     Text {
+                        id: monthText
                         text: Qt.formatDate(calendar.currentDate, "MMMM yyyy")
                         font.family: Theme.primaryFont
                         font.pointSize: Theme.normalFontSize
                         color: Theme.secondaryColor
+                        anchors.left: parent.left
+                        anchors.leftMargin: 6
                         anchors.verticalCenter: parent.verticalCenter
-                        width: 125  // Set consistent width for month/year text
-                        horizontalAlignment: Text.AlignHCenter
+                        horizontalAlignment: Text.AlignLeft
                     }
-                    
-                    Button {
-                        width: 40  // Set explicit width
-                        text: "arrow_right"
-                        onClicked: calendar.currentDate = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() + 1, 1)
-                        background: Rectangle {
-                            color: "transparent"
+
+                    Row {
+                        anchors.right: parent.right
+                        anchors.rightMargin: -6 
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        Button {
+                            id: leftArrow
+                            text: "arrow_left"
+                            onClicked: calendar.currentDate = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() - 1, 1)
+                            background: Rectangle {
+                                color: "transparent"
+                            }
+                            contentItem: Text {
+                                text: parent.text
+                                color: Theme.secondaryColor
+                                font.pointSize: Theme.iconSize
+                                font.family: Theme.iconFont
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                anchors.fill: parent
+                            }
                         }
-                        contentItem: Text {
-                            text: parent.text
-                            color: Theme.secondaryColor
-                            font.pointSize: Theme.iconSize
-                            font.family: Theme.iconFont
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.fill: parent  // Make text fill entire button area
+                        
+                        Button {
+                            id: rightArrow
+                            text: "arrow_right"
+                            onClicked: calendar.currentDate = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() + 1, 1)
+                            background: Rectangle {
+                                color: "transparent"
+                            }
+                            contentItem: Text {
+                                text: parent.text
+                                color: Theme.secondaryColor
+                                font.pointSize: Theme.iconSize
+                                font.family: Theme.iconFont
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                anchors.fill: parent
+                            }
                         }
                     }
                 }
