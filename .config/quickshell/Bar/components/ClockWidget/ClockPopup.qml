@@ -239,6 +239,7 @@ PopupWindow {
                             color: {
                                 if (dayNumber === calendar.today.getDate() && 
                                     monthOffset === 0 && 
+                                    calendar.currentDate.getMonth() === calendar.today.getMonth() && 
                                     calendar.currentDate.getFullYear() === calendar.today.getFullYear()) {
                                     return Theme.primaryLightColor
                                 }
@@ -281,12 +282,7 @@ PopupWindow {
                                 font.pointSize: Theme.smallFontSize || Theme.normalFontSize - 2
                                 color: {
                                     if (parent.monthOffset !== 0) {
-                                        return Theme.tertiaryColor || Theme.secondaryLighterColor 
-                                    }
-                                    if (parent.dayNumber === calendar.today.getDate() && 
-                                        parent.monthOffset === 0 && 
-                                        calendar.currentDate.getFullYear() === calendar.today.getFullYear()) {
-                                        return Theme.secondaryColor 
+                                        return Theme.secondaryLighterColor 
                                     }
                                     return Theme.secondaryColor
                                 }
