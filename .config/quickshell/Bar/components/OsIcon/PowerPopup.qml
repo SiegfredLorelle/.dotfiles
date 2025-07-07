@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
+import Quickshell.Io
 import "root:/Theme"
 
 PopupWindow {
@@ -20,10 +21,51 @@ PopupWindow {
         item: anchorItem
     }
     
-    width: 200
+    width: 250
     height: newsExpanded ? 300 : 80
     color: "transparent"
     visible: false
+    
+    // Process components for system commands (using the pattern from the reference code)
+    Process {
+        id: logoutProcess
+        command: ["sh", "-c", "hyprctl dispatch exit"]
+        running: false
+        onExited: {
+            running = false
+            console.log("Logout command executed")
+        }
+    }
+    
+    Process {
+        id: shutdownProcess
+        command: ["systemctl", "poweroff"]
+        running: false
+        onExited: {
+            running = false
+            console.log("Shutdown command executed")
+        }
+    }
+    
+    Process {
+        id: rebootProcess
+        command: ["systemctl", "reboot"]
+        running: false
+        onExited: {
+            running = false
+            console.log("Reboot command executed")
+        }
+    }
+    
+    Process {
+        id: lockProcess
+        command: ["sh", "-c", "hyprlock"]
+        running: false
+        onExited: {
+            running = false
+            console.log("Lock command executed")
+        }
+    }
     
     // Public methods for showing/hiding with animation
     function showPopup() {
@@ -153,6 +195,41 @@ PopupWindow {
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 6
                     
+                    // Lock button
+                    Button {
+                        id: lockButton
+                        width: 50
+                        height: 34
+                        
+                        background: Rectangle {
+                            color: parent.hovered ? Theme.primaryLightColor : "transparent"
+                            radius: 6
+                            opacity: parent.hovered ? 0.8 : 1.0
+                            
+                            Behavior on color {
+                                ColorAnimation { duration: 150 }
+                            }
+                        }
+                        
+                        contentItem: Text {
+                            text: "󰌾"  // Lock icon
+                            font.family: Theme.iconFont
+                            font.pointSize: Theme.normalFontSize
+                            color: Theme.secondaryColor
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        
+                        onClicked: {
+                            lockProcess.running = true
+                            root.hidePopup()
+                        }
+                        
+                        ToolTip.text: "Lock Screen"
+                        ToolTip.visible: hovered
+                        ToolTip.delay: 500
+                    }
+                    
                     // Logout button
                     Button {
                         id: logoutButton
@@ -179,8 +256,7 @@ PopupWindow {
                         }
                         
                         onClicked: {
-                            // Add logout command here
-                            console.log("Logout clicked")
+                            logoutProcess.running = true
                             root.hidePopup()
                         }
                         
@@ -215,8 +291,7 @@ PopupWindow {
                         }
                         
                         onClicked: {
-                            // Add shutdown command here
-                            console.log("Shutdown clicked")
+                            shutdownProcess.running = true
                             root.hidePopup()
                         }
                         
@@ -251,8 +326,7 @@ PopupWindow {
                         }
                         
                         onClicked: {
-                            // Add reboot command here
-                            console.log("Reboot clicked")
+                            rebootProcess.running = true
                             root.hidePopup()
                         }
                         
