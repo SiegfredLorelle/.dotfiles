@@ -22,7 +22,7 @@ PopupWindow {
     }
     
     width: 250 + 8 * 2
-    height: newsExpanded ? 300 : 80
+    height: newsExpanded ? 300 : 90
     color: "transparent"
     visible: false
     
@@ -209,9 +209,9 @@ PopupWindow {
                         }
                         
                         contentItem: Text {
-                            text: "󰌾"  // Lock icon
+                            text: "lock"  // Lock icon
                             font.family: Theme.iconFont
-                            font.pointSize: Theme.normalFontSize
+                            font.pointSize: Theme.iconSize
                             color: Theme.secondaryColor
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -237,13 +237,12 @@ PopupWindow {
                             color: parent.hovered ? Theme.primaryLightColor : "transparent"
                             radius: 6
                             opacity: parent.hovered ? 0.8 : 1.0
-                            // Removed Behavior - instant color change
                         }
                         
                         contentItem: Text {
-                            text: "󰍃"  // Logout icon
+                            text: "logout"  // Logout icon
                             font.family: Theme.iconFont
-                            font.pointSize: Theme.normalFontSize
+                            font.pointSize: Theme.iconSize
                             color: Theme.secondaryColor
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -273,9 +272,9 @@ PopupWindow {
                         }
                         
                         contentItem: Text {
-                            text: "󰐥"  // Shutdown icon
+                            text: "power_settings_new"  // Shutdown icon
                             font.family: Theme.iconFont
-                            font.pointSize: Theme.normalFontSize
+                            font.pointSize: Theme.iconSize
                             color: Theme.secondaryColor
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -305,9 +304,9 @@ PopupWindow {
                         }
                         
                         contentItem: Text {
-                            text: "󰜉"  // Reboot icon
+                            text: "restart_alt"  // Reboot icon
                             font.family: Theme.iconFont
-                            font.pointSize: Theme.normalFontSize
+                            font.pointSize: Theme.iconSize
                             color: Theme.secondaryColor
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -343,9 +342,9 @@ PopupWindow {
                         spacing: 4
                         
                         Text {
-                            text: "󰎕"  // News icon
+                            text: "rss_feed"  // News icon
                             font.family: Theme.iconFont
-                            font.pointSize: Theme.normalFontSize * 0.8
+                            font.pointSize: Theme.mediumFontSize
                             color: Theme.secondaryColor
                             anchors.verticalCenter: parent.verticalCenter
                         }
@@ -353,15 +352,15 @@ PopupWindow {
                         Text {
                             text: "Arch News"
                             font.family: Theme.textFont
-                            font.pointSize: Theme.normalFontSize * 0.7
+                            font.pointSize: Theme.normalFontSize
                             color: Theme.secondaryColor
                             anchors.verticalCenter: parent.verticalCenter
                         }
                         
                         Text {
-                            text: newsExpanded ? "▲" : "▼"
-                            font.family: Theme.textFont
-                            font.pointSize: Theme.normalFontSize * 0.6
+                            text: newsExpanded ? "unfold_less" : "unfold_more"
+                            font.family: Theme.iconFont
+                            font.pointSize: Theme.mediumFontSize
                             color: Theme.secondaryColor
                             anchors.verticalCenter: parent.verticalCenter
                         }
