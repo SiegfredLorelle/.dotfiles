@@ -21,7 +21,7 @@ PopupWindow {
         item: anchorItem
     }
     
-    width: 250
+    width: 250 + 8 * 2
     height: newsExpanded ? 300 : 80
     color: "transparent"
     visible: false
@@ -168,7 +168,7 @@ PopupWindow {
         
         Item {
             anchors.fill: parent
-            anchors.leftMargin: 35
+            anchors.leftMargin: 34.3
             
             // Apply slide animation to the entire container
             opacity: root.animationOpacity
@@ -188,7 +188,7 @@ PopupWindow {
             Column {
                 anchors.fill: parent
                 anchors.margins: 8
-                spacing: 8
+                spacing: 4
                 
                 // Horizontal layout for power buttons
                 Row {
@@ -340,7 +340,7 @@ PopupWindow {
                 Button {
                     id: newsToggleButton
                     anchors.horizontalCenter: parent.horizontalCenter
-                    width: 160
+                    width: 215
                     height: 30
                     
                     background: Rectangle {
@@ -394,7 +394,7 @@ PopupWindow {
                 // News items list
                 ScrollView {
                     id: newsScrollView
-                    width: parent.width - 16
+                    width: parent.width
                     height: newsExpanded ? 200 : 0
                     anchors.horizontalCenter: parent.horizontalCenter
                     visible: newsExpanded
