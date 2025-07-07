@@ -188,7 +188,7 @@ PopupWindow {
             Column {
                 anchors.fill: parent
                 anchors.margins: 8
-                spacing: 4
+                spacing: 6
                 
                 // Horizontal layout for power buttons
                 Row {
@@ -205,10 +205,7 @@ PopupWindow {
                             color: parent.hovered ? Theme.primaryLightColor : "transparent"
                             radius: 6
                             opacity: parent.hovered ? 0.8 : 1.0
-                            
-                            Behavior on color {
-                                ColorAnimation { duration: 150 }
-                            }
+                            // Removed Behavior - instant color change
                         }
                         
                         contentItem: Text {
@@ -227,7 +224,7 @@ PopupWindow {
                         
                         ToolTip.text: "Lock Screen"
                         ToolTip.visible: hovered
-                        ToolTip.delay: 500
+                        ToolTip.delay: 0  // Instant tooltip
                     }
                     
                     // Logout button
@@ -240,10 +237,7 @@ PopupWindow {
                             color: parent.hovered ? Theme.primaryLightColor : "transparent"
                             radius: 6
                             opacity: parent.hovered ? 0.8 : 1.0
-                            
-                            Behavior on color {
-                                ColorAnimation { duration: 150 }
-                            }
+                            // Removed Behavior - instant color change
                         }
                         
                         contentItem: Text {
@@ -262,7 +256,7 @@ PopupWindow {
                         
                         ToolTip.text: "Logout"
                         ToolTip.visible: hovered
-                        ToolTip.delay: 500
+                        ToolTip.delay: 0  // Instant tooltip
                     }
                     
                     // Shutdown button
@@ -275,10 +269,7 @@ PopupWindow {
                             color: parent.hovered ? Theme.primaryLightColor : "transparent"
                             radius: 6
                             opacity: parent.hovered ? 0.8 : 1.0
-                            
-                            Behavior on color {
-                                ColorAnimation { duration: 150 }
-                            }
+                            // Removed Behavior - instant color change
                         }
                         
                         contentItem: Text {
@@ -297,7 +288,7 @@ PopupWindow {
                         
                         ToolTip.text: "Shutdown"
                         ToolTip.visible: hovered
-                        ToolTip.delay: 500
+                        ToolTip.delay: 0  // Instant tooltip
                     }
                     
                     // Reboot button
@@ -310,10 +301,7 @@ PopupWindow {
                             color: parent.hovered ? Theme.primaryLightColor : "transparent"
                             radius: 6
                             opacity: parent.hovered ? 0.8 : 1.0
-                            
-                            Behavior on color {
-                                ColorAnimation { duration: 150 }
-                            }
+                            // Removed Behavior - instant color change
                         }
                         
                         contentItem: Text {
@@ -332,7 +320,7 @@ PopupWindow {
                         
                         ToolTip.text: "Reboot"
                         ToolTip.visible: hovered
-                        ToolTip.delay: 500
+                        ToolTip.delay: 0  // Instant tooltip
                     }
                 }
                 
@@ -347,10 +335,7 @@ PopupWindow {
                         color: parent.hovered ? Theme.primaryLightColor : "transparent"
                         radius: 6
                         opacity: parent.hovered ? 0.8 : 1.0
-                        
-                        Behavior on color {
-                            ColorAnimation { duration: 150 }
-                        }
+                        // Removed Behavior - instant color change
                     }
                     
                     contentItem: Row {
@@ -388,7 +373,7 @@ PopupWindow {
                     
                     ToolTip.text: newsExpanded ? "Hide Arch News" : "Show Arch News"
                     ToolTip.visible: hovered
-                    ToolTip.delay: 500
+                    ToolTip.delay: 0  // Instant tooltip
                 }
                 
                 // News items list
@@ -415,6 +400,7 @@ PopupWindow {
                                 height: newsItemColumn.height + 8
                                 color: newsItemMouseArea.containsMouse ? Theme.primaryLightColor : "transparent"
                                 radius: 4
+                                // Removed Behavior - instant color change like news items
                                 
                                 MouseArea {
                                     id: newsItemMouseArea
