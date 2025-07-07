@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import "components/Workspace"
 import "components/ClockWidget"
-import "components"
+import "components/OsIcon"
 import "root:/Theme"
 
 Scope {
