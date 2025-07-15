@@ -38,4 +38,5 @@ require("lazy").setup({
     require("plugins.lsp"),
     require("plugins.undotree"),
     require("plugins.lualine"),
+    require("plugins.indent-blankline")
 })

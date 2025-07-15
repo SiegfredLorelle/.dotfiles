@@ -39,6 +39,13 @@ vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. (defaul
 
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
 
+-- Enable list mode to show whitespace characters
+-- vim.opt.list = true
+-- vim.opt.listchars = {
+--   space = '·',        -- Show spaces as dots
+--   tab = '→ ',         -- Show tabs as arrows
+-- }
+
 -- vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
 -- vim.o.autoindent = true -- Copy indent from current line when starting new one (default: true)
 -- vim.o.sidescrolloff = 8 -- Minimal number of screen columns either side of cursor if wrap is `false` (default: 0)
