@@ -21,3 +21,19 @@
 
 ### Dashboard
 - 3 options (dashboard, performance)
+
+## Neovim
+- show the content of the diagnostics in the same line
+- change the icon of the diagnostics
+- gitkraken? show the who and the commit message on the current line
+- configure LSPs and Linters to work for:
+    - Python
+    - JS
+    - React
+    - Typscript React
+    - Readme?
+
+## zsh and kitty
+- run fastfetch every open of the terminal?
+- style it
+
