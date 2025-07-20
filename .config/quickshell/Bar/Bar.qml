@@ -19,41 +19,70 @@ Scope {
                 bottom: true
                 left: true
             }
-            implicitWidth: 50
+            implicitWidth: 70 // Accommodates both mainBar and cornerRectangle
             
-            GlassEffects {
-                anchors.fill: parent
-                rightRadius: true  // Only right side has radius
-                baseColor: Theme.primaryColor
-                borderRadius: Theme.borderRadius
-            }
-            
-            OsIcon {
+            Rectangle {
+                id: mainBar
                 anchors {
                     top: parent.top
+                    bottom: parent.bottom
+                    left: parent.left
+                }
+                width: 50
+                color: Theme.primaryColor
+            }
+            
+            Rectangle {
+                id: cornerRectangle
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: mainBar.right
+                }
+            }
+            // Top-right rounded corner for cornerRectangle
+            RoundCorner {
+                anchors {
+                    top: cornerRectangle.top
+                    left: cornerRectangle.left
+                }
+                size: 20
+                color: Theme.primaryColor
+                corner: RoundCorner.CornerEnum.TopLeft
+            }
+            
+            // Bottom-right rounded corner for cornerRectangle
+            RoundCorner {
+                anchors {
+                    bottom: cornerRectangle.bottom
+                    left: cornerRectangle.left
+                }
+                size: 20 
+                color: Theme.primaryColor
+                corner: RoundCorner.CornerEnum.BottomLeft
+            }
+            
+            // Components inside mainBar
+            OsIcon {
+                anchors {
+                    top: mainBar.top
                     topMargin: Theme.barGap
-                    horizontalCenter: parent.horizontalCenter
+                    horizontalCenter: mainBar.horizontalCenter
                 }
             }
             
             Workspace {
                 anchors {
-                    top: parent.top
+                    top: mainBar.top
                     topMargin: Theme.barGap + 40
-                    horizontalCenter: parent.horizontalCenter
+                    horizontalCenter: mainBar.horizontalCenter
                 }
             }
 
-//             ActiveWindow {
-//                 anchors {
-//                     verticalCenter: parent.verticalCenter 
-//                 }
-//             }
-//
             ClockWidget {
                 anchors {
-                    bottom: parent.bottom
-                    horizontalCenter: parent.horizontalCenter
+                    bottom: mainBar.bottom
+                    horizontalCenter: mainBar.horizontalCenter
                     bottomMargin: Theme.barGap
                 }
             }
