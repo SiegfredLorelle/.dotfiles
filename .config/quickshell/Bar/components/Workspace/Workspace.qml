@@ -12,7 +12,6 @@ Rectangle {
     border.color: Theme.primaryLightColor
     border.width: 1
 
-
     // All 10 possible workspaces, index represents workspace id, null if unused
     property var allWorkspaces: {
         var workspaces = new Array(10).fill(null);
@@ -69,7 +68,8 @@ Rectangle {
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
                     onPressed: {
-                        workspace.activate()
+                        var dispatchCommand = "workspace " + (index + 1).toString()
+                        Hyprland.dispatch(dispatchCommand)
                     }
                 }
                 Text {
