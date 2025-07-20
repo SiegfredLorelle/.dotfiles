@@ -5,33 +5,44 @@ import "root:/Theme"
 
 Rectangle {
     id: workspaceContainer
-    
-    width: 36 
+    width: 36
     height: childrenRect.height + 16  // Auto-height based on content + padding
-    radius: width / 2 
+    radius: width / 2
     color: Theme.primaryLightColor 
     border.color: Theme.primaryLightColor
     border.width: 1
 
+
+    // All 10 possible workspaces, index represents workspace id, null if unused
+    property var allWorkspaces: {
+        var workspaces = new Array(10).fill(null);
+            for (var workspace of Hyprland.workspaces.values) {
+                workspaces[workspace.id - 1] = workspace
+            }
+        return workspaces;
+    }
+
     Column {
-        spacing: 4 
+        spacing: 4
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
             topMargin: 8  // Padding from container top
         }
+
         Repeater {
-            model: Hyprland.workspaces
+            model: 10
 
             Rectangle {
-                property var workspace: modelData
+                required property int index
+                property var workspace: allWorkspaces[index]
                 property bool isActive: workspace.id === Hyprland.focusedWorkspace?.id
                 property bool hasWindows: workspace.windows.length > 0
                 property bool isPressed: mouseArea.pressed
 
-                width: isActive ? 28 : 20 
+                width: isActive ? 28 : 20
                 height: isActive ? 28 : 20
-                radius: width / 2 
+                radius: width / 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: {
                     if (isPressed) {
@@ -56,14 +67,14 @@ Rectangle {
                     id: mouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor 
+                    cursorShape: Qt.PointingHandCursor
                     onPressed: {
                         workspace.activate()
                     }
                 }
                 Text {
                     anchors.centerIn: parent
-                    text: workspace.id == "10" ? "0" : workspace.id
+                    text: workspace ? workspace.id : ""
                     font.family: Theme.primaryFont 
                     font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
                     color: {
@@ -71,7 +82,6 @@ Rectangle {
                     }
                     font.bold: parent.isActive
                 }
-
             }
         }
     }
