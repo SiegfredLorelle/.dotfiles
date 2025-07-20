@@ -29,10 +29,10 @@ return {
             bg = "#2D313B", -- Repeating the second color
         })
         vim.api.nvim_set_hl(0, "IndentBlanklineIndent5", {
-            bg = "#3F4451", -- Repeating the third color
+            bg = "#282C34",
         })
         vim.api.nvim_set_hl(0, "IndentBlanklineIndent6", {
-            bg = "#282C34", -- Repeating the first color
+            bg = "#2D313B",
         })
 
         require("ibl").setup {
