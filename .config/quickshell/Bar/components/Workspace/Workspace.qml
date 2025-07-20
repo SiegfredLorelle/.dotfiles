@@ -74,7 +74,7 @@ Rectangle {
                 }
                 Text {
                     anchors.centerIn: parent
-                    text: workspace ? workspace.id : ""
+                    text: workspace ? workspace.id != "10" ? workspace.id : "0" : ""
                     font.family: Theme.primaryFont 
                     font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
                     color: {

@@ -6,18 +6,34 @@
 ## Quickshell
 
 ### Bar
-- show all 10 workspaces
-- Only highligh used workspaces
-- Add icon depending on what are opened on those workspaces
+- Fix warnings (run `quickshell` manually to see)
+- Create often used Texts and Icons
 - Update border radius of bar to opposite (so it would look it surround apps)
-- Updatable wallpaper which updates color pallete
+    - Updatable wallpaper which updates color pallete
+
+#### workspaces
+- Add icon depending on what are opened on those workspaces (replace numbers)
+
+#### Active Workspace
 - Show the app name in the center of bar based on active app
-- Add notifications
-- Add System Tray
+
+#### Os Icon, Settings, Power, and Arch News
+- Update the look of clicking OS icon (settings, lock, power)
+
+#### Status/Connections
 - Way to manage bluetooth, WiFi, and Audio
 - Performance as icons with surrounding bar
-- Update the look of clicking OS icon (settings, lock, power)
+
+
+#### System Tray
+- Add System Tray
+
+#### Notifications
+- Add notifications
+
+#### Clock
 - calendar to option for tasks and calendar
+
 
 ### Dashboard
 - 3 options (dashboard, performance)
@@ -32,6 +48,8 @@
     - React
     - Typscript React
     - Readme?
+- clickable status line
+
 
 ## zsh and kitty
 - run fastfetch every open of the terminal?
