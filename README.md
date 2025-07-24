@@ -19,9 +19,11 @@ Dotfiles are hidden configuration files (prefixed with a dot, like `.zshrc`) tha
 
 This repository includes configuration files for the following applications and tools:
 
-* **Shell:** `zsh` (with a basic setup)
+* **Shell:** `zsh`
 * **Terminal Emulator:** `kitty`
-* **Window Manager:** `Hyprland`
+* **Terminal Multiplexer:** `tmux`
+* **Window Tiling Manager:** `Hyprland`
+* **Desktop Environment:** `Quickshell`
 <!-- * **Editor:** Neovim
 * **Display Manager:** SDDM
 * **Other Tools:**
@@ -50,11 +52,39 @@ Before you begin, ensure you have the following installed:
     ```
 3.  **Required Applications:** To fully utilize these dotfiles, you'll need to install the corresponding applications. If an application isn't installed, Stow will still create the symlink, but the configuration won't take effect until the application is present.
 
+    **Not yet working: packages are not yet modularized**
     For example, if you're using `zsh`, `hyprland`, and `neovim`, you would install them like so:
 
     ```bash
     sudo pacman -S zsh hyprland kitty wofi
     ```
+
+    #### Before proceeding make sure the following are installed:
+    
+    - npm
+    - yarn
+
+    ```bash
+    sudo pacman -S yarn npm
+    ```
+
+    #### screenshots:
+
+    Install tmux and tmux plugin manager (tpm)
+
+    ```bash
+    sudo pacman -S hyprshot swappy
+    ```
+    
+    #### tmux:
+
+    Install tmux and tmux plugin manager (tpm)
+
+    ```bash
+    sudo pacman -S tmux
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ```
+
 ---
 
 ### Installation Steps
