@@ -51,16 +51,16 @@ vim.keymap.set('n', 'N', 'Nzzzv', opts)
 -- vim.keymap.set('n', '<leader>xs', ':close<CR>', opts) -- close current split window
 
 -- Navigate between splits
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
+-- vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
+-- vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
+-- vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
+-- vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
 -- Indent current line (normal mode)
-vim.keymap.set('n', '<C-,>', '<<', opts)  -- unindent (< shape)
-vim.keymap.set('n', '<C-.>', '>>', opts)  -- indent (> shape)
-vim.keymap.set('v', '<C-,>', '<gv', opts) -- unindent and reselect
-vim.keymap.set('v', '<C-.>', '>gv', opts) -- indent and reselect
+vim.keymap.set('n', '<S-l>', '>>', opts)  -- indent (right)
+vim.keymap.set('n', '<S-h>', '<<', opts)  -- unindent (left)
+vim.keymap.set('v', '<S-h>', '<gv', opts) -- unindent and reselect
+vim.keymap.set('v', '<S-l>', '>gv', opts) -- indent and reselect
 
 
 -- True delete keymaps (don't yank to clipboard/registers)
