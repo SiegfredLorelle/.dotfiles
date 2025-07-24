@@ -38,5 +38,7 @@ require("lazy").setup({
     require("plugins.lsp"),
     require("plugins.undotree"),
     require("plugins.lualine"),
-    require("plugins.indent-blankline")
+    require("plugins.indent-blankline"),
+    require("plugins.tmux-navigator"),
+    require("plugins.markdown-preview")
 })
