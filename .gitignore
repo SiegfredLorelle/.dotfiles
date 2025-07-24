@@ -1,0 +1,5 @@
+# Tmux plugins directory
+.config/tmux/plugins/*
+
+# But keep the directory structure if you want
+!.config/tmux/plugins/.gitkeep
