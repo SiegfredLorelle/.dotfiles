@@ -1,7 +1,10 @@
 # TODOs
 
-## TMUX
-- install and config
+## tmux
+- configure look of the bar
+- look into more plugins to use 
+ - yanking package
+- keep tmux sessions when rebooting with resurrect (write script to save every exit)
 
 ## Quickshell
 
@@ -54,4 +57,9 @@
 ## zsh and kitty
 - run fastfetch every open of the terminal?
 - style it
+
+## Dolphin
+
+## Wofi
+- run timeshift through it (have different command)
 
