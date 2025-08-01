@@ -2,9 +2,6 @@
 
 ## tmux
 - configure look of the bar
-- look into more plugins to use 
- - yanking package
-- keep tmux sessions when rebooting with resurrect (write script to save every exit)
 
 ## Quickshell
 
@@ -42,6 +39,7 @@
 - 3 options (dashboard, performance)
 
 ## Neovim
+- color plugins
 - show the content of the diagnostics in the same line
 - change the icon of the diagnostics
 - gitkraken? show the who and the commit message on the current line
