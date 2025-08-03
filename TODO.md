@@ -1,7 +1,7 @@
 # TODOs
 
 ## tmux
-- configure look of the bar
+-
 
 ## Quickshell
 
