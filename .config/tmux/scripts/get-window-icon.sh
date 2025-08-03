@@ -5,7 +5,7 @@ TERMINAL_ICON=""
 NEOVIM_ICON=""
 FILE_ICON=""
 TMUX_ICON=""
-
+GIT_ICON=""
 # Icon mapping logic
 case "$window_name" in
     "nvim"|"vim"|"neovim")
@@ -16,6 +16,9 @@ case "$window_name" in
         ;;
     "[tmux]"|"tmux")
         echo "$TMUX_ICON"
+        ;;
+    "git")
+        echo "$GIT_ICON"
         ;;
     *)
         echo "$FILE_ICON"
