@@ -3,7 +3,8 @@ window_name="$1"
 # Define icons
 TERMINAL_ICON=""
 NEOVIM_ICON=""
-FILE=""
+FILE_ICON=""
+TMUX_ICON=""
 
 # Icon mapping logic
 case "$window_name" in
@@ -13,7 +14,10 @@ case "$window_name" in
     "zsh"|"bash"|"terminal")
         echo "$TERMINAL_ICON"
         ;;
+    "[tmux]"|"tmux")
+        echo "$TMUX_ICON"
+        ;;
     *)
-        echo "$FILE"
+        echo "$FILE_ICON"
         ;;
 esac
