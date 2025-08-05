@@ -21,9 +21,10 @@ This repository includes configuration files for the following applications and 
 
 * **Shell:** `zsh`
 * **Terminal Emulator:** `kitty`
+* **Text Editor:** `neovim`
 * **Terminal Multiplexer:** `tmux`
-* **Window Tiling Manager:** `Hyprland`
-* **Desktop Environment:** `Quickshell`
+* **Tiling Window Manager:** `Hyprland`
+* **Desktop Components:** `Quickshell`
 <!-- * **Editor:** Neovim
 * **Display Manager:** SDDM
 * **Other Tools:**
@@ -60,7 +61,7 @@ Before you begin, ensure you have the following installed:
     ```
 
     #### Before proceeding make sure the following are installed:
-    
+
     - npm
     - yarn
 
@@ -75,7 +76,7 @@ Before you begin, ensure you have the following installed:
     ```bash
     sudo pacman -S hyprshot swappy
     ```
-    
+
     #### tmux:
 
     Install tmux and tmux plugin manager (tpm)
