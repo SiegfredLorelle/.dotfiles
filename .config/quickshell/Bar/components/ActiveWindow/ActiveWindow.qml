@@ -1,4 +1,31 @@
-// not yet released in current version of quickshell (0.1.0) look for
-//
-// 
-// https://github.com/quickshell-mirror/quickshell/commit/362c8e1b693d99254c2be979641d9c1188d2629a#diff-c5c8c6d64e4f98e1f5d0430adc271867d77d4a07378d57faa2bf4841e12491af
+import Quickshell
+import Quickshell.Hyprland
+import QtQuick
+import "root:/Theme"
+
+Rectangle {
+    id: activeWindowContainer
+    width: windowText.implicitWidth
+    height: 36
+    color: Theme.primaryColor
+
+    // Ensure minimum width for when there's no active window
+    property int minimumWidth: 120
+
+    Text {
+        id: windowText
+        anchors.centerIn: parent
+        
+        // Get the active window title, fallback to "Desktop" if none
+        text: Hyprland.activeToplevel?.title ?? "Desktop"
+        
+        font.family: Theme.primaryFont
+        font.pointSize: Theme.normalFontSize
+        color: Theme.secondaryColor
+        
+        // Elide text if it gets too long
+        elide: Text.ElideRight
+        maximumLineCount: 1
+        
+    }
+}

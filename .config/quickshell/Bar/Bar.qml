@@ -3,6 +3,7 @@ import QtQuick
 import "components/Workspace"
 import "components/ClockWidget"
 import "components/OsIcon"
+import "components/ActiveWindow"
 import "root:/Theme"
 
 Scope {
@@ -63,6 +64,7 @@ Scope {
             }
             
             // Components inside mainBar
+            // Components at the top
             OsIcon {
                 anchors {
                     top: mainBar.top
@@ -70,7 +72,7 @@ Scope {
                     horizontalCenter: mainBar.horizontalCenter
                 }
             }
-            
+
             Workspace {
                 anchors {
                     top: mainBar.top
@@ -79,6 +81,15 @@ Scope {
                 }
             }
 
+            // Components at the center
+            ActiveWindow {
+                anchors {
+                    verticalCenter: mainBar.verticalCenter
+                    horizontalCenter: horizontalCenter
+                }
+            }
+
+            // Components at the bottom
             ClockWidget {
                 anchors {
                     bottom: mainBar.bottom
