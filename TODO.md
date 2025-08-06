@@ -8,14 +8,19 @@
 ### Bar
 - Fix warnings (run `quickshell` manually to see)
 - Create often used Texts and Icons
-- Update border radius of bar to opposite (so it would look it surround apps)
-    - Updatable wallpaper which updates color pallete
+
+#### settings
+- Option to move bar to the top, left, right or bottom
+- Updatable wallpaper which updates color pallete
 
 #### workspaces
 - Add icon depending on what are opened on those workspaces (replace numbers)
+- animation when changing workspaces?
+- use much simpler and smaller circle for unused workspaces
 
 #### Active Workspace
 - Show the app name in the center of bar based on active app
+- animation when changing text?
 
 #### Os Icon, Settings, Power, and Arch News
 - Update the look of clicking OS icon (settings, lock, power)
@@ -33,7 +38,8 @@
 
 #### Clock
 - calendar to option for tasks and calendar
-
+- animation when changing time/date?
+- 
 
 ### Dashboard
 - 3 options (dashboard, performance)
@@ -57,6 +63,7 @@
 - style it
 
 ## Dolphin
+- colors
 
 ## Wofi
 - run timeshift through it (have different command)
