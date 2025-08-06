@@ -1,7 +1,7 @@
 # TODOs
 
 ## tmux
--
+- mouse icon when hovering/clicking in statusline
 
 ## Quickshell
 
@@ -21,6 +21,7 @@
 #### Active Workspace
 - Show the app name in the center of bar based on active app
 - animation when changing text?
+- go to the window of active workspace when clicked by mouse
 
 #### Os Icon, Settings, Power, and Arch News
 - Update the look of clicking OS icon (settings, lock, power)
@@ -46,6 +47,7 @@
 
 ## Neovim
 - color plugins
+- markdown preview
 - show the content of the diagnostics in the same line
 - change the icon of the diagnostics
 - gitkraken? show the who and the commit message on the current line

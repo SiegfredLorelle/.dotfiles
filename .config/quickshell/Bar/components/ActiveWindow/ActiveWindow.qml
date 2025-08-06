@@ -6,8 +6,17 @@ import "root:/Theme"
 Rectangle {
     id: activeWindowContainer
     width: 50
-    height: windowText.implicitHeight
+    height: windowText.contentWidth + 36
     color: Theme.primaryColor
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        onPressed: Hyprland.activeToplevel?.workspace.activate()
+    }
+
 
     Text {
         id: windowText
