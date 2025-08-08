@@ -4,7 +4,7 @@ import QtQuick
 import "root:/Theme"
 
 Rectangle {
-    id: workspaceContainer
+    id: workspaceContainerWorks
     width: 36
     height: childrenRect.height + 16  // Auto-height based on content + padding
     radius: width / 2
@@ -35,8 +35,7 @@ Rectangle {
             Rectangle {
                 required property int index
                 property var workspace: allWorkspaces[index]
-                property bool isActive: workspace.id === Hyprland.focusedWorkspace?.id
-                property bool hasWindows: workspace.windows.length > 0
+                property bool isActive: workspace?.id === Hyprland.focusedWorkspace?.id
                 property bool isPressed: mouseArea.pressed
 
                 width: isActive ? 28 : 20
