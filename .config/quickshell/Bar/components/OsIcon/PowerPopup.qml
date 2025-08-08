@@ -7,8 +7,8 @@ import "root:/Theme"
 AnimatedPopup {
     id: root
 
-    width: 250 + 8 * 2
-    height: newsExpanded ? 300 : 90
+    implicitWidth: 250 + 8 * 2
+    implicitHeight: newsExpanded ? 300 : 90
     leftMargin: 34.3
 
     property bool newsExpanded: false

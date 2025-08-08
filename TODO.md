@@ -19,6 +19,7 @@
 - use much simpler and smaller circle for unused workspaces
 
 #### Active Workspace
+- display the icon of the app ?
 - Show the app name in the center of bar based on active app
 - animation when changing text?
 - go to the window of active workspace when clicked by mouse
@@ -58,7 +59,7 @@
     - Typscript React
     - Readme?
 - clickable status line
-
+- highlight current line number
 
 ## zsh and kitty
 - run fastfetch every open of the terminal?

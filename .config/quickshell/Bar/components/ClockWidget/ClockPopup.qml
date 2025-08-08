@@ -6,8 +6,8 @@ import "root:/Theme"
 AnimatedPopup {
     id: root
 
-    width: 300
-    height: 250
+    implicitWidth: 300
+    implicitHeight: 250
     leftMargin: 35
 
     GlassEffects {
