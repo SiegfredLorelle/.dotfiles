@@ -85,7 +85,7 @@ Scope {
             ActiveWindow {
                 anchors {
                     verticalCenter: mainBar.verticalCenter
-                    horizontalCenter: horizontalCenter
+                    horizontalCenter: mainBar.horizontalCenter
                 }
             }
 
