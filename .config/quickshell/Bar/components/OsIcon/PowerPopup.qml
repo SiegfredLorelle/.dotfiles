@@ -210,7 +210,7 @@ AnimatedPopup {
                 }
                 Text {
                     text: "Arch News"
-                    font.family: Theme.textFont
+                    font.family: Theme.primaryFont
                     font.pointSize: Theme.normalFontSize
                     color: Theme.secondaryColor
                     anchors.verticalCenter: parent.verticalCenter
@@ -269,7 +269,7 @@ AnimatedPopup {
 
                             Text {
                                 text: modelData.title
-                                font.family: Theme.textFont
+                                font.family: Theme.primaryFont
                                 font.pointSize: Theme.normalFontSize * 0.7
                                 font.weight: Font.Medium
                                 color: Theme.secondaryColor
@@ -279,7 +279,7 @@ AnimatedPopup {
 
                             Text {
                                 text: modelData.date
-                                font.family: Theme.textFont
+                                font.family: Theme.primaryFont
                                 font.pointSize: Theme.normalFontSize * 0.6
                                 color: Theme.secondaryColor
                                 opacity: 0.7
@@ -287,7 +287,7 @@ AnimatedPopup {
 
                             Text {
                                 text: modelData.summary
-                                font.family: Theme.textFont
+                                font.family: Theme.primaryFont
                                 font.pointSize: Theme.normalFontSize * 0.6
                                 color: Theme.secondaryColor
                                 opacity: 0.8
