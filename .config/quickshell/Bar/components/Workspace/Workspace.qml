@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Services.Notifications
 import QtQuick
 import "root:/Theme"
 
@@ -18,8 +19,15 @@ Rectangle {
             for (var workspace of Hyprland.workspaces.values) {
                 workspaces[workspace.id - 1] = workspace
             }
+        console.log("RAN")
         return workspaces;
     }
+
+    function getAppIcon(name: string, fallback: string): string {
+        // TODO: Use script to display things properly
+        return ""
+    }
+
 
     Column {
         spacing: 4
@@ -71,16 +79,34 @@ Rectangle {
                         Hyprland.dispatch(dispatchCommand)
                     }
                 }
-                Text {
-                    anchors.centerIn: parent
-                    text: workspace ? workspace.id != "10" ? workspace.id : "0" : ""
-                    font.family: Theme.primaryFont 
-                    font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
-                    color: {
-                        return Theme.secondaryColor 
+
+                Repeater {
+                    model: workspace ? workspace.toplevels.values : []
+
+                    Text {
+                        required property var modelData
+                        anchors.centerIn: parent
+                        text:  modelData.title[0]
+                        font.family: Theme.primaryFont 
+                        font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
+                        color: {
+                            return Theme.secondaryColor 
+                        }
+                        font.bold: parent.isActive
                     }
-                    font.bold: parent.isActive
                 }
+
+                // Text {
+                //     anchors.centerIn: parent
+                //     // text: workspace ? workspace.id != "10" ? workspace.id : "0" : ""
+                //     text: workspace ? workspace.toplevels.values[0].title : ""
+                //     font.family: Theme.primaryFont 
+                //     font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
+                //     color: {
+                //         return Theme.secondaryColor 
+                //     }
+                //     font.bold: parent.isActive
+                // }
             }
         }
     }

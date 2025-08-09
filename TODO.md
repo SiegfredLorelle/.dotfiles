@@ -6,7 +6,6 @@
 ## Quickshell
 
 ### Bar
-- Fix warnings (run `quickshell` manually to see)
 - Create often used Texts and Icons
 
 #### settings
