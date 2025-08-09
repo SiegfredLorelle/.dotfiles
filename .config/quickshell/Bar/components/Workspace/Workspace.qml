@@ -23,9 +23,11 @@ Rectangle {
         return workspaces;
     }
 
-    function getAppIcon(name: string, fallback: string): string {
+    function getAppIcon(name): string {
         // TODO: Use script to display things properly
-        return ""
+        const quickshellIconName = DesktopEntries.heuristicLookup(name)?.icon
+        const iconPath = Quickshell.iconPath(quickshellIconName)
+        return iconPath
     }
 
 
@@ -79,20 +81,20 @@ Rectangle {
                         Hyprland.dispatch(dispatchCommand)
                     }
                 }
-
                 Repeater {
                     model: workspace ? workspace.toplevels.values : []
 
-                    Text {
+                    Item {
                         required property var modelData
                         anchors.centerIn: parent
-                        text:  modelData.title[0]
-                        font.family: Theme.primaryFont 
-                        font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
-                        color: {
-                            return Theme.secondaryColor 
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: getAppIcon(modelData.lastIpcObject.class)
+                            width: 32
+                            height: 32
+                            fillMode: Image.PreserveAspectFit
                         }
-                        font.bold: parent.isActive
                     }
                 }
 
