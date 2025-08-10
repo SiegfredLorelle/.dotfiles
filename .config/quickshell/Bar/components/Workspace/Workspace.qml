@@ -1,7 +1,9 @@
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.Notifications
+import Quickshell.Widgets
 import QtQuick
+import Qt5Compat.GraphicalEffects
 import "root:/Theme"
 
 Rectangle {
@@ -24,10 +26,23 @@ Rectangle {
     }
 
     function getAppIcon(name): string {
-        // TODO: Use script to display things properly
-        const quickshellIconName = DesktopEntries.heuristicLookup(name)?.icon
+        // Refresh the top levels to make sure it is updated
+        Hyprland.refreshToplevels()
+
+        // TODO: Check if in icons that are manually changed 
+
+        // Get the icon name base on desktop entries
+        const quickshellIconName = DesktopEntries.heuristicLookup(name).icon
+
+
         const iconPath = Quickshell.iconPath(quickshellIconName)
-        return iconPath
+
+
+        if (iconPath) {
+            return iconPath
+        }
+        // TODO: add fallback for apps that are not saved in deskop entries
+        return ""
     }
 
 
@@ -81,19 +96,43 @@ Rectangle {
                         Hyprland.dispatch(dispatchCommand)
                     }
                 }
+
                 Repeater {
                     model: workspace ? workspace.toplevels.values : []
 
                     Item {
                         required property var modelData
                         anchors.centerIn: parent
+                        width: 20
+                        height: 20
 
-                        Image {
-                            anchors.centerIn: parent
+                        // Rounded mask
+                        Rectangle {
+                            id: maskRect
+                            anchors.fill: parent
+                            radius: width / 2
+                            visible: false
+                        }
+
+                        IconImage {
+                            id: appIcon
+                            anchors.fill: parent
                             source: getAppIcon(modelData.lastIpcObject.class)
-                            width: 32
-                            height: 32
-                            fillMode: Image.PreserveAspectFit
+                            mipmap: true
+                            visible: false
+                        }
+
+                        Desaturate {
+                            id: desaturateEffect
+                            anchors.fill: parent
+                            source: appIcon
+                            desaturation: 1.0
+                            layer.enabled: true
+                            layer.smooth: true
+                            layer.effect: OpacityMask {
+                                source: desaturateEffect
+                                maskSource: maskRect
+                            }
                         }
                     }
                 }
