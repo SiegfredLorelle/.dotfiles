@@ -11,13 +11,16 @@
 #### settings
 - Option to move bar to the top, left, right or bottom
 - Updatable wallpaper which updates color pallete
+- privacy mode (hide icons for windows in workspaces, hide recording icon)
 
 #### workspaces
+- Display icon for all windows for each workspace (not just one window per workspace)
 - Add icon depending on what are opened on those workspaces (replace numbers)
 - animation when changing workspaces?
 - use much simpler and smaller circle for unused workspaces
 
 #### Active Workspace
+- update automatically to desktop when moving to unused workspace
 - display the icon of the app ?
 - Show the app name in the center of bar based on active app
 - animation when changing text?

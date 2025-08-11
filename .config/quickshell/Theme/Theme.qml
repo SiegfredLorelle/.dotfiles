@@ -4,11 +4,16 @@ import QtQuick
 QtObject {
     // Colors
     readonly property color secondaryColor: "#236376"
+    readonly property color secondaryColorOpaqued: "#60236376"
     readonly property color secondaryLightColor: "#4A8296" // Lighter shade 1
+    readonly property color secondaryLightColorOpaqued: "#604A8296" // Lighter shade 1
     readonly property color secondaryLighterColor: "#72A1B3" // Lighter shade 2
     readonly property color primaryColor: "#E6C871"
+    readonly property color primaryColorOpaqued: "#60E6C871"
     readonly property color primaryLightColor: "#EDD69B" // Lighter shade 1
+    readonly property color primaryLightColorOpaqued: "#60EDD69B" // Lighter shade 1
     readonly property color primaryLighterColor: "#F3E3C5" // Lighter shade 2
+    readonly property color primaryLighterColorOpaqued: "#60F3E3C5" // Lighter shade 2
     
     // Fonts
     readonly property string primaryFont: "JetBrainsMono Nerd Font"

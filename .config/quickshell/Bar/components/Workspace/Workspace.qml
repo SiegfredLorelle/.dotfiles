@@ -28,12 +28,18 @@ Rectangle {
     function getAppIcon(name): string {
         // Refresh the top levels to make sure it is updated
         Hyprland.refreshToplevels()
+        // TODO: Check if in icons that are manually changed from downloaded icons, material icons or nerd fonts
+        
+         // IF STEAM_APP_DEFAULT CHECK THE TITLE (GENSHIN IMPACT and HOYOPLAY)
 
-        // TODO: Check if in icons that are manually changed 
-
+         // DEBUG qml: steam_app_default undefined
+         // DEBUG qml: kitty kitty
+         // DEBUG qml: steam_app_default undefined
+         // DEBUG qml: net.lutris.Lutris net.lutris.Lutris
+         
         // Get the icon name base on desktop entries
-        const quickshellIconName = DesktopEntries.heuristicLookup(name).icon
-
+        const quickshellIconName = DesktopEntries.heuristicLookup(name)?.icon
+        console.log(name, quickshellIconName)
 
         const iconPath = Quickshell.iconPath(quickshellIconName)
 
@@ -133,6 +139,12 @@ Rectangle {
                                 source: desaturateEffect
                                 maskSource: maskRect
                             }
+                        }
+
+                        ColorOverlay {
+                            anchors.fill: desaturateEffect
+                            source: desaturateEffect
+                            color: Theme.primaryColorOpaqued // Semi-transparent black (80% opacity); adjust for darker/lighter
                         }
                     }
                 }
