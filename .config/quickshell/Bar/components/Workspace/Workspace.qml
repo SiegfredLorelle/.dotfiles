@@ -54,7 +54,7 @@ Rectangle {
 
 
     Column {
-        spacing: 4
+        spacing: 6
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
@@ -67,31 +67,26 @@ Rectangle {
             Rectangle {
                 required property int index
                 property var workspace: allWorkspaces[index] ?? null
-                property bool isPressed: mouseArea.pressed
+                property bool isWorkspaceActive: workspace ? workspace.active : false
+                property int appCount: workspace ? workspace.toplevels.values.length : 0
 
-                width: workspace?.toplevels.values.length ? 24 : 6
-                height: workspace?.toplevels.values.length ? workspace?.toplevels.values.length * 24 : 6
+                width: appCount > 0 ? 24 : 8
+                height: isWorkspaceActive || appCount > 0 ? Math.max(appCount * 24, 16) : 8
                 radius: width / 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: {
-                    if (isPressed) {
+                    if (isWorkspaceActive) {
                         return Qt.darker(Theme.primaryColor, 1.1)
                     }
                     return Theme.primaryColor
                 }
-                scale: isPressed ? 0.9 : 1.0
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: 100
-                        easing.type: Easing.OutQuad
-                    }
-                }
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: 100
+                        duration: 60
                     }
                 }
+
                 MouseArea {
                     id: mouseArea
                     anchors.fill: parent
@@ -102,7 +97,7 @@ Rectangle {
                         Hyprland.dispatch(dispatchCommand)
                     }
                 }
-                
+
                 Column {
                     anchors.centerIn: parent
                     spacing: 4

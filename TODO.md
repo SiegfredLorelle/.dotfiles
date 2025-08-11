@@ -14,17 +14,17 @@
 - privacy mode (hide icons for windows in workspaces, hide recording icon)
 
 #### workspaces
-- Display icon for all windows for each workspace (not just one window per workspace)
-- Add icon depending on what are opened on those workspaces (replace numbers)
 - animation when changing workspaces?
-- use much simpler and smaller circle for unused workspaces
+- add icons manually
+    - for genshin and hoyolab
+    - update kitty icon to be simple material terminal
+- handle too many apps open so it won't affect the title at the center of  the bar
+    - maybe automatically make the size smaller based on the number of apps
+    - maybe don't show if more than 3 in a workspace
 
 #### Active Workspace
 - update automatically to desktop when moving to unused workspace
-- display the icon of the app ?
-- Show the app name in the center of bar based on active app
 - animation when changing text?
-- go to the window of active workspace when clicked by mouse
 
 #### Os Icon, Settings, Power, and Arch News
 - Update the look of clicking OS icon (settings, lock, power)
