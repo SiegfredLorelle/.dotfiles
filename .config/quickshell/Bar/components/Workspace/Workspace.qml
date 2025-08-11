@@ -133,18 +133,21 @@ Rectangle {
                             anchors.fill: parent
                             source: appIcon
                             desaturation: 1.0
-                            layer.enabled: true
-                            layer.smooth: true
-                            layer.effect: OpacityMask {
-                                source: desaturateEffect
-                                maskSource: maskRect
-                            }
+                            visible: false // Make invisible to use in the next effect
                         }
 
                         ColorOverlay {
+                            id: colorOverlay
                             anchors.fill: desaturateEffect
                             source: desaturateEffect
-                            color: Theme.primaryColorOpaqued // Semi-transparent black (80% opacity); adjust for darker/lighter
+                            color: Theme.primaryColorOpaqued // Your semi-transparent color
+                            visible: false // Make invisible to apply mask
+                        }
+
+                        OpacityMask {
+                            anchors.fill: parent
+                            source: colorOverlay
+                            maskSource: maskRect
                         }
                     }
                 }
