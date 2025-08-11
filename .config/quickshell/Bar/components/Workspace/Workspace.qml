@@ -22,6 +22,7 @@ Rectangle {
                 workspaces[workspace.id - 1] = workspace
             }
         console.log("RAN")
+        console.log(workspace.toplevels.values.length)
         return workspaces;
     }
 
@@ -65,12 +66,12 @@ Rectangle {
 
             Rectangle {
                 required property int index
-                property var workspace: allWorkspaces[index]
+                property var workspace: allWorkspaces[index] ?? null
                 property bool isActive: workspace?.id === Hyprland.focusedWorkspace?.id
                 property bool isPressed: mouseArea.pressed
 
-                width: isActive ? 28 : 20
-                height: isActive ? 28 : 20
+                width: 20
+                height: workspace ? workspace?.toplevels.values.length * 28 : 20
                 radius: width / 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: {
@@ -152,17 +153,6 @@ Rectangle {
                     }
                 }
 
-                // Text {
-                //     anchors.centerIn: parent
-                //     // text: workspace ? workspace.id != "10" ? workspace.id : "0" : ""
-                //     text: workspace ? workspace.toplevels.values[0].title : ""
-                //     font.family: Theme.primaryFont 
-                //     font.pointSize: isActive ? Theme.mediumFontSize : Theme.normalFontSize
-                //     color: {
-                //         return Theme.secondaryColor 
-                //     }
-                //     font.bold: parent.isActive
-                // }
             }
         }
     }
