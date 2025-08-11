@@ -67,11 +67,10 @@ Rectangle {
             Rectangle {
                 required property int index
                 property var workspace: allWorkspaces[index] ?? null
-                property bool isActive: workspace?.id === Hyprland.focusedWorkspace?.id
                 property bool isPressed: mouseArea.pressed
 
-                width: 20
-                height: workspace ? workspace?.toplevels.values.length * 28 : 20
+                width: workspace?.toplevels.values.length ? 24 : 6
+                height: workspace?.toplevels.values.length ? workspace?.toplevels.values.length * 24 : 6
                 radius: width / 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: {
@@ -107,14 +106,19 @@ Rectangle {
                 Column {
                     anchors.centerIn: parent
                     spacing: 4
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        topMargin: 8  // Padding from container top
+                    }
 
                     Repeater {
                         model: workspace ? workspace.toplevels.values : []
 
                         Item {
                             required property var modelData
-                            width: 20
-                            height: 20
+                            width: 16
+                            height: 16
 
                             // Rounded mask
                             Rectangle {
