@@ -22,7 +22,6 @@ Rectangle {
                 workspaces[workspace.id - 1] = workspace
             }
         console.log("RAN")
-        console.log(workspace.toplevels.values.length)
         return workspaces;
     }
 
@@ -74,12 +73,7 @@ Rectangle {
                 height: isWorkspaceActive || appCount > 0 ? Math.max(appCount * 24, 16) : 8
                 radius: width / 2
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: {
-                    if (isWorkspaceActive) {
-                        return Qt.darker(Theme.primaryColor, 1.1)
-                    }
-                    return Theme.primaryColor
-                }
+                color: isWorkspaceActive ? Qt.darker(Theme.primaryColor, 1.1) : Theme.primaryColor
 
                 Behavior on color {
                     ColorAnimation {
