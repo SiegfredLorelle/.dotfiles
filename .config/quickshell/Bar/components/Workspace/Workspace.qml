@@ -103,52 +103,56 @@ Rectangle {
                         Hyprland.dispatch(dispatchCommand)
                     }
                 }
+                
+                Column {
+                    anchors.centerIn: parent
+                    spacing: 4
 
-                Repeater {
-                    model: workspace ? workspace.toplevels.values : []
+                    Repeater {
+                        model: workspace ? workspace.toplevels.values : []
 
-                    Item {
-                        required property var modelData
-                        anchors.centerIn: parent
-                        width: 20
-                        height: 20
+                        Item {
+                            required property var modelData
+                            width: 20
+                            height: 20
 
-                        // Rounded mask
-                        Rectangle {
-                            id: maskRect
-                            anchors.fill: parent
-                            radius: width / 2
-                            visible: false
-                        }
+                            // Rounded mask
+                            Rectangle {
+                                id: maskRect
+                                anchors.fill: parent
+                                radius: width / 2
+                                visible: false
+                            }
 
-                        IconImage {
-                            id: appIcon
-                            anchors.fill: parent
-                            source: getAppIcon(modelData.lastIpcObject.class)
-                            mipmap: true
-                            visible: false
-                        }
+                            IconImage {
+                                id: appIcon
+                                anchors.fill: parent
+                                source: getAppIcon(modelData.lastIpcObject.class)
+                                mipmap: true
+                                visible: false
+                            }
 
-                        Desaturate {
-                            id: desaturateEffect
-                            anchors.fill: parent
-                            source: appIcon
-                            desaturation: 1.0
-                            visible: false // Make invisible to use in the next effect
-                        }
+                            Desaturate {
+                                id: desaturateEffect
+                                anchors.fill: parent
+                                source: appIcon
+                                desaturation: 1.0
+                                visible: false // Make invisible to use in the next effect
+                            }
 
-                        ColorOverlay {
-                            id: colorOverlay
-                            anchors.fill: desaturateEffect
-                            source: desaturateEffect
-                            color: Theme.primaryColorOpaqued // Your semi-transparent color
-                            visible: false // Make invisible to apply mask
-                        }
+                            ColorOverlay {
+                                id: colorOverlay
+                                anchors.fill: desaturateEffect
+                                source: desaturateEffect
+                                color: Theme.primaryColorOpaqued // Your semi-transparent color
+                                visible: false // Make invisible to apply mask
+                            }
 
-                        OpacityMask {
-                            anchors.fill: parent
-                            source: colorOverlay
-                            maskSource: maskRect
+                            OpacityMask {
+                                anchors.fill: parent
+                                source: colorOverlay
+                                maskSource: maskRect
+                            }
                         }
                     }
                 }
