@@ -25,9 +25,11 @@ Rectangle {
         return workspaces;
     }
 
-    function getAppIcon(name): string {
+    function getAppIcon(app): string {
         // Refresh the top levels to make sure it is updated
         Hyprland.refreshToplevels()
+
+        const appName = app.lastIpcObject.class
         // TODO: Check if in icons that are manually changed from downloaded icons, material icons or nerd fonts
         
          // IF STEAM_APP_DEFAULT CHECK THE TITLE (GENSHIN IMPACT and HOYOPLAY)
@@ -38,18 +40,25 @@ Rectangle {
          // DEBUG qml: net.lutris.Lutris net.lutris.Lutris
          
         // Get the icon name base on desktop entries
-        const quickshellIconName = DesktopEntries.heuristicLookup(name)?.icon
-        console.log(name, quickshellIconName)
+        const quickshellIconName = DesktopEntries.heuristicLookup(appName)?.icon
 
+        // If not found in desktop entries, check for manually added icons
+        if (quickshellIconName == undefined) {
+            const appTitle = app.title.toLowerCase()
+            console.log("Doing maunal Check", appTitle)
+        }
+        
+        // If found in desktop entries, get the icon file path
         const iconPath = Quickshell.iconPath(quickshellIconName)
-
-
         if (iconPath) {
+            console.log(appName, iconPath)
             return iconPath
         }
-        // TODO: add fallback for apps that are not saved in deskop entries
+        // add fallback for app not found in desktop entries and was not
+        // manually added
         return ""
     }
+
 
 
     Column {
@@ -69,8 +78,8 @@ Rectangle {
                 property bool isWorkspaceActive: workspace ? workspace.active : false
                 property int appCount: workspace ? workspace.toplevels.values.length : 0
 
-                width: appCount > 0 ? 24 : 8
-                height: isWorkspaceActive || appCount > 0 ? Math.max(appCount * 24, 16) : 8
+                width: appCount > 0 ? 24 : 6
+                height: isWorkspaceActive || appCount > 0 ? Math.max(appCount * 24, 14) : 6
                 radius: width / 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: isWorkspaceActive ? Qt.darker(Theme.primaryColor, 1.1) : Theme.primaryColor
@@ -120,7 +129,7 @@ Rectangle {
                             IconImage {
                                 id: appIcon
                                 anchors.fill: parent
-                                source: getAppIcon(modelData.lastIpcObject.class)
+                                source: getAppIcon(modelData)
                                 mipmap: true
                                 visible: false
                             }
