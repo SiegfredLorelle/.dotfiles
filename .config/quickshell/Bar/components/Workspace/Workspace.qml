@@ -25,41 +25,93 @@ Rectangle {
         return workspaces;
     }
 
+    // Cache for icon paths to avoid repeated searches
+    property var iconCache: ({})
+    // Add this property to track if icons are cached
+    property bool iconsCached: false
+
+    // Pre-cache icons on component completion
+    Component.onCompleted: {
+        preCacheIcons()
+    }
+
+    function preCacheIcons() {
+        const appIconDir = Quickshell.env("HOME") + "/Pictures/assets/icons/apps"
+
+        Qt.createQmlObject(`
+            import Qt.labs.folderlistmodel 2.15
+            FolderListModel {
+                folder: "file://${appIconDir}"
+                nameFilters: ["*.png", "*.svg", "*.ico"]
+                showDirs: false
+
+                onCountChanged: {
+                    // Cache all available icons
+                    for (let i = 0; i < count; i++) {
+                        const fileName = get(i, "fileName")
+                        const baseName = fileName.replace(/\\.(png|svg|ico)$/i, "")
+                        const fullPath = "file://${appIconDir}/" + fileName
+
+                        // Create cache entries for potential matches
+                        iconCache[baseName] = fullPath
+                        iconCache[baseName.toLowerCase()] = fullPath
+                        iconCache[baseName.replace(/-/g, " ")] = fullPath
+                    }
+
+                    iconsCached = true
+                    console.log("Icons pre-cached:", Object.keys(iconCache).length)
+                    destroy()
+                }
+
+                onStatusChanged: {
+                    if (status === FolderListModel.Error) {
+                        iconsCached = true // Mark as cached even on error to avoid hanging
+                        destroy()
+                    }
+                }
+            }`, workspaceContainerWorks)
+    }
+
+    // Modified getAppIcon function
     function getAppIcon(app): string {
-        // Refresh the top levels to make sure it is updated
         Hyprland.refreshToplevels()
 
         const appName = app.lastIpcObject.class
-        // TODO: Check if in icons that are manually changed from downloaded icons, material icons or nerd fonts
-        
-         // IF STEAM_APP_DEFAULT CHECK THE TITLE (GENSHIN IMPACT and HOYOPLAY)
+        const appTitle = app.title.toLowerCase().replace(/ /g, "-")
 
-         // DEBUG qml: steam_app_default undefined
-         // DEBUG qml: kitty kitty
-         // DEBUG qml: steam_app_default undefined
-         // DEBUG qml: net.lutris.Lutris net.lutris.Lutris
-         
-        // Get the icon name base on desktop entries
+        // Try desktop entries first
         const quickshellIconName = DesktopEntries.heuristicLookup(appName)?.icon
+        if (quickshellIconName !== undefined) {
+            const iconPath = Quickshell.iconPath(quickshellIconName)
+            if (iconPath && iconPath !== "image://icon/") {
+                console.log("Desktop entry icon found:", appName, iconPath)
+                return iconPath
+            }
+        }
 
-        // If not found in desktop entries, check for manually added icons
-        if (quickshellIconName == undefined) {
-            const appTitle = app.title.toLowerCase()
-            console.log("Doing maunal Check", appTitle)
+        // Check pre-cached icons
+        if (iconsCached && appTitle !== "") {
+            console.log("Searching cached icons for:", appTitle)
+
+            // Try exact match first
+            if (iconCache[appTitle]) {
+                console.log("Exact match found:", iconCache[appTitle])
+                return iconCache[appTitle]
+            }
+
+            // Try partial matches
+            for (const cachedName in iconCache) {
+                if (cachedName.includes(appTitle) || appTitle.includes(cachedName)) {
+                    console.log("Partial match found:", cachedName, "->", iconCache[cachedName])
+                    return iconCache[cachedName]
+                }
+            }
+
+            console.log("No cached icon found for:", appTitle)
         }
-        
-        // If found in desktop entries, get the icon file path
-        const iconPath = Quickshell.iconPath(quickshellIconName)
-        if (iconPath) {
-            console.log(appName, iconPath)
-            return iconPath
-        }
-        // add fallback for app not found in desktop entries and was not
-        // manually added
-        return ""
+
+        return "" // Fallback
     }
-
-
 
     Column {
         spacing: 6
@@ -158,7 +210,6 @@ Rectangle {
                         }
                     }
                 }
-
             }
         }
     }
