@@ -109,8 +109,7 @@ Rectangle {
 
             console.log("No cached icon found for:", appTitle)
         }
-
-        return "" // Fallback
+        return "" // No app icon found
     }
 
     Column {
@@ -170,7 +169,10 @@ Rectangle {
                             width: 16
                             height: 16
 
-                            // Rounded mask
+                            property string iconSource: getAppIcon(modelData)
+                            property bool hasAppIcon: iconSource !== ""
+
+                            // Rounded mask for app icons
                             Rectangle {
                                 id: maskRect
                                 anchors.fill: parent
@@ -178,34 +180,56 @@ Rectangle {
                                 visible: false
                             }
 
-                            IconImage {
-                                id: appIcon
+                            // App icon display (when available)
+                            Item {
                                 anchors.fill: parent
-                                source: getAppIcon(modelData)
-                                mipmap: true
-                                visible: false
+                                visible: hasAppIcon
+
+                                IconImage {
+                                    id: appIcon
+                                    anchors.fill: parent
+                                    source: iconSource
+                                    mipmap: true
+                                    visible: false
+                                }
+
+                                Desaturate {
+                                    id: desaturateEffect
+                                    anchors.fill: parent
+                                    source: appIcon
+                                    desaturation: 1.0
+                                    visible: false
+                                }
+
+                                ColorOverlay {
+                                    id: colorOverlay
+                                    anchors.fill: desaturateEffect
+                                    source: desaturateEffect
+                                    color: Theme.primaryColorOpaqued
+                                    visible: false
+                                }
+
+                                OpacityMask {
+                                    anchors.fill: parent
+                                    source: colorOverlay
+                                    maskSource: maskRect
+                                }
                             }
 
-                            Desaturate {
-                                id: desaturateEffect
+                            // Material icon fallback (when no app icon)
+                            Rectangle {
                                 anchors.fill: parent
-                                source: appIcon
-                                desaturation: 1.0
-                                visible: false // Make invisible to use in the next effect
-                            }
+                                radius: width / 2
+                                color: Theme.primaryColorOpaqued
+                                visible: !hasAppIcon
 
-                            ColorOverlay {
-                                id: colorOverlay
-                                anchors.fill: desaturateEffect
-                                source: desaturateEffect
-                                color: Theme.primaryColorOpaqued // Your semi-transparent color
-                                visible: false // Make invisible to apply mask
-                            }
-
-                            OpacityMask {
-                                anchors.fill: parent
-                                source: colorOverlay
-                                maskSource: maskRect
+                                Text {
+                                    text: "terminal"
+                                    font.family: Theme.iconFont
+                                    font.pixelSize: 14 // Adjust size to fit within 16x16
+                                    color: "#857959" // Or whatever color you prefer
+                                    anchors.centerIn: parent
+                                }
                             }
                         }
                     }

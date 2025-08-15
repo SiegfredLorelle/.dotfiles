@@ -16,8 +16,8 @@
 #### workspaces
 - animation when changing workspaces?
 - add icons manually
-    - for genshin and hoyolab
     - update kitty icon to be simple material terminal
+    - add fallback icon (look for icon that look likes terminal or generic app)
 - handle too many apps open so it won't affect the title at the center of  the bar
     - maybe automatically make the size smaller based on the number of apps
     - maybe don't show if more than 3 in a workspace
@@ -25,6 +25,7 @@
 #### Active Workspace
 - update automatically to desktop when moving to unused workspace
 - animation when changing text?
+- scroll the text when too long like marquee
 
 #### Os Icon, Settings, Power, and Arch News
 - Update the look of clicking OS icon (settings, lock, power)
