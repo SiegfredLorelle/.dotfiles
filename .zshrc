@@ -52,3 +52,8 @@ bindkey '^[[B' history-search-forward  # Down Arrow
 # --- Custom Keybindings for Word Traversal (Ctrl+Arrow) ---
 bindkey '^[[1;5D' backward-word # Alt + Left Arrow
 bindkey '^[[1;5C' forward-word  # Alt + Right Arrow
+
+# Increase max number of open files/sockets to prevent error by WakaTime plugin and Lualine's gitt diff in Neovim
+ulimit -n 4096
+
+. "$HOME/.local/bin/env"
