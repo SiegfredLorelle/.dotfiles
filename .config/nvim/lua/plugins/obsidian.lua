@@ -9,9 +9,6 @@ return {
   ---@type obsidian.config
   opts = {
     legacy_commands = false, -- this will be removed in the next major release
-    attachments = {
-      img_folder = "attachments",  -- default location for images
-    },
     workspaces = {
       {
         name = "personal",
@@ -23,5 +20,10 @@ return {
       -- },
     },
   },
+  config = function(_, opts)
+    -- Set conceallevel before the plugin initializes
+    vim.opt.conceallevel = 2
+    require("obsidian").setup(opts)
+  end,
 }
 
