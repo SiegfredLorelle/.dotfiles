@@ -40,5 +40,6 @@ require("lazy").setup({
     require("plugins.lualine"),
     require("plugins.indent-blankline"),
     require("plugins.tmux-navigator"),
-    require("plugins.markdown-preview")
+    require("plugins.markdown-preview"),
+    require("plugins.obsidian"),
 })
