@@ -243,7 +243,7 @@ AnimatedPopup {
             const day = date.getDate()
             const month = months[date.getMonth()]
             const year = date.getFullYear()
-            return day + "-" + month + "-" + year
+            return day + " " + month + " " + year
         } catch (e) {
             console.log("Failed to format date:", e)
             return dateString
@@ -422,53 +422,50 @@ AnimatedPopup {
             ToolTip.delay: 0
         }
 
-        Row {
+        MouseArea {
             id: newsHeaderRow
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             height: newsExpanded && !errorMessage ? 24 : 0
             visible: newsExpanded && !errorMessage
-            spacing: 6
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: fetchArchNews(true)
 
             Behavior on height {
                 NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
             }
 
-            Text {
-                text: "Updated: " + lastFetchTime
-                font.family: Theme.primaryFont
-                font.pointSize: Theme.normalFontSize * 0.8
-                color: Theme.secondaryColor
-                opacity: 0.7
-                anchors.verticalCenter: parent.verticalCenter
-            }
+            Rectangle {
+                anchors.fill: parent
+                radius: 4
+                color: newsHeaderRow.containsMouse ? Theme.primaryLightColor : "transparent"
 
-            Button {
-                id: refreshButton
-                width: 20
-                height: 20
-                anchors.verticalCenter: parent.verticalCenter
-                enabled: !fetchingNews
-                opacity: enabled ? 1.0 : 0.5
+                Row {
+                    anchors.fill: parent
+                    anchors.margins: 4
+                    spacing: 6
 
-                background: Rectangle {
-                    color: parent.hovered ? Theme.primaryLightColor : "transparent"
-                    radius: 4
+                    Text {
+                        text: "Updated: " + lastFetchTime
+                        font.family: Theme.primaryFont
+                        font.pointSize: Theme.normalFontSize * 0.8
+                        color: Theme.secondaryColor
+                        opacity: 0.7
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "refresh"
+                        font.family: Theme.iconFont
+                        font.pointSize: Theme.iconSize * 0.5
+                        color: Theme.secondaryColor
+                        opacity: 0.7
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
-
-                contentItem: Text {
-                    text: "refresh"
-                    font.family: Theme.iconFont
-                    font.pointSize: Theme.normalFontSize * 0.6
-                    color: Theme.secondaryColor
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-
-                onClicked: fetchArchNews(true)
-                ToolTip.text: "Refresh news"
-                ToolTip.visible: hovered
-                ToolTip.delay: 0
             }
         }
 
