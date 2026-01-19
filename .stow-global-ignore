@@ -23,3 +23,6 @@ _darcs
 ^/COPYING
 
 ^TODO\.md$   # Ignore root TODO.md
+
+# Python cache
+__pycache__/

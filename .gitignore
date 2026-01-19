@@ -2,3 +2,10 @@
 .config/tmux/plugins/*
 # But keep the directory structure
 !.config/tmux/plugins/.gitkeep
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local config (contains sensitive data)
+.gitconfig.local
