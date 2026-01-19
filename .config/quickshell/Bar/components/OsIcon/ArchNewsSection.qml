@@ -67,6 +67,15 @@ Column {
         }
     }
 
+    Process {
+        id: createCacheDirProcess
+        command: ["mkdir", "-p", Quickshell.env("HOME") + "/.cache/quickshell/"]
+        running: false
+        onExited: {
+            running = false
+        }
+    }
+
     FileView {
         id: cacheFile
         path: Quickshell.env("HOME") + "/.cache/quickshell/arch-news.json"
@@ -164,6 +173,7 @@ Column {
 
     function writeCache(data) {
         try {
+            createCacheDirProcess.running = true
             const jsonString = JSON.stringify(data, null, 2)
             cacheFile.setText(jsonString)
         } catch (e) {

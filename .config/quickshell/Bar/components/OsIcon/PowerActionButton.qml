@@ -24,6 +24,6 @@ Button {
         verticalAlignment: Text.AlignVCenter
     }
     ToolTip.text: root.tooltipText
-    ToolTip.visible: hovered
+    ToolTip.visible: hovered && root.tooltipText.trim().length > 0
     ToolTip.delay: 0
 }
