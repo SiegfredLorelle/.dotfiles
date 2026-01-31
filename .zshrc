@@ -57,3 +57,10 @@ bindkey '^[[1;5C' forward-word  # Alt + Right Arrow
 ulimit -n 4096
 
 . "$HOME/.local/bin/env"
+
+# bun completions
+[ -s "/home/asdasd/.bun/_bun" ] && source "/home/asdasd/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
