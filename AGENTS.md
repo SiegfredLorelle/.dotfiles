@@ -124,6 +124,55 @@ Run these commands to verify the integrity of specific configurations.
   }
   ```
 
+#### Quickshell Patterns & Best Practices
+
+Reference repositories:
+- [caelestia-dots/shell](https://github.com/caelestia-dots/shell)
+- [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland)
+
+**Creating Singleton Services:**
+- Use `pragma Singleton` at file top (no qmldir file needed in Quickshell)
+- Use `Singleton` type from Quickshell as root element
+- Example:
+  ```qml
+  pragma Singleton
+  import Quickshell
+  
+  Singleton {
+      id: root
+      // properties and functions
+  }
+  ```
+
+**Data Collection:**
+- **FileView** for reading files (`/proc/stat`, `/proc/meminfo`, `/sys/*`):
+  ```qml
+  import Quickshell.Io
+  
+  FileView {
+      id: cpuFile
+      path: "/proc/stat"
+  }
+  // Access with cpuFile.text() and cpuFile.reload()
+  ```
+- **Process + StdioCollector** for command output:
+  ```qml
+  Process {
+      command: ["cat", "/some/path"]
+      stdout: StdioCollector {
+          onStreamFinished: {
+              const data = this.text.trim()
+              // parse data
+          }
+      }
+  }
+  ```
+- **Never use** `stdout` as direct string property - use StdioCollector or SplitParser
+
+**Timer for Polling:**
+- Use Timer with `repeat: true` and `triggeredOnStart: true` for immediate first update
+- Typical interval: 1000ms for system stats
+
 ### Hyprlang (Hyprland Config)
 - **Variables**: `$camelCase`.
 - **Monitors/Workspaces**: Define generic rules first, then specific.

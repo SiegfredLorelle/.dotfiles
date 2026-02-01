@@ -1,3 +1,8 @@
+// Performance monitor widget for the bar
+// Displays three circular gauges: CPU, Memory, GPU
+// Shows hover popup with detailed stats (PerformancePopup.qml)
+// Data provided by SystemStats.qml singleton
+
 import QtQuick
 import "root:/Theme"
 

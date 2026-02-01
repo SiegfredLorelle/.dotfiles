@@ -1,3 +1,7 @@
+// Performance statistics popup - shows on hover over PerformanceMonitor
+// Displays: CPU % + temp, Memory % + usage in MB, GPU % + temp
+// Uses GlassEffects for background styling matching the bar theme
+
 import QtQuick
 import Quickshell
 import "root:/Theme"

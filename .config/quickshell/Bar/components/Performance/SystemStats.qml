@@ -1,3 +1,13 @@
+// System performance monitoring singleton for AMD/Radeon systems
+// Data sources:
+//   - CPU usage: /proc/stat (calculated from user+nice+system vs total ticks)
+//   - Memory: /proc/meminfo (MemTotal - MemAvailable)
+//   - GPU usage: /sys/class/drm/card1/device/gpu_busy_percent
+//   - CPU temp: /sys/class/hwmon/hwmon3/temp1_input (k10temp driver, AMD CPU)
+//   - GPU temp: /sys/class/hwmon/hwmon2/temp1_input (amdgpu driver)
+// Polling interval: 1000ms
+// Pattern: pragma Singleton + Singleton type, no qmldir needed (Quickshell feature)
+
 pragma Singleton
 pragma ComponentBehavior: Bound
 import QtQuick
