@@ -4,6 +4,7 @@ import "components/Workspace"
 import "components/ClockWidget"
 import "components/OsIcon"
 import "components/ActiveWindow"
+import "components/Performance"
 import "root:/Theme"
 
 Scope {
@@ -83,8 +84,18 @@ Scope {
 
             // Components at the center
             ActiveWindow {
+                id: activeWindowComponent
                 anchors {
                     verticalCenter: mainBar.verticalCenter
+                    horizontalCenter: mainBar.horizontalCenter
+                }
+            }
+
+            // Performance Monitor - between ActiveWindow and Clock
+            PerformanceMonitor {
+                anchors {
+                    top: activeWindowComponent.bottom
+                    topMargin: Theme.barGap * 2
                     horizontalCenter: mainBar.horizontalCenter
                 }
             }
