@@ -108,7 +108,7 @@ Column {
                 const centerX = width / 2
                 const centerY = height / 2
                 const radius = (width / 2) - 3
-                const startAngle = -Math.PI / 2
+                const startAngle = -Math.PI / 2 + (Math.PI / 4)
                 const endAngle = startAngle + (2 * Math.PI * progress)
 
                 ctx.clearRect(0, 0, width, height)
