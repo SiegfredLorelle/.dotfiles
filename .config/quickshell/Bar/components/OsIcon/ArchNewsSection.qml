@@ -236,10 +236,11 @@ Column {
         contentItem: Row {
             anchors.centerIn: parent
             spacing: 4
-            Text {
-                text: "rss_feed"
-                font.family: Theme.iconFont
-                font.pointSize: Theme.mediumFontSize
+                Text {
+                    text: "rss_feed"
+                    font.family: Theme.iconFont
+                    font.variableAxes: Theme.iconFontStyle
+                    font.pointSize: Theme.mediumFontSize
                 color: Theme.secondaryColor
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -250,10 +251,11 @@ Column {
                 color: Theme.secondaryColor
                 anchors.verticalCenter: parent.verticalCenter
             }
-            Text {
-                text: newsExpanded ? "unfold_less" : "unfold_more"
-                font.family: Theme.iconFont
-                font.pointSize: Theme.mediumFontSize
+                Text {
+                    text: newsExpanded ? "unfold_less" : "unfold_more"
+                    font.family: Theme.iconFont
+                    font.variableAxes: Theme.iconFontStyle
+                    font.pointSize: Theme.mediumFontSize
                 color: Theme.secondaryColor
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -303,6 +305,7 @@ Column {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "refresh"
                     font.family: Theme.iconFont
+                    font.variableAxes: Theme.iconFontStyle
                     font.pointSize: Theme.iconSize * 0.5
                     color: Theme.secondaryColor
                     opacity: 0.7

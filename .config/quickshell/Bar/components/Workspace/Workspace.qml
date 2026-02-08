@@ -226,6 +226,7 @@ Rectangle {
                                 Text {
                                     text: "terminal"
                                     font.family: Theme.iconFont
+                                    font.variableAxes: Theme.iconFontStyle
                                     font.pixelSize: 14 // Adjust size to fit within 16x16
                                     color: "#857959" // Or whatever color you prefer
                                     anchors.centerIn: parent

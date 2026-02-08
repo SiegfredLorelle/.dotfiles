@@ -18,6 +18,10 @@ QtObject {
     // Fonts
     readonly property string primaryFont: "JetBrainsMono Nerd Font"
     readonly property string iconFont: "Material Symbols Rounded"
+    readonly property string iconStyle: "filled"
+    readonly property variant iconFontStyle: {
+        return iconStyle === "filled" ? { "FILL": 1 } : { "FILL": 0 }
+    }
     
     // Font Sizes
     readonly property int normalFontSize: 9

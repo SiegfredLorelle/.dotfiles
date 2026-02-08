@@ -57,6 +57,7 @@ AnimatedPopup {
                         color: Theme.secondaryColor
                         font.pointSize: Theme.iconSize
                         font.family: Theme.iconFont
+                        font.variableAxes: Theme.iconFontStyle
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         anchors.fill: parent
@@ -75,6 +76,7 @@ AnimatedPopup {
                         color: Theme.secondaryColor
                         font.pointSize: Theme.iconSize
                         font.family: Theme.iconFont
+                        font.variableAxes: Theme.iconFontStyle
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         anchors.fill: parent

@@ -31,7 +31,7 @@ AnimatedPopup {
             spacing: 8
 
             Text {
-                text: "󰓅"
+                text: "speed"
                 font.family: Theme.iconFont
                 font.pointSize: Theme.mediumFontSize
                 color: Theme.secondaryColor
@@ -48,7 +48,7 @@ AnimatedPopup {
 
         // CPU Section
         PerformanceStatRow {
-            icon: "󰻠"
+            icon: "memory"
             label: "CPU"
             percent: SystemStats.cpuPercent
             color: Theme.secondaryColor
@@ -57,7 +57,7 @@ AnimatedPopup {
 
         // Memory Section
         PerformanceStatRow {
-            icon: "󰍛"
+            icon: "storage"
             label: "RAM"
             percent: SystemStats.memoryPercent
             color: Theme.secondaryColor
@@ -93,6 +93,7 @@ AnimatedPopup {
             Text {
                 text: icon
                 font.family: Theme.iconFont
+                font.variableAxes: Theme.iconFontStyle
                 font.pointSize: Theme.normalFontSize
                 color: parent.parent.color
             }
@@ -123,7 +124,7 @@ AnimatedPopup {
             width: parent.width
             height: 8
             radius: 4
-            color: Theme.secondaryColorOpaqued
+            color: "transparent"
 
             Rectangle {
                 width: parent.width * (percent / 100)
@@ -146,10 +147,11 @@ AnimatedPopup {
             visible: temp > 0 || detail !== ""
 
             Text {
-                text: temp > 0 ? "󰔏 " + temp + "°C" : detail
+                text: temp > 0 ? "device_thermostat " + temp + "°C" : detail
                 font.family: temp > 0 ? Theme.iconFont : Theme.primaryFont
+                font.variableAxes: temp > 0 ? Theme.iconFontStyle : undefined
                 font.pointSize: Theme.normalFontSize - 2
-                color: Theme.secondaryLighterColor
+                color: Theme.secondaryLightColor
             }
         }
     }

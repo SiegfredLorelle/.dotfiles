@@ -9,7 +9,7 @@ import "root:/Theme"
 Column {
     id: root
     spacing: Theme.barGap
-    width: 36
+    width: 24
 
     // Main container with mouse area
     MouseArea {
@@ -20,19 +20,19 @@ Column {
         Column {
             id: gaugesColumn
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: Theme.barGap
+            spacing: Theme.largeSpacing
 
             // CPU Gauge
             CircularGauge {
                 value: SystemStats.cpuPercent
-                icon: "󰻠"
+                icon: "memory"
                 color: Theme.secondaryColor
             }
 
             // Memory Gauge
             CircularGauge {
                 value: SystemStats.memoryPercent
-                icon: "󰍛"
+                icon: "storage"
                 color: Theme.secondaryColor
             }
 
@@ -85,16 +85,13 @@ Column {
         property string icon: ""
         property color color: Theme.secondaryColor
 
-        width: 32
-        height: 32
+        width: 28
+        height: 28
 
         // Background circle
         Rectangle {
-            anchors.fill: parent
             radius: width / 2
             color: "transparent"
-            border.color: Theme.secondaryColorOpaqued
-            border.width: 2
         }
 
         // Progress arc using Canvas
@@ -118,7 +115,7 @@ Column {
                 ctx.beginPath()
                 ctx.arc(centerX, centerY, radius, startAngle, endAngle)
                 ctx.strokeStyle = color
-                ctx.lineWidth = 3
+                ctx.lineWidth = 2
                 ctx.lineCap = "round"
                 ctx.stroke()
             }
@@ -136,8 +133,9 @@ Column {
             anchors.centerIn: parent
             text: icon
             font.family: Theme.iconFont
-            font.pointSize: Theme.normalFontSize - 2
-            color: color
+            font.variableAxes: Theme.iconFontStyle
+            font.pointSize: Theme.normalFontSize
+            color: Theme.secondaryColor
         }
     }
 }
