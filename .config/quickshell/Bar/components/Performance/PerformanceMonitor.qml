@@ -115,7 +115,7 @@ Column {
                 ctx.beginPath()
                 ctx.arc(centerX, centerY, radius, startAngle, endAngle)
                 ctx.strokeStyle = color
-                ctx.lineWidth = 2
+                ctx.lineWidth = 1.5
                 ctx.lineCap = "round"
                 ctx.stroke()
             }

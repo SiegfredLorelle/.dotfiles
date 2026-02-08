@@ -95,7 +95,7 @@ Scope {
             PerformanceMonitor {
                 anchors {
                     bottom: clockWidgetComponent.top
-                    bottomMargin: Theme.barGap * 2
+                    bottomMargin: Theme.barGap
                     horizontalCenter: mainBar.horizontalCenter
                 }
             }
