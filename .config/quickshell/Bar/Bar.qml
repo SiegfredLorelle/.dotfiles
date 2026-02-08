@@ -94,14 +94,15 @@ Scope {
             // Performance Monitor - between ActiveWindow and Clock
             PerformanceMonitor {
                 anchors {
-                    top: activeWindowComponent.bottom
-                    topMargin: Theme.barGap * 2
+                    bottom: clockWidgetComponent.top
+                    bottomMargin: Theme.barGap * 2
                     horizontalCenter: mainBar.horizontalCenter
                 }
             }
 
             // Components at the bottom
             ClockWidget {
+                id: clockWidgetComponent
                 anchors {
                     bottom: mainBar.bottom
                     horizontalCenter: mainBar.horizontalCenter
@@ -111,3 +112,4 @@ Scope {
         }
     }
 }
+
