@@ -147,3 +147,9 @@ Before you begin, ensure you have the following installed:
     After deploying your dotfiles, it's crucial to **log out of your current session and then log back in**. This ensures that all changes, especially those related to your shell and desktop environment configurations, take full effect.
 
 ---
+
+## Superpowers (OpenCode Plugin)
+
+Superpowers is an agentic skills framework for OpenCode that provides structured workflows for software development. See `.config/opencode/README.md` for installation instructions.
+
+---
