@@ -11,7 +11,7 @@ AnimatedPopup {
     id: root
 
     implicitWidth: 200
-    implicitHeight: 70
+    implicitHeight: 100  // Match gauge column: 3*28 + 2*8 = 100px
     leftMargin: 35
 
     GlassEffects {
@@ -25,7 +25,7 @@ AnimatedPopup {
         id: contentColumn
         anchors.fill: parent
         anchors.margins: 8
-        spacing: 4
+        spacing: 0  // No spacing, rows will distribute evenly
 
         // CPU Row
         MetricRow {
@@ -33,6 +33,7 @@ AnimatedPopup {
             label: "CPU"
             value: SystemStats.cpuPercent
             detail: SystemStats.cpuTemp + "°C"
+            height: parent.height / 3
         }
 
         // Memory Row
@@ -40,8 +41,9 @@ AnimatedPopup {
             icon: "storage"
             label: "RAM"
             value: SystemStats.memoryPercent
-            detail: (SystemStats.memoryUsedMB / 1024).toFixed(1) + "/" + 
+            detail: (SystemStats.memoryUsedMB / 1024).toFixed(1) + "/" +
                     (SystemStats.memoryTotalMB / 1024).toFixed(1) + " GB"
+            height: parent.height / 3
         }
 
         // GPU Row
@@ -50,6 +52,7 @@ AnimatedPopup {
             label: "GPU"
             value: SystemStats.gpuPercent
             detail: SystemStats.gpuTemp + "°C"
+            height: parent.height / 3
         }
     }
 
