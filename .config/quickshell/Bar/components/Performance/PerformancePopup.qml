@@ -38,7 +38,7 @@ AnimatedPopup {
 
         // Memory Row
         MetricRow {
-            icon: "storage"
+            icon: "memory_alt"
             label: "RAM"
             value: SystemStats.memoryPercent
             detail: (SystemStats.memoryUsedMB / 1024).toFixed(1) + "/" +

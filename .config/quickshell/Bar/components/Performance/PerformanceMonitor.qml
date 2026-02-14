@@ -32,7 +32,7 @@ Column {
             // Memory Gauge
             CircularGauge {
                 value: SystemStats.memoryPercent
-                icon: "storage"
+                icon: "memory_alt"
                 color: Theme.secondaryColor
             }
 
