@@ -20,7 +20,25 @@ AnimatedPopup {
         showBorder: false
         borderRadius: Theme.borderRadius
     }
-    
+
+    // Interactive area for click and scroll
+    MouseArea {
+        id: popupMouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+
+        // Click to toggle mute
+        onClicked: {
+            AudioService.toggleMute()
+        }
+
+        // Scroll to adjust volume
+        onWheel: (wheel) => {
+            const delta = wheel.angleDelta.y > 0 ? 5 : -5
+            AudioService.setVolume(AudioService.volume + delta)
+        }
+    }
+
     Column {
         id: contentColumn
         anchors.fill: parent

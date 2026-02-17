@@ -26,33 +26,43 @@ Column {
         active: root.audioEnabled
         sourceComponent: AudioIndicator {}
         visible: status === Loader.Ready && AudioService.available
+        width: 20
+        height: 20
     }
-    
+
     // Network Indicator - only shows if NetworkService detects WiFi
     Loader {
         active: root.networkEnabled
         sourceComponent: NetworkIndicator {}
         visible: status === Loader.Ready && NetworkService.available
+        width: 20
+        height: 20
     }
-    
+
     // Bluetooth Indicator - only shows if BluetoothService detects Bluetooth
     Loader {
         active: root.bluetoothEnabled
         sourceComponent: BluetoothIndicator {}
         visible: status === Loader.Ready && BluetoothService.available
+        width: 20
+        height: 20
     }
-    
+
     // Battery Indicator - only shows if BatteryService detects battery
     Loader {
         active: root.batteryEnabled
         sourceComponent: BatteryIndicator {}
         visible: status === Loader.Ready && BatteryService.available
+        width: 20
+        height: 20
     }
-    
+
     // Brightness Indicator - only shows if BrightnessService detects brightness control
     Loader {
         active: root.brightnessEnabled
         sourceComponent: BrightnessIndicator {}
         visible: status === Loader.Ready && BrightnessService.available
+        width: 20
+        height: 20
     }
 }
