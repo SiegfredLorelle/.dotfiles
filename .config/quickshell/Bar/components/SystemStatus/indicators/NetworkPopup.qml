@@ -13,11 +13,9 @@ AnimatedPopup {
     
     GlassEffects {
         anchors.fill: parent
-        glassOpacity: 0.95
-        showBorder: true
-        borderColor: Theme.lighterPrimaryColor
-        borderWidth: 1
-        cornerRadius: Theme.borderRadius
+        rightRadius: true
+        showBorder: false
+        borderRadius: Theme.borderRadius
     }
     
     Column {

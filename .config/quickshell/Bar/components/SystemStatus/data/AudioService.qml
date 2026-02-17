@@ -16,8 +16,12 @@ Singleton {
     // Audio properties
     property int volume: 0
     property bool isMuted: false
-    property bool hasHeadphones: false
     property bool available: false
+    
+    // Properties for commands
+    property real targetVolume: 0.5
+    property bool shouldSetVolume: false
+    property bool shouldToggleMute: false
     
     // Timer for periodic updates
     Timer {
@@ -37,6 +41,32 @@ Singleton {
             onStreamFinished: {
                 const text = this.text.trim()
                 parseVolume(text)
+            }
+        }
+    }
+    
+    // Process for setting volume
+    Process {
+        id: setVolumeProcess
+        running: root.shouldSetVolume
+        command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", root.targetVolume.toFixed(2)]
+        onRunningChanged: {
+            if (!running) {
+                root.shouldSetVolume = false
+                updateTimer.restart()
+            }
+        }
+    }
+    
+    // Process for toggling mute
+    Process {
+        id: toggleMuteProcess
+        running: root.shouldToggleMute
+        command: ["wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle"]
+        onRunningChanged: {
+            if (!running) {
+                root.shouldToggleMute = false
+                updateTimer.restart()
             }
         }
     }
@@ -63,16 +93,11 @@ Singleton {
     }
     
     function setVolume(percent) {
-        const vol = Math.max(0, Math.min(100, percent)) / 100
-        const process = Quickshell.createProcess()
-        process.command = ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", vol.toFixed(2)]
-        process.start()
+        targetVolume = Math.max(0, Math.min(100, percent)) / 100
+        shouldSetVolume = true
     }
     
     function toggleMute() {
-        const process = Quickshell.createProcess()
-        process.command = ["wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle"]
-        process.start()
-        updateTimer.restart()
+        shouldToggleMute = true
     }
 }
