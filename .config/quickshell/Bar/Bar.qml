@@ -5,6 +5,7 @@ import "components/ClockWidget"
 import "components/OsIcon"
 import "components/ActiveWindow"
 import "components/Performance"
+import "components/SystemStatus"
 import "root:/Theme"
 
 Scope {
@@ -91,8 +92,19 @@ Scope {
                 }
             }
 
-            // Performance Monitor - between ActiveWindow and Clock
+            // Performance Monitor - between ActiveWindow and SystemStatus
             PerformanceMonitor {
+                id: performanceMonitorComponent
+                anchors {
+                    bottom: systemStatusComponent.top
+                    bottomMargin: Theme.barGap
+                    horizontalCenter: mainBar.horizontalCenter
+                }
+            }
+
+            // SystemStatus - between PerformanceMonitor and ClockWidget
+            SystemStatus {
+                id: systemStatusComponent
                 anchors {
                     bottom: clockWidgetComponent.top
                     bottomMargin: Theme.barGap
