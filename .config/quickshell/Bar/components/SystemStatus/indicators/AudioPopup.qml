@@ -10,8 +10,8 @@ import "../data"
 AnimatedPopup {
     id: root
     
-    implicitWidth: 180
-    implicitHeight: contentColumn.height + 16
+    width: 180
+    height: 80
     leftMargin: 35
     
     GlassEffects {
@@ -31,7 +31,7 @@ AnimatedPopup {
         Text {
             text: "Audio"
             font.family: Theme.primaryFont
-            font.pointSize: Theme.smallFontSize
+            font.pointSize: Theme.normalFontSize
             color: Theme.primaryColor
         }
         
@@ -44,7 +44,7 @@ AnimatedPopup {
                 text: AudioService.isMuted ? "volume_off" : "volume_up"
                 font.family: Theme.iconFont
                 font.variableAxes: Theme.iconFontStyle
-                font.pointSize: Theme.smallFontSize
+                font.pointSize: Theme.normalFontSize
                 color: Theme.secondaryColor
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -52,8 +52,8 @@ AnimatedPopup {
             Text {
                 text: AudioService.isMuted ? "Muted" : AudioService.volume + "%"
                 font.family: Theme.primaryFont
-                font.pointSize: Theme.smallFontSize
-                color: Theme.foregroundColor
+                font.pointSize: Theme.normalFontSize
+                color: Theme.secondaryColor
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
@@ -62,13 +62,13 @@ AnimatedPopup {
         Rectangle {
             width: parent.width
             height: 4
-            color: Theme.opaqueSecondaryColor
+            color: Theme.secondaryColorOpaqued
             radius: 2
             
             Rectangle {
                 width: parent.width * (AudioService.volume / 100)
                 height: parent.height
-                color: AudioService.isMuted ? Theme.opaqueSecondaryColor : Theme.secondaryColor
+                color: AudioService.isMuted ? Theme.secondaryColorOpaqued : Theme.secondaryColor
                 radius: 2
             }
         }

@@ -5,6 +5,7 @@
 
 import QtQuick
 import "root:/Theme"
+import "data"
 import "indicators"
 
 Column {

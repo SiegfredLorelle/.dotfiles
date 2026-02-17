@@ -7,8 +7,8 @@ import "../data"
 AnimatedPopup {
     id: root
     
-    implicitWidth: 180
-    implicitHeight: 60
+    width: 180
+    height: 60
     leftMargin: 35
     
     GlassEffects {
@@ -26,15 +26,15 @@ AnimatedPopup {
         Text {
             text: "Brightness"
             font.family: Theme.primaryFont
-            font.pointSize: Theme.smallFontSize
+            font.pointSize: Theme.normalFontSize
             color: Theme.primaryColor
         }
         
         Text {
             text: BrightnessService.brightness + "%"
             font.family: Theme.primaryFont
-            font.pointSize: Theme.smallFontSize
-            color: Theme.foregroundColor
+            font.pointSize: Theme.normalFontSize
+            color: Theme.secondaryColor
         }
     }
 }
