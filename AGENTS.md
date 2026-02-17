@@ -219,6 +219,36 @@ Reference repositories:
 2. **Visual Check**: For UI (QML/Hyprland), ask the user to verify visual changes if you cannot run the tool.
 3. **Git**: Stage only the intended files. Do not stage `lazy-lock.json` unless explicitly updating plugins.
 
+### 5.4 Git Workflow
+
+**Commit Message Convention**
+When suggesting commit messages, follow the existing convention from `git log`:
+
+| Scope | Used For | Example |
+|-------|----------|---------|
+| `quickshell(bar):` | Bar/widget changes | `quickshell(bar): add AudioService singleton` |
+| `hyprland:` | Hyprland config | `hyprland: fix pavucontrol not following theme` |
+| `neovim:` | Neovim config | `neovim: add lsp configuration` |
+| `kitty:` | Kitty terminal config | `kitty: update font settings` |
+| `zsh:` | Zsh shell config | `zsh: add bun autocompletes` |
+| `opencode:` | Opencode config | `opencode: add superpowers documentation` |
+| `chore:` | Maintenance tasks | `chore: ignore markdown and cache files` |
+
+**Rules:**
+- Use lowercase, present tense, descriptive messages
+- Check `git log` to understand the convention for the specific file being changed
+- Match the scope to the configuration area being modified
+
+**Agent Restrictions**
+**CRITICAL**: AI agents MUST NOT run `git commit` commands.
+- **DO**: Stage files with `git add`
+- **DO**: Suggest commit messages based on `git log` patterns
+- **DO**: Use `git status` and `git diff` to understand changes
+- **NEVER**: Run `git commit`
+- **NEVER**: Run `git push`
+
+Always leave committing to the user. Present staged changes and suggest an appropriate commit message, but let the user execute the actual commit.
+
 ## 6. Color Palette & Theme (OneDark-ish)
 
 Reference these colors when creating new UI elements to maintain consistency.
