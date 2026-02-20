@@ -92,19 +92,19 @@ Scope {
                 }
             }
 
-            // Performance Monitor - between ActiveWindow and SystemStatus
-            PerformanceMonitor {
-                id: performanceMonitorComponent
+            // SystemStatus - between ActiveWindow and PerformanceMonitor
+            SystemStatus {
+                id: systemStatusComponent
                 anchors {
-                    bottom: systemStatusComponent.top
+                    bottom: performanceMonitorComponent.top
                     bottomMargin: Theme.barGap
                     horizontalCenter: mainBar.horizontalCenter
                 }
             }
 
-            // SystemStatus - between PerformanceMonitor and ClockWidget
-            SystemStatus {
-                id: systemStatusComponent
+            // Performance Monitor - between SystemStatus and ClockWidget
+            PerformanceMonitor {
+                id: performanceMonitorComponent
                 anchors {
                     bottom: clockWidgetComponent.top
                     bottomMargin: Theme.barGap
