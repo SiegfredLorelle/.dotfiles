@@ -21,6 +21,7 @@ AnimatedPopup {
     Column {
         anchors.fill: parent
         anchors.margins: 8
+        anchors.topMargin: 0
         spacing: 8
         
         Text {
