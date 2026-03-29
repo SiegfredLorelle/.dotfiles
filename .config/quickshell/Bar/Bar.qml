@@ -6,6 +6,7 @@ import "components/OsIcon"
 import "components/ActiveWindow"
 import "components/Performance"
 import "components/SystemStatus"
+import "components/SystemTray"
 import "root:/Theme"
 
 Scope {
@@ -92,7 +93,17 @@ Scope {
                 }
             }
 
-            // SystemStatus - between ActiveWindow and PerformanceMonitor
+            // SystemTray - between ActiveWindow and SystemStatus
+            SystemTray {
+                id: systemTrayComponent
+                anchors {
+                    bottom: systemStatusComponent.top
+                    bottomMargin: Theme.barGap
+                    horizontalCenter: mainBar.horizontalCenter
+                }
+            }
+
+            // SystemStatus - between SystemTray and PerformanceMonitor
             SystemStatus {
                 id: systemStatusComponent
                 anchors {

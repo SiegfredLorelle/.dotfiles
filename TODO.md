@@ -36,7 +36,8 @@
 
 
 #### System Tray
-- Add System Tray
+- Fix icon for spotify
+- Fix icon for syncthing
 
 #### Notifications
 - Add notifications
