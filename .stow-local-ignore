@@ -18,14 +18,13 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
-^/README.*
-^/LICENSE.*
-^/COPYING
+^README.*
+^LICENSE.*
+^COPYING$
 
 ^TODO\.md$   # Ignore root TODO.md
+^AGENTS\.md$
 
 # Python cache
 __pycache__/
 .ruff_cache
-
-AGENTS.md
