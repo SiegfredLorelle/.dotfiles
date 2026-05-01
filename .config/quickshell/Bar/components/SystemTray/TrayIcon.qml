@@ -1,7 +1,7 @@
 // Individual tray icon component
 // Renders icon from SystemTray service (D-Bus StatusNotifierItem)
 // Icons are desaturated and tinted with theme color to match bar style
-// Left-click activates, right-click secondary activates, hover shows name
+// Left-click activates, right-click secondary activates
 // Fallback chain: tray icon -> DesktopEntries lookup -> Material icon
 
 import QtQuick
@@ -28,7 +28,7 @@ Rectangle {
     function lookupIcon(appId) {
         if (!appId || appId.length === 0) return ""
         const entry = DesktopEntries.heuristicLookup(appId)
-        if (entry?.icon) {
+        if (entry && entry.icon) {
             const path = Quickshell.iconPath(entry.icon)
             if (path && path !== "image://icon/") return path
         }
@@ -36,7 +36,7 @@ Rectangle {
         const stripped = appId.replace(/-linux(-\d+)?$/, "")
         if (stripped !== appId) {
             const strippedEntry = DesktopEntries.heuristicLookup(stripped)
-            if (strippedEntry?.icon) {
+            if (strippedEntry && strippedEntry.icon) {
                 const path = Quickshell.iconPath(strippedEntry.icon)
                 if (path && path !== "image://icon/") return path
             }
@@ -117,7 +117,8 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        cursorShape: Qt.PointingHandCursor
 
         onClicked: (event) => {
             if (!modelData) return
@@ -125,39 +126,6 @@ Rectangle {
                 modelData.activate()
             } else if (event.button === Qt.RightButton) {
                 modelData.secondaryActivate()
-            }
-        }
-
-        onEntered: {
-            trayPopup.showPopup()
-        }
-
-        onExited: {
-            hideTimer.start()
-        }
-    }
-
-    Timer {
-        id: hideTimer
-        interval: 200
-        onTriggered: {
-            if (!trayPopup.containsMouse) {
-                trayPopup.hidePopup()
-            }
-        }
-    }
-
-    TrayPopup {
-        id: trayPopup
-        anchorItem: root
-        appName: modelData ? (modelData.title || modelData.id || "") : ""
-        isFallback: false
-
-        onContainsMouseChanged: {
-            if (containsMouse) {
-                hideTimer.stop()
-            } else {
-                hideTimer.start()
             }
         }
     }

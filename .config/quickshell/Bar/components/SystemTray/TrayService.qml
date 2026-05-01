@@ -7,6 +7,7 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Services.SystemTray
 
@@ -19,12 +20,12 @@ Singleton {
     // Fallback process watchlist for daemons without tray icons
     readonly property list<var> watchlist: [
         { name: "dockerd",      displayName: "Docker",     icon: "deployed_code" },
-        { name: "syncthing",    displayName: "Syncthing",  icon: "sync" },
+        { name: "syncthing",    displayName: "Syncthing",  icon: "sync", launchCommand: ["xdg-open", "http://127.0.0.1:8384"] },
         { name: "tailscaled",   displayName: "Tailscale",  icon: "lan" },
         { name: "mpd",          displayName: "MPD",        icon: "music_note" },
     ]
 
-    // Fallback results: [{name, displayName, icon, running}]
+    // Fallback results: [{name, displayName, icon, windowClass, launchCommand, running}]
     property list<var> fallbackItems: []
 
     // Pre-filtered to only running fallback items
@@ -49,6 +50,10 @@ Singleton {
         }
     }
 
+    Process {
+        id: launchProcess
+    }
+
     function pollFallbackProcesses() {
         const patterns = []
         for (let i = 0; i < watchlist.length; i++) {
@@ -69,9 +74,48 @@ Singleton {
                 name: entry.name,
                 displayName: entry.displayName,
                 icon: entry.icon,
+                windowClass: entry.windowClass || "",
+                launchCommand: entry.launchCommand || [],
                 running: running
             })
         }
         fallbackItems = results
+    }
+
+    function activateFallback(entry) {
+        if (root.focusFallbackWindow(entry)) {
+            return
+        }
+
+        const command = entry.launchCommand || []
+        if (command.length === 0) {
+            return
+        }
+
+        launchProcess.command = command
+        launchProcess.running = true
+    }
+
+    function focusFallbackWindow(entry) {
+        const windowClass = entry.windowClass || ""
+        if (windowClass.length === 0) {
+            return false
+        }
+
+        Hyprland.refreshToplevels()
+
+        const targetClass = windowClass.toLowerCase()
+        const toplevels = Hyprland.toplevels.values
+        for (let i = 0; i < toplevels.length; i++) {
+            const toplevel = toplevels[i]
+            const ipcObject = toplevel.lastIpcObject || {}
+            const className = (ipcObject.class || "").toLowerCase()
+            if (className === targetClass) {
+                Hyprland.dispatch("focuswindow class:" + windowClass)
+                return true
+            }
+        }
+
+        return false
     }
 }
