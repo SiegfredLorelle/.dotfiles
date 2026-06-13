@@ -121,7 +121,7 @@ Run these commands to verify the integrity of specific configurations.
   Rectangle {
       id: rootItem
       width: 100; height: 100
-      color: Theme.backgroundColor
+      color: Theme.secondaryColor
 
       MouseArea {
           anchors.fill: parent
@@ -130,54 +130,10 @@ Run these commands to verify the integrity of specific configurations.
   }
   ```
 
-#### Quickshell Patterns & Best Practices
-
-Reference repositories:
-- [caelestia-dots/shell](https://github.com/caelestia-dots/shell)
-- [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland)
-
-**Creating Singleton Services:**
-- Use `pragma Singleton` at file top (no qmldir file needed in Quickshell)
-- Use `Singleton` type from Quickshell as root element
-- Example:
-  ```qml
-  pragma Singleton
-  import Quickshell
-  
-  Singleton {
-      id: root
-      // properties and functions
-  }
-  ```
-
-**Data Collection:**
-- **FileView** for reading files (`/proc/stat`, `/proc/meminfo`, `/sys/*`):
-  ```qml
-  import Quickshell.Io
-  
-  FileView {
-      id: cpuFile
-      path: "/proc/stat"
-  }
-  // Access with cpuFile.text() and cpuFile.reload()
-  ```
-- **Process + StdioCollector** for command output:
-  ```qml
-  Process {
-      command: ["cat", "/some/path"]
-      stdout: StdioCollector {
-          onStreamFinished: {
-              const data = this.text.trim()
-              // parse data
-          }
-      }
-  }
-  ```
-- **Never use** `stdout` as direct string property - use StdioCollector or SplitParser
-
-**Timer for Polling:**
-- Use Timer with `repeat: true` and `triggeredOnStart: true` for immediate first update
-- Typical interval: 1000ms for system stats
+> **Quickshell deep-dive**: singleton services, data collection (FileView,
+> Process + StdioCollector), timer polling, and the theming contract live in
+> [`.config/quickshell/CLAUDE.md`](.config/quickshell/CLAUDE.md). Read it before
+> editing QML.
 
 ### Hyprlang (Hyprland Config)
 - **Variables**: `$camelCase`.
@@ -255,20 +211,13 @@ When suggesting commit messages, follow the existing convention from `git log`:
 
 Always leave committing to the user. Present staged changes and suggest an appropriate commit message, but let the user execute the actual commit.
 
-## 6. Color Palette & Theme (OneDark-ish)
+## 6. Theme & Color Palette
 
-Reference these colors when creating new UI elements to maintain consistency.
-
-| Color Name | Hex Code | Semantic Usage |
-|------------|----------|----------------|
-| **Background**| `#282C34` | Main window background |
-| **Foreground**| `#cdd6f4` | Primary text |
-| **Red**       | `#e06c75` | Errors, deletions, close buttons |
-| **Green**     | `#98c379` | Success, additions, git diffs |
-| **Yellow**    | `#e5c07b` | Warnings, changed states |
-| **Blue**      | `#61afef` | Information, focused elements |
-| **Purple**    | `#c678dd` | Keywords, special highlighting |
-| **Cyan**      | `#56b6c2` | Operators, accents |
+The UI theme (colors, fonts, spacing) is defined in
+[`.config/quickshell/Theme/Theme.qml`](.config/quickshell/Theme/Theme.qml) — the
+**single source of truth**. Never hardcode hex values; reference `Theme.*`
+properties. Semantic usage guidance lives in
+[`.config/quickshell/CLAUDE.md`](.config/quickshell/CLAUDE.md).
 
 ---
 *Generated for agentic coding context.*

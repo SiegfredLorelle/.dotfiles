@@ -7,7 +7,11 @@ used in this repo and auto-loads `CLAUDE.md`.
 **Read [CLAUDE.md](./CLAUDE.md) before making changes.** Everything in it applies to all
 agents (OpenCode, Codex, etc.), not just Claude Code — repository structure, build/lint/test
 commands, code style (Lua / QML / Hyprlang), naming conventions, the agent operational
-protocol, git workflow, and the theme color palette.
+protocol, and git workflow.
+
+Directory-specific guidance is nested where it's relevant: Quickshell/QML work has its own
+[`.config/quickshell/CLAUDE.md`](./.config/quickshell/CLAUDE.md) (and a matching `AGENTS.md`),
+covering the theming contract — `Theme.qml` is the source of truth for colors/fonts/spacing.
 
 ## Critical rule
 
