@@ -1,6 +1,7 @@
 // Individual tray icon component
 // Renders icon from SystemTray service (D-Bus StatusNotifierItem)
-// Icons are desaturated and tinted with theme color to match bar style
+// Each icon sits on a gold chip with a desaturated, translucent-gold icon on top,
+// mirroring the Workspace (opened-apps) recipe so the tray matches that palette
 // Left-click activates, right-click secondary activates
 // Fallback chain: tray icon -> DesktopEntries lookup -> Material icon
 
@@ -15,7 +16,8 @@ Rectangle {
 
     width: 20
     height: 20
-    color: "transparent"
+    radius: width / 2
+    color: Theme.primaryColor  // gold chip behind the icon (matches Workspace sub-pills)
 
     // Strip query parameters from icon path (e.g., "steam_tray_mono?path=/home/..." -> "steam_tray_mono")
     property string cleanIcon: {
@@ -61,24 +63,6 @@ Rectangle {
     property bool hasResolvedIcon: root.resolvedIcon.length > 0 && resolvedImage.status === Image.Ready
     property bool hasImageIcon: root.hasDirectIcon || root.hasResolvedIcon
 
-    // Primary icon: try tray icon directly
-    IconImage {
-        id: trayIcon
-        source: root.cleanIcon
-        anchors.fill: parent
-        mipmap: true
-        visible: false
-    }
-
-    // Secondary icon: DesktopEntries resolved fallback
-    IconImage {
-        id: resolvedImage
-        source: root.resolvedIcon
-        anchors.fill: parent
-        mipmap: true
-        visible: false
-    }
-
     // Pick the working icon for the pipeline (null if none loaded)
     property var activeIcon: {
         if (root.hasDirectIcon) return trayIcon
@@ -86,22 +70,63 @@ Rectangle {
         return null
     }
 
-    // Desaturate to grayscale
-    Desaturate {
-        id: desaturatedIcon
+    // Icon area, inset from the chip edges for padding (mirrors Workspace app icons)
+    Item {
+        id: iconArea
         anchors.fill: parent
-        source: root.activeIcon
-        desaturation: 1.0
-        visible: false
-    }
+        anchors.margins: 3
 
-    // Tinted overlay (visible when any icon loaded)
-    ColorOverlay {
-        id: tintedIcon
-        anchors.fill: parent
-        source: desaturatedIcon
-        color: Theme.secondaryColor
-        visible: root.hasImageIcon
+        // Rounded mask so the icon is clipped to the chip shape
+        Rectangle {
+            id: maskRect
+            anchors.fill: parent
+            radius: width / 2
+            visible: false
+        }
+
+        // Primary icon: try tray icon directly
+        IconImage {
+            id: trayIcon
+            source: root.cleanIcon
+            anchors.fill: parent
+            mipmap: true
+            visible: false
+        }
+
+        // Secondary icon: DesktopEntries resolved fallback
+        IconImage {
+            id: resolvedImage
+            source: root.resolvedIcon
+            anchors.fill: parent
+            mipmap: true
+            visible: false
+        }
+
+        // Desaturate to grayscale
+        Desaturate {
+            id: desaturatedIcon
+            anchors.fill: parent
+            source: root.activeIcon
+            desaturation: 1.0
+            visible: false
+        }
+
+        // Tint with translucent gold (matches Workspace app-icon overlay)
+        ColorOverlay {
+            id: tintedIcon
+            anchors.fill: parent
+            source: desaturatedIcon
+            color: Theme.primaryColorOpaqued
+            visible: false
+        }
+
+        // Faint gold icon clipped to the chip (visible when any icon loaded)
+        OpacityMask {
+            anchors.fill: parent
+            source: tintedIcon
+            maskSource: maskRect
+            visible: root.hasImageIcon
+        }
     }
 
     // Material icon fallback (visible when no image icon available)
@@ -111,7 +136,7 @@ Rectangle {
         font.family: Theme.iconFont
         font.variableAxes: Theme.iconFontStyle
         font.pointSize: Theme.normalFontSize
-        color: Theme.secondaryColor
+        color: Theme.primaryColorOpaqued
         visible: !root.hasImageIcon
     }
 

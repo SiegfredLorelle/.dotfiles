@@ -11,7 +11,9 @@ Rectangle {
 
     width: 20
     height: 20
-    color: "transparent"
+    radius: width / 2
+    color: Theme.primaryColor  // gold chip, matching TrayIcon and Workspace
+    opacity: 0.65              // dimmed to distinguish from real tray items
 
     Text {
         anchors.centerIn: parent
@@ -19,8 +21,7 @@ Rectangle {
         font.family: Theme.iconFont
         font.variableAxes: Theme.iconFontStyle
         font.pointSize: Theme.normalFontSize
-        color: Theme.secondaryColor
-        opacity: 0.65
+        color: Theme.primaryColorOpaqued
     }
 
     MouseArea {
