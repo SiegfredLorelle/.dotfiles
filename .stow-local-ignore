@@ -24,6 +24,7 @@ _darcs
 
 ^TODO\.md$   # Ignore root TODO.md
 ^AGENTS\.md$
+^CLAUDE\.md$
 
 # Python cache
 __pycache__/
