@@ -2,8 +2,8 @@
 // Renders icon from SystemTray service (D-Bus StatusNotifierItem)
 // Each icon sits on a gold chip with a desaturated, translucent-gold icon on top,
 // mirroring the Workspace (opened-apps) recipe so the tray matches that palette
+// Resolution: DesktopEntries lookup (stable) -> SNI tray icon -> Material icon
 // Left-click activates, right-click secondary activates
-// Fallback chain: tray icon -> DesktopEntries lookup -> Material icon
 
 import QtQuick
 import Quickshell
@@ -19,12 +19,11 @@ Rectangle {
     radius: width / 2
     color: Theme.primaryColor  // gold chip behind the icon (matches Workspace sub-pills)
 
-    // Strip query parameters from icon path (e.g., "steam_tray_mono?path=/home/..." -> "steam_tray_mono")
-    property string cleanIcon: {
-        const raw = modelData ? modelData.icon || "" : ""
-        const qIdx = raw.indexOf("?")
-        return qIdx > 0 ? raw.substring(0, qIdx) : raw
-    }
+    // Tray icon URL passed through verbatim. Quickshell encodes some SNI icons
+    // with a "?path=" query pointing at the app's icon dir (e.g.
+    // "spotify-linux?path=/opt/spotify/...") — IconImage needs it to resolve, so
+    // do NOT strip the query.
+    property string directIcon: modelData ? modelData.icon || "" : ""
 
     // Try to resolve icon via DesktopEntries, stripping known suffixes
     function lookupIcon(appId) {
@@ -46,12 +45,12 @@ Rectangle {
         return ""
     }
 
-    // Resolve icon via DesktopEntries: try id, cleanIcon, title
+    // Resolve icon via DesktopEntries: try id, directIcon, title
     property string resolvedIcon: {
         if (!modelData) return ""
         const fromId = lookupIcon(modelData.id)
         if (fromId.length > 0) return fromId
-        const fromIcon = lookupIcon(root.cleanIcon)
+        const fromIcon = lookupIcon(root.directIcon)
         if (fromIcon.length > 0) return fromIcon
         const fromTitle = lookupIcon(modelData.title)
         if (fromTitle.length > 0) return fromTitle
@@ -59,14 +58,17 @@ Rectangle {
     }
 
     // Whether each icon source loaded successfully
-    property bool hasDirectIcon: root.cleanIcon.length > 0 && trayIcon.status === Image.Ready
+    property bool hasDirectIcon: root.directIcon.length > 0 && trayIcon.status === Image.Ready
     property bool hasResolvedIcon: root.resolvedIcon.length > 0 && resolvedImage.status === Image.Ready
     property bool hasImageIcon: root.hasDirectIcon || root.hasResolvedIcon
 
-    // Pick the working icon for the pipeline (null if none loaded)
+    // Pick the working icon for the pipeline (null if none loaded).
+    // Prefer the DesktopEntries-resolved icon (stable /usr/share path, same as
+    // Workspace) over the SNI-provided icon, which some apps (e.g. Spotify) send
+    // intermittently as a blank/failing pixmap.
     property var activeIcon: {
-        if (root.hasDirectIcon) return trayIcon
         if (root.hasResolvedIcon) return resolvedImage
+        if (root.hasDirectIcon) return trayIcon
         return null
     }
 
@@ -87,7 +89,7 @@ Rectangle {
         // Primary icon: try tray icon directly
         IconImage {
             id: trayIcon
-            source: root.cleanIcon
+            source: root.directIcon
             anchors.fill: parent
             mipmap: true
             visible: false
@@ -102,7 +104,7 @@ Rectangle {
             visible: false
         }
 
-        // Desaturate to grayscale
+        // Desaturate to grayscale (matches Workspace app-icon treatment)
         Desaturate {
             id: desaturatedIcon
             anchors.fill: parent
