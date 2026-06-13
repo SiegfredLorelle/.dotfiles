@@ -9,6 +9,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
+import "root:/Services"
 import "root:/Theme"
 
 Rectangle {
@@ -45,7 +46,9 @@ Rectangle {
         return ""
     }
 
-    // Resolve icon via DesktopEntries: try id, directIcon, title
+    // Resolve icon via DesktopEntries: try id, directIcon, title. If all fail,
+    // fall back to a custom icon file (AppIconCache) keyed by id then title, so a
+    // dropped file in ~/Pictures/assets/icons/apps can rescue an unresolved app.
     property string resolvedIcon: {
         if (!modelData) return ""
         const fromId = lookupIcon(modelData.id)
@@ -54,6 +57,12 @@ Rectangle {
         if (fromIcon.length > 0) return fromIcon
         const fromTitle = lookupIcon(modelData.title)
         if (fromTitle.length > 0) return fromTitle
+        if (AppIconCache.ready) {
+            const fromCacheId = AppIconCache.lookup(modelData.id || "")
+            if (fromCacheId.length > 0) return fromCacheId
+            const fromCacheTitle = AppIconCache.lookup(modelData.title || "")
+            if (fromCacheTitle.length > 0) return fromCacheTitle
+        }
         return ""
     }
 
@@ -131,16 +140,8 @@ Rectangle {
         }
     }
 
-    // Material icon fallback (visible when no image icon available)
-    Text {
-        anchors.centerIn: parent
-        text: "apps"
-        font.family: Theme.iconFont
-        font.variableAxes: Theme.iconFontStyle
-        font.pointSize: Theme.normalFontSize
-        color: Theme.primaryColorOpaqued
-        visible: !root.hasImageIcon
-    }
+    // No glyph fallback: an item that resolves via none of DesktopEntries, its
+    // SNI icon, or a custom file renders a blank gold chip (glyph-free by design).
 
     MouseArea {
         anchors.fill: parent

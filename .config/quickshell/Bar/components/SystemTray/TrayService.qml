@@ -17,12 +17,13 @@ Singleton {
     // Tray items from D-Bus (event-driven, no polling)
     readonly property list<var> trayItems: SystemTray.items.values
 
-    // Fallback process watchlist for daemons without tray icons
+    // Fallback process watchlist for daemons without tray icons.
+    // `icon` is a base filename resolved against AppIconCache (a file dropped in
+    // ~/Pictures/assets/icons/apps, e.g. docker.png). No Material-glyph fallback —
+    // a daemon with no matching file renders a blank chip.
     readonly property list<var> watchlist: [
-        { name: "dockerd",      displayName: "Docker",     icon: "deployed_code" },
-        { name: "syncthing",    displayName: "Syncthing",  icon: "sync", launchCommand: ["xdg-open", "http://127.0.0.1:8384"] },
-        { name: "tailscaled",   displayName: "Tailscale",  icon: "lan" },
-        { name: "mpd",          displayName: "MPD",        icon: "music_note" },
+        { name: "dockerd",      displayName: "Docker",     icon: "docker" },
+        { name: "syncthing",    displayName: "Syncthing",  icon: "syncthing", launchCommand: ["xdg-open", "http://127.0.0.1:8384"] },
     ]
 
     // Fallback results: [{name, displayName, icon, windowClass, launchCommand, running}]
