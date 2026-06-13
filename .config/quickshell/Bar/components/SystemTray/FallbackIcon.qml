@@ -1,8 +1,6 @@
-// Individual fallback process icon
-// Shows a custom icon file (from AppIconCache) for daemons without tray icons,
-// styled to match TrayIcon and Workspace (desaturate -> gold tint -> circular mask).
-// No glyph fallback: a daemon with no matching file renders a blank chip.
-// Left-click focuses or opens configured target
+// Individual fallback process icon: a custom icon file (from AppIconCache) for
+// daemons without tray icons, styled like TrayIcon (desaturate -> gold tint -> mask).
+// Left-click focuses the window or runs the configured launch command.
 
 import QtQuick
 import Quickshell
@@ -17,7 +15,7 @@ Rectangle {
     width: 20
     height: 20
     radius: width / 2
-    color: Theme.primaryColor  // gold chip, matching TrayIcon and Workspace
+    color: Theme.primaryColor  // gold chip
 
     // Resolve the configured base filename to a custom icon file url.
     // Gated on AppIconCache.ready so the binding re-evaluates after the scan.
@@ -27,7 +25,7 @@ Rectangle {
     }
     property bool hasImageIcon: root.resolvedIcon.length > 0 && fallbackImage.status === Image.Ready
 
-    // Icon area, inset from the chip edges for padding (mirrors TrayIcon)
+    // Icon area, inset from the chip edges for padding
     Item {
         id: iconArea
         anchors.fill: parent
@@ -49,7 +47,7 @@ Rectangle {
             visible: false
         }
 
-        // Desaturate to grayscale (matches Workspace/TrayIcon app-icon treatment)
+        // Recolor to match the theme: desaturate to gray, then tint gold
         Desaturate {
             id: desaturatedIcon
             anchors.fill: parent
@@ -58,7 +56,6 @@ Rectangle {
             visible: false
         }
 
-        // Tint with translucent gold (matches Workspace/TrayIcon app-icon overlay)
         ColorOverlay {
             id: tintedIcon
             anchors.fill: parent
@@ -67,7 +64,7 @@ Rectangle {
             visible: false
         }
 
-        // Faint gold icon clipped to the chip (visible when the icon loaded)
+        // Final icon, clipped to the chip
         OpacityMask {
             anchors.fill: parent
             source: tintedIcon

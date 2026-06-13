@@ -5,7 +5,6 @@ Column {
     id: root
     spacing: 4
     
-    // Main date/time display with mouse area
     MouseArea {
         width: dateTimeColumn.width
         height: dateTimeColumn.height
@@ -54,7 +53,6 @@ Column {
             }
         }
         
-        // Show calendar on hover
         onEntered: {
             clockPopup.showPopup()
         }
@@ -65,7 +63,6 @@ Column {
         }
     }
     
-    // Timer to delay hiding the popup
     Timer {
         id: hideTimer
         interval: 200
@@ -76,12 +73,10 @@ Column {
         }
     }
     
-    // Calendar popup - now just a simple instantiation
     ClockPopup {
         id: clockPopup
         anchorItem: root
         
-        // Handle mouse events for hover management
         onContainsMouseChanged: {
             if (containsMouse) {
                 hideTimer.stop()

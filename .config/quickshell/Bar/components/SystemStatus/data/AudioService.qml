@@ -2,7 +2,6 @@
 // Data sources:
 //   - Volume/mute: wpctl (wireplumber)
 // Polling interval: 500ms (audio changes frequently)
-// Pattern: pragma Singleton + Singleton type
 
 pragma Singleton
 pragma ComponentBehavior: Bound
@@ -13,17 +12,14 @@ import Quickshell.Io
 Singleton {
     id: root
     
-    // Audio properties
     property int volume: 0
     property bool isMuted: false
     property bool available: false
     
-    // Properties for commands
     property real targetVolume: 0.5
     property bool shouldSetVolume: false
     property bool shouldToggleMute: false
     
-    // Timer for periodic updates
     Timer {
         id: updateTimer
         interval: 500
@@ -33,7 +29,6 @@ Singleton {
         onTriggered: root.updateAudio()
     }
     
-    // Process for getting volume
     Process {
         id: volumeProcess
         command: ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]
@@ -45,7 +40,6 @@ Singleton {
         }
     }
     
-    // Process for setting volume
     Process {
         id: setVolumeProcess
         running: root.shouldSetVolume
@@ -58,7 +52,6 @@ Singleton {
         }
     }
     
-    // Process for toggling mute
     Process {
         id: toggleMuteProcess
         running: root.shouldToggleMute

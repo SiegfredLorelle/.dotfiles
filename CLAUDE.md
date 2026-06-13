@@ -88,6 +88,17 @@ Run these commands to verify the integrity of specific configurations.
 
 ## 3. Code Style Guidelines
 
+### Comments (all languages)
+Comment to explain **why**, not **what** — the code already says what it does.
+- **Keep:** non-obvious rationale, footguns, upstream-quirk workarounds, subtle
+  framework semantics (e.g. *why* a binding must reference a flag).
+- **Cut:** comments restating the next line, labels on structurally-obvious blocks
+  (`// Timer for polling` above a named `Timer`), and design notes already stated
+  once elsewhere.
+- One purpose-stating header comment per file is fine; don't re-explain the same
+  policy in every file.
+- Prefer a self-explaining name over a comment.
+
 ### Lua (Neovim)
 - **Formatting**: 4 spaces for options, 2 spaces for plugin tables/deep nesting.
 - **Strings**: Double quotes `"` preferred over single quotes.

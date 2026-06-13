@@ -14,7 +14,6 @@ Rectangle {
     color: "transparent"
     visible: AudioService.available
     
-    // Icon property
     property string icon: getIcon()
     property color iconColor: AudioService.isMuted ? Theme.opaqueSecondaryColor : Theme.secondaryColor
     
@@ -25,7 +24,6 @@ Rectangle {
         return "volume_up"
     }
     
-    // Icon display
     Text {
         anchors.centerIn: parent
         text: root.icon
@@ -35,17 +33,14 @@ Rectangle {
         color: root.iconColor
     }
     
-    // Mouse area for interactions
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
-        
-        // Click to toggle mute
+
         onClicked: {
             AudioService.toggleMute()
         }
-        
-        // Scroll to adjust volume
+
         onWheel: (wheel) => {
             const delta = wheel.angleDelta.y > 0 ? 5 : -5
             AudioService.setVolume(AudioService.volume + delta)
@@ -60,7 +55,7 @@ Rectangle {
         }
     }
     
-    // Timer to delay hiding the popup
+    // Brief delay on exit so the cursor can move onto the popup without it closing
     Timer {
         id: hideTimer
         interval: 200
@@ -71,7 +66,6 @@ Rectangle {
         }
     }
     
-    // Audio popup
     AudioPopup {
         id: audioPopup
         anchorItem: root
@@ -85,7 +79,7 @@ Rectangle {
         }
     }
     
-    // Update icon when volume changes
+    // icon binds through getIcon(), a function call QML can't track — refresh it explicitly
     Connections {
         target: AudioService
         function onVolumeChanged() { root.icon = getIcon() }

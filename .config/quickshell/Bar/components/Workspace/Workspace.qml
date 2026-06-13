@@ -33,7 +33,6 @@ Rectangle {
 
         const appName = app.lastIpcObject.class
 
-        // Try desktop entries first
         const quickshellIconName = DesktopEntries.heuristicLookup(appName)?.icon
         if (quickshellIconName !== undefined) {
             const iconPath = Quickshell.iconPath(quickshellIconName)
@@ -47,7 +46,7 @@ Rectangle {
         if (AppIconCache.ready) {
             return AppIconCache.lookup(app.title || "")
         }
-        return "" // No app icon found
+        return ""
     }
 
     Column {
@@ -118,7 +117,6 @@ Rectangle {
                                 visible: false
                             }
 
-                            // App icon display (when available)
                             Item {
                                 anchors.fill: parent
                                 visible: hasAppIcon
@@ -166,7 +164,7 @@ Rectangle {
                                     font.family: Theme.iconFont
                                     font.variableAxes: Theme.iconFontStyle
                                     font.pixelSize: 14 // Adjust size to fit within 16x16
-                                    color: "#857959" // Or whatever color you prefer
+                                    color: "#857959"
                                     anchors.centerIn: parent
                                 }
                             }

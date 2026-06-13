@@ -4,7 +4,6 @@ import "root:/Theme"
 Item {
     id: root
     
-    // Customizable properties
     property color baseColor: Theme.primaryColor
     property real baseOpacity: 0.9
     property real gradientOpacity: 0.6
@@ -19,7 +18,6 @@ Item {
     property real shadowOffset: 2
     property real animationOpacity: 1.0  // For animated components
     
-    // Border visibility controls
     property bool showBorder: true
     property bool showOuterBorder: true
     property bool showInnerShadow: true
@@ -57,7 +55,6 @@ Item {
         return bottomRightRadius ? borderRadius : 0
     }
     
-    // Main background with transparency
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
@@ -69,7 +66,6 @@ Item {
         bottomRightRadius: root.computedBottomRightRadius
     }
     
-    // Glassmorphism gradient overlay
     Rectangle {
         id: gradientOverlay
         anchors.fill: parent
@@ -86,7 +82,6 @@ Item {
         }
     }
     
-    // Outer border for glassmorphism effect
     Rectangle {
         id: outerBorder
         anchors.fill: parent
@@ -100,7 +95,6 @@ Item {
         visible: root.showBorder && root.showOuterBorder
     }
     
-    // Subtle inner shadow effect
     Rectangle {
         id: innerShadow
         anchors {
@@ -117,7 +111,6 @@ Item {
         visible: root.showBorder && root.showInnerShadow
     }
     
-    // Optional drop shadow (positioned behind the component)
     Rectangle {
         id: dropShadow
         anchors {

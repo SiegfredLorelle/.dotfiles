@@ -21,7 +21,6 @@ Column {
     property bool batteryEnabled: false      // Enable on laptop
     property bool brightnessEnabled: false   // Enable on laptop
     
-    // Audio Indicator - only shows if AudioService detects audio system
     Loader {
         active: root.audioEnabled
         sourceComponent: AudioIndicator {}
@@ -30,7 +29,6 @@ Column {
         height: 20
     }
 
-    // Network Indicator - only shows if NetworkService detects WiFi
     Loader {
         active: root.networkEnabled
         sourceComponent: NetworkIndicator {}
@@ -39,7 +37,6 @@ Column {
         height: 20
     }
 
-    // Bluetooth Indicator - only shows if BluetoothService detects Bluetooth
     Loader {
         active: root.bluetoothEnabled
         sourceComponent: BluetoothIndicator {}
@@ -48,7 +45,6 @@ Column {
         height: 20
     }
 
-    // Battery Indicator - only shows if BatteryService detects battery
     Loader {
         active: root.batteryEnabled
         sourceComponent: BatteryIndicator {}
@@ -57,7 +53,6 @@ Column {
         height: 20
     }
 
-    // Brightness Indicator - only shows if BrightnessService detects brightness control
     Loader {
         active: root.brightnessEnabled
         sourceComponent: BrightnessIndicator {}

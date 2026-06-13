@@ -3,7 +3,6 @@
 // name -> file-url lookup. Used by Workspace (opened-apps) and the SystemTray
 // fallbacks so "drop a file in apps/" is the single way to brand an app/daemon
 // that has no standard desktop icon (e.g. genshin-impact.ico, hoyoplay.png).
-// Pattern: pragma Singleton + Singleton type (see .config/quickshell/CLAUDE.md)
 
 pragma Singleton
 pragma ComponentBehavior: Bound
@@ -14,7 +13,6 @@ import Qt.labs.folderlistmodel
 Singleton {
     id: root
 
-    // Absolute path to the custom-icon directory
     readonly property string iconDir: Quickshell.env("HOME") + "/Pictures/assets/icons/apps"
 
     // baseName variants -> "file://.../<file>" (mutated in place; see `ready`)

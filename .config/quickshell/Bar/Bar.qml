@@ -44,7 +44,6 @@ Scope {
                     left: mainBar.right
                 }
             }
-            // Top-right rounded corner for cornerRectangle
             RoundCorner {
                 anchors {
                     top: cornerRectangle.top
@@ -55,7 +54,6 @@ Scope {
                 corner: RoundCorner.CornerEnum.TopLeft
             }
             
-            // Bottom-right rounded corner for cornerRectangle
             RoundCorner {
                 anchors {
                     bottom: cornerRectangle.bottom
@@ -66,7 +64,6 @@ Scope {
                 corner: RoundCorner.CornerEnum.BottomLeft
             }
             
-            // Components inside mainBar
             // Components at the top
             OsIcon {
                 anchors {

@@ -1,7 +1,6 @@
 // System Tray singleton service
 // Primary: Quickshell.Services.SystemTray (D-Bus StatusNotifierItem)
 // Fallback: pgrep-based process watchlist for daemons without tray icons
-// Pattern: pragma Singleton + Singleton type
 
 pragma Singleton
 pragma ComponentBehavior: Bound
@@ -19,8 +18,7 @@ Singleton {
 
     // Fallback process watchlist for daemons without tray icons.
     // `icon` is a base filename resolved against AppIconCache (a file dropped in
-    // ~/Pictures/assets/icons/apps, e.g. docker.png). No Material-glyph fallback —
-    // a daemon with no matching file renders a blank chip.
+    // ~/Pictures/assets/icons/apps, e.g. docker.png).
     readonly property list<var> watchlist: [
         { name: "dockerd",      displayName: "Docker",     icon: "docker" },
         { name: "syncthing",    displayName: "Syncthing",  icon: "syncthing", launchCommand: ["xdg-open", "http://127.0.0.1:8384"] },
@@ -29,10 +27,8 @@ Singleton {
     // Fallback results: [{name, displayName, icon, windowClass, launchCommand, running}]
     property list<var> fallbackItems: []
 
-    // Pre-filtered to only running fallback items
     readonly property list<var> runningFallbackItems: fallbackItems.filter(item => item.running)
 
-    // Timer for fallback process polling
     Timer {
         id: fallbackTimer
         interval: 5000
@@ -42,7 +38,6 @@ Singleton {
         onTriggered: root.pollFallbackProcesses()
     }
 
-    // Process for checking running daemons
     Process {
         id: pgrepProcess
         stdout: StdioCollector {

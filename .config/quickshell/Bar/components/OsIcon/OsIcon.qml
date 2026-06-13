@@ -6,7 +6,6 @@ Item {
     width: osIcon.width
     height: osIcon.height
     
-    // Mouse area for hover detection
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
@@ -20,7 +19,6 @@ Item {
             anchors.centerIn: parent
         }
         
-        // Show power popup on hover
         onEntered: {
             powerPopup.showPopup()
         }
@@ -31,7 +29,6 @@ Item {
         }
     }
     
-    // Timer to delay hiding the popup
     Timer {
         id: hideTimer
         interval: 200
@@ -42,12 +39,10 @@ Item {
         }
     }
     
-    // Power popup
     PowerPopup {
         id: powerPopup
         anchorItem: root
         
-        // Handle mouse events for hover management
         onContainsMouseChanged: {
             if (containsMouse) {
                 hideTimer.stop()

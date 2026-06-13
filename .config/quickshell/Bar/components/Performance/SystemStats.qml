@@ -6,7 +6,6 @@
 //   - CPU temp: /sys/class/hwmon/hwmon3/temp1_input (k10temp driver, AMD CPU)
 //   - GPU temp: /sys/class/hwmon/hwmon2/temp1_input (amdgpu driver)
 // Polling interval: 1000ms
-// Pattern: pragma Singleton + Singleton type, no qmldir needed (Quickshell feature)
 
 pragma Singleton
 pragma ComponentBehavior: Bound
@@ -17,28 +16,24 @@ import Quickshell.Io
 Singleton {
     id: root
     
-    // Performance metrics
     property int cpuPercent: 0
     property int memoryPercent: 0
     property int gpuPercent: 0
-    
-    // Temperatures (in Celsius)
+
+    // Temperatures, °C
     property int cpuTemp: 0
     property int gpuTemp: 0
-    
-    // Memory details
+
     property int memoryUsedMB: 0
     property int memoryTotalMB: 0
-    
-    // Historical data for graphs (last 60 seconds)
+
+    // Last 60s of samples, for the popup graphs
     property var cpuHistory: []
     property var memoryHistory: []
     property var gpuHistory: []
-    
-    // CPU calculation state
+
     property var lastCpuStats: null
     
-    // Timer for periodic updates
     Timer {
         id: updateTimer
         interval: 1000
@@ -47,32 +42,28 @@ Singleton {
         triggeredOnStart: true
         onTriggered: root.updateStats()
     }
-    
-    // FileView for CPU stats
+
     FileView {
         id: cpuFile
         path: "/proc/stat"
     }
-    
-    // FileView for Memory stats
+
     FileView {
         id: memoryFile
         path: "/proc/meminfo"
     }
-    
-    // FileView for CPU temperature
+
     FileView {
         id: cpuTempFile
         path: "/sys/class/hwmon/hwmon3/temp1_input"
     }
-    
-    // FileView for GPU temperature
+
     FileView {
         id: gpuTempFile
         path: "/sys/class/hwmon/hwmon2/temp1_input"
     }
-    
-    // Process for GPU usage (single value, more reliable)
+
+    // GPU usage: Process is more reliable than FileView for this value
     Process {
         id: gpuProcess
         command: ["cat", "/sys/class/drm/card1/device/gpu_busy_percent"]
@@ -88,26 +79,16 @@ Singleton {
     }
     
     function updateStats() {
-        // Reload all FileView sources
         cpuFile.reload()
         memoryFile.reload()
         cpuTempFile.reload()
         gpuTempFile.reload()
-        
-        // Start GPU process
         gpuProcess.running = true
-        
-        // Parse CPU stats
+
         parseCpuStats(cpuFile.text())
-        
-        // Parse Memory stats
         parseMemoryStats(memoryFile.text())
-        
-        // Parse Temperatures
         parseCpuTemp(cpuTempFile.text())
         parseGpuTemp(gpuTempFile.text())
-        
-        // Update history
         updateHistory()
     }
     
@@ -186,12 +167,10 @@ Singleton {
     }
     
     function updateHistory() {
-        // Add current values to history
         cpuHistory.push(cpuPercent)
         memoryHistory.push(memoryPercent)
         gpuHistory.push(gpuPercent)
-        
-        // Keep only last 60 entries
+
         if (cpuHistory.length > 60) cpuHistory.shift()
         if (memoryHistory.length > 60) memoryHistory.shift()
         if (gpuHistory.length > 60) gpuHistory.shift()

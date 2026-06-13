@@ -11,7 +11,6 @@ Column {
     spacing: Theme.barGap
     width: 24
 
-    // Main container with mouse area
     MouseArea {
         width: parent.width
         height: gaugesColumn.height
@@ -22,21 +21,18 @@ Column {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: Theme.largeSpacing
 
-            // CPU Gauge
             CircularGauge {
                 value: SystemStats.cpuPercent
                 icon: "memory"
                 color: Theme.secondaryColor
             }
 
-            // Memory Gauge
             CircularGauge {
                 value: SystemStats.memoryPercent
                 icon: "memory_alt"
                 color: Theme.secondaryColor
             }
 
-            // GPU Gauge
             CircularGauge {
                 value: SystemStats.gpuPercent
                 icon: "󰢮"
@@ -44,7 +40,6 @@ Column {
             }
         }
 
-        // Show popup on hover
         onEntered: {
             performancePopup.showPopup()
         }
@@ -54,7 +49,7 @@ Column {
         }
     }
 
-    // Timer to delay hiding the popup
+    // Brief delay on exit so the cursor can move onto the popup without it closing
     Timer {
         id: hideTimer
         interval: 200
@@ -65,7 +60,6 @@ Column {
         }
     }
 
-    // Performance popup
     PerformancePopup {
         id: performancePopup
         anchorItem: root
@@ -79,7 +73,6 @@ Column {
         }
     }
 
-    // Circular gauge component
     component CircularGauge: Item {
         property int value: 0
         property string icon: ""
@@ -88,13 +81,11 @@ Column {
         width: 28
         height: 28
 
-        // Background circle
         Rectangle {
             radius: width / 2
             color: "transparent"
         }
 
-        // Progress arc using Canvas
         Canvas {
             id: progressCanvas
             anchors.fill: parent
@@ -128,7 +119,6 @@ Column {
             }
         }
 
-        // Center icon
         Text {
             anchors.centerIn: parent
             text: icon

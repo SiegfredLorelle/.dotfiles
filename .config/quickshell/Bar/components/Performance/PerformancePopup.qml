@@ -27,7 +27,6 @@ AnimatedPopup {
         anchors.margins: 8
         spacing: 0  // No spacing, rows will distribute evenly
 
-        // CPU Row
         MetricRow {
             icon: "memory"
             label: "CPU"
@@ -36,7 +35,6 @@ AnimatedPopup {
             height: parent.height / 3
         }
 
-        // Memory Row
         MetricRow {
             icon: "memory_alt"
             label: "RAM"
@@ -46,7 +44,6 @@ AnimatedPopup {
             height: parent.height / 3
         }
 
-        // GPU Row
         MetricRow {
             icon: "󰢮"
             label: "GPU"
@@ -56,7 +53,6 @@ AnimatedPopup {
         }
     }
 
-    // Compact metric row component
     component MetricRow: RowLayout {
         property string icon
         property string label
@@ -66,7 +62,6 @@ AnimatedPopup {
         spacing: 6
         width: parent.width
 
-        // Icon
         Text {
             text: icon
             font.family: Theme.iconFont
@@ -76,7 +71,6 @@ AnimatedPopup {
             Layout.alignment: Qt.AlignVCenter
         }
 
-        // Label
         Text {
             text: label
             font.family: Theme.primaryFont
@@ -85,7 +79,6 @@ AnimatedPopup {
             Layout.alignment: Qt.AlignVCenter
         }
 
-        // Percentage (bold)
         Text {
             text: value + "%"
             font.family: Theme.primaryFont
@@ -101,7 +94,6 @@ AnimatedPopup {
             height: 1
         }
 
-        // Detail (temp or memory)
         Text {
             text: detail
             font.family: Theme.primaryFont

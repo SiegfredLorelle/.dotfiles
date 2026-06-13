@@ -1,9 +1,5 @@
-// Individual tray icon component
-// Renders icon from SystemTray service (D-Bus StatusNotifierItem)
-// Each icon sits on a gold chip with a desaturated, translucent-gold icon on top,
-// mirroring the Workspace (opened-apps) recipe so the tray matches that palette
-// Resolution: DesktopEntries lookup (stable) -> SNI tray icon -> Material icon
-// Left-click activates, right-click secondary activates
+// Individual tray icon: a desaturated, gold-tinted icon on a gold chip.
+// Icon resolution: DesktopEntries lookup -> SNI tray icon -> custom file (AppIconCache).
 
 import QtQuick
 import Quickshell
@@ -18,7 +14,7 @@ Rectangle {
     width: 20
     height: 20
     radius: width / 2
-    color: Theme.primaryColor  // gold chip behind the icon (matches Workspace sub-pills)
+    color: Theme.primaryColor  // gold chip behind the icon
 
     // Tray icon URL passed through verbatim. Quickshell encodes some SNI icons
     // with a "?path=" query pointing at the app's icon dir (e.g.
@@ -66,7 +62,6 @@ Rectangle {
         return ""
     }
 
-    // Whether each icon source loaded successfully
     property bool hasDirectIcon: root.directIcon.length > 0 && trayIcon.status === Image.Ready
     property bool hasResolvedIcon: root.resolvedIcon.length > 0 && resolvedImage.status === Image.Ready
     property bool hasImageIcon: root.hasDirectIcon || root.hasResolvedIcon
@@ -81,7 +76,7 @@ Rectangle {
         return null
     }
 
-    // Icon area, inset from the chip edges for padding (mirrors Workspace app icons)
+    // Icon area, inset from the chip edges for padding
     Item {
         id: iconArea
         anchors.fill: parent
@@ -95,7 +90,6 @@ Rectangle {
             visible: false
         }
 
-        // Primary icon: try tray icon directly
         IconImage {
             id: trayIcon
             source: root.directIcon
@@ -104,7 +98,6 @@ Rectangle {
             visible: false
         }
 
-        // Secondary icon: DesktopEntries resolved fallback
         IconImage {
             id: resolvedImage
             source: root.resolvedIcon
@@ -113,7 +106,7 @@ Rectangle {
             visible: false
         }
 
-        // Desaturate to grayscale (matches Workspace app-icon treatment)
+        // Recolor to match the theme: desaturate to gray, then tint gold
         Desaturate {
             id: desaturatedIcon
             anchors.fill: parent
@@ -122,7 +115,6 @@ Rectangle {
             visible: false
         }
 
-        // Tint with translucent gold (matches Workspace app-icon overlay)
         ColorOverlay {
             id: tintedIcon
             anchors.fill: parent
@@ -131,7 +123,7 @@ Rectangle {
             visible: false
         }
 
-        // Faint gold icon clipped to the chip (visible when any icon loaded)
+        // Final icon, clipped to the chip
         OpacityMask {
             anchors.fill: parent
             source: tintedIcon
@@ -140,8 +132,7 @@ Rectangle {
         }
     }
 
-    // No glyph fallback: an item that resolves via none of DesktopEntries, its
-    // SNI icon, or a custom file renders a blank gold chip (glyph-free by design).
+    // No glyph fallback by design: an unresolved item renders a blank gold chip.
 
     MouseArea {
         anchors.fill: parent

@@ -9,9 +9,7 @@ import "root:/Theme"
 Rectangle {
     id: root
 
-    // Grouped pill behind the tray icons, mirroring the opened-apps (Workspace) pill:
-    // an opaque light-gold surface that lifts the teal icons off the gold bar with clean
-    // dark-on-light contrast, matching the Workspace container 1:1.
+    // Grouped pill behind the tray icons, matching the Workspace pill.
     width: 36  // matches the Workspace pill width so the two pills align on the bar
     height: trayColumn.implicitHeight + Theme.largeSpacing * 2
     radius: width / 2

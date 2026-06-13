@@ -21,18 +21,15 @@ AnimatedPopup {
         borderRadius: Theme.borderRadius
     }
 
-    // Interactive area for click and scroll
     MouseArea {
         id: popupMouseArea
         anchors.fill: parent
         hoverEnabled: true
 
-        // Click to toggle mute
         onClicked: {
             AudioService.toggleMute()
         }
 
-        // Scroll to adjust volume
         onWheel: (wheel) => {
             const delta = wheel.angleDelta.y > 0 ? 5 : -5
             AudioService.setVolume(AudioService.volume + delta)
@@ -46,7 +43,6 @@ AnimatedPopup {
         anchors.topMargin: 0
         spacing: 8
         
-        // Header
         Text {
             text: "Audio"
             font.family: Theme.primaryFont
@@ -54,7 +50,6 @@ AnimatedPopup {
             color: Theme.primaryColor
         }
         
-        // Volume row
         Row {
             spacing: 6
             width: parent.width
