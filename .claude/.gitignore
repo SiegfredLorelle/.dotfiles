@@ -1,0 +1,11 @@
+# Ignore everything by default; opt in to curated config only.
+*
+!.gitignore
+!settings.json
+!CLAUDE.md
+!commands/
+!commands/**
+!agents/
+!agents/**
+!skills/
+!skills/**
