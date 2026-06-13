@@ -25,6 +25,7 @@ This repository includes configuration files for the following applications and 
 * **Terminal Multiplexer:** `tmux`
 * **Tiling Window Manager:** `Hyprland`
 * **Desktop Components:** `Quickshell`
+* **AI Coding Agent:** `Claude Code`
 <!-- * **Editor:** Neovim
 * **Display Manager:** SDDM
 * **Other Tools:**
