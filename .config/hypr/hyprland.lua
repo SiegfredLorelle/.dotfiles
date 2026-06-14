@@ -58,7 +58,7 @@ end)
 hl.config({
     general = {
         gaps_in = 4,
-        gaps_out = { top = 8, right = 8, bottom = 8, left = -10 },
+        gaps_out = { top = 8, right = 8, bottom = 8, left = 0 },
         border_size = 2,
 
         col = {

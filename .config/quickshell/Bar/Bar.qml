@@ -23,7 +23,8 @@ Scope {
                 bottom: true
                 left: true
             }
-            implicitWidth: 70 // Accommodates both mainBar and cornerRectangle
+            implicitWidth: Theme.barWindowWidth
+            exclusiveZone: Theme.barExclusiveZone
             
             Rectangle {
                 id: mainBar
@@ -32,7 +33,7 @@ Scope {
                     bottom: parent.bottom
                     left: parent.left
                 }
-                width: 50
+                width: Theme.barWidth
                 color: Theme.primaryColor
             }
             
@@ -49,7 +50,7 @@ Scope {
                     top: cornerRectangle.top
                     left: cornerRectangle.left
                 }
-                size: 20
+                size: Theme.barCornerSize
                 color: Theme.primaryColor
                 corner: RoundCorner.CornerEnum.TopLeft
             }
@@ -59,7 +60,7 @@ Scope {
                     bottom: cornerRectangle.bottom
                     left: cornerRectangle.left
                 }
-                size: 20 
+                size: Theme.barCornerSize
                 color: Theme.primaryColor
                 corner: RoundCorner.CornerEnum.BottomLeft
             }
@@ -132,4 +133,3 @@ Scope {
         }
     }
 }
-

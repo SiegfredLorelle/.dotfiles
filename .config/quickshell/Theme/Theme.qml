@@ -35,4 +35,8 @@ QtObject {
     readonly property int largeSpacing: 8
     readonly property int borderRadius: 10
     readonly property int barGap: 14
+    readonly property int barWidth: 50
+    readonly property int barCornerSize: 20
+    readonly property int barWindowWidth: barWidth + barCornerSize
+    readonly property int barExclusiveZone: 60
 }
