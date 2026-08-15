@@ -142,7 +142,10 @@ Rectangle {
         onClicked: (event) => {
             if (!modelData) return
             if (event.button === Qt.LeftButton) {
-                modelData.activate()
+                // Prefer focusing the app's Hyprland window (reliable); fall back
+                // to SNI activate() for apps hidden entirely to the tray.
+                if (!TrayService.focusTrayItem(modelData))
+                    modelData.activate()
             } else if (event.button === Qt.RightButton) {
                 modelData.secondaryActivate()
             }

@@ -22,7 +22,6 @@ Rectangle {
             for (var workspace of Hyprland.workspaces.values) {
                 workspaces[workspace.id - 1] = workspace
             }
-        console.log("RAN")
         return workspaces;
     }
 
