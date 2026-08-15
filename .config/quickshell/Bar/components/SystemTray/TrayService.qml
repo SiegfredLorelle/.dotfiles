@@ -107,7 +107,7 @@ Singleton {
             const ipcObject = toplevel.lastIpcObject || {}
             const className = (ipcObject.class || "").toLowerCase()
             if (className === targetClass) {
-                Hyprland.dispatch("focuswindow class:" + windowClass)
+                Hyprland.dispatch('hl.dsp.focus({ window = "class:' + windowClass + '" })')
                 return true
             }
         }

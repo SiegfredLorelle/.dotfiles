@@ -78,15 +78,18 @@ Rectangle {
                     }
                 }
 
+                // Hit area is sized to the full pill width + one inter-dot gap
+                // instead of filling the tiny dot (idle dots are only 6px), so the
+                // whole workspace band is clickable. The dot's own width/height
+                // still drive the visuals; this overflows the parent (no clip).
                 MouseArea {
                     id: mouseArea
-                    anchors.fill: parent
+                    anchors.centerIn: parent
+                    width: workspaceContainerWorks.width
+                    height: parent.height + 6
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onPressed: {
-                        var dispatchCommand = "workspace " + (index + 1).toString()
-                        Hyprland.dispatch(dispatchCommand)
-                    }
+                    onPressed: Hyprland.dispatch("hl.dsp.focus({ workspace = " + (index + 1) + " })")
                 }
 
                 Column {

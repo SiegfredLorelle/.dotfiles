@@ -14,7 +14,11 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onPressed: Hyprland.activeToplevel?.workspace.activate()
+        onPressed: {
+            const ws = Hyprland.activeToplevel?.workspace
+            if (ws)
+                Hyprland.dispatch("hl.dsp.focus({ workspace = " + ws.id + " })")
+        }
     }
 
 
