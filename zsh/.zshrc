@@ -56,16 +56,20 @@ bindkey '^[[1;5C' forward-word  # Alt + Right Arrow
 # Increase max number of open files/sockets to prevent error by WakaTime plugin and Lualine's gitt diff in Neovim
 ulimit -n 4096
 
-. "$HOME/.local/bin/env"
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 # bun completions
 [ -s "/home/asdasd/.bun/_bun" ] && source "/home/asdasd/.bun/_bun"
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if [[ -d "$HOME/.bun" ]]; then
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
 # JDK + Android SDK toolchain (user-space installs for gawi)
-export JAVA_HOME="$HOME/.jdks/jdk-17.0.20+8"
-export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH="$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+if [[ -d "$HOME/.jdks/jdk-17.0.20+8" ]]; then
+    export JAVA_HOME="$HOME/.jdks/jdk-17.0.20+8"
+    export ANDROID_HOME="$HOME/Android/Sdk"
+    export PATH="$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+fi
