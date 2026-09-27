@@ -64,3 +64,8 @@ ulimit -n 4096
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# JDK + Android SDK toolchain (user-space installs for gawi)
+export JAVA_HOME="$HOME/.jdks/jdk-17.0.20+8"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
