@@ -31,7 +31,7 @@ ln -s ~/.config/opencode/superpowers/skills ~/.config/opencode/skills/superpower
 ### Option 2: Using the Install Script
 
 ```bash
-bash ~/.dotfiles/.config/opencode/scripts/install-superpowers.sh
+bash ~/.dotfiles/opencode/.config/opencode/scripts/install-superpowers.sh
 ```
 
 ## Verification

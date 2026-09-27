@@ -10,7 +10,7 @@ commands, code style (Lua / QML / Hyprlang), naming conventions, the agent opera
 protocol, and git workflow.
 
 Directory-specific guidance is nested where it's relevant: Quickshell/QML work has its own
-[`.config/quickshell/CLAUDE.md`](./.config/quickshell/CLAUDE.md) (and a matching `AGENTS.md`),
+[`quickshell/.config/quickshell/CLAUDE.md`](./quickshell/.config/quickshell/CLAUDE.md) (and a matching `AGENTS.md`),
 covering the theming contract — `Theme.qml` is the source of truth for colors/fonts/spacing.
 
 ## Critical rule

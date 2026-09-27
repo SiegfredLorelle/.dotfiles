@@ -54,7 +54,6 @@ Before you begin, ensure you have the following installed:
     ```
 3.  **Required Applications:** To fully utilize these dotfiles, you'll need to install the corresponding applications. If an application isn't installed, Stow will still create the symlink, but the configuration won't take effect until the application is present.
 
-    **Not yet working: packages are not yet modularized**
     For example, if you're using `zsh`, `hyprland`, and `neovim`, you would install them like so:
 
     ```bash
@@ -119,29 +118,26 @@ Before you begin, ensure you have the following installed:
 
     GNU Stow works by creating symlinks from the dotfiles in this repository to your home directory. This method is generally safer and more flexible than directly copying files, as it allows for easy updates, removal, and selective deployment.
 
-    * **Simulate Deployment**
-        It's highly recommended to first simulate the Stow command to see what changes will be made without actually performing them.
+    Each top-level directory is a Stow package (`nvim/`, `tmux/`, `hypr/`, ...), so you pick
+    which ones a machine gets. Don't run `stow .`: the repo root is not a package.
 
-        To simulate deploying specific directories (e.g., only `zsh` and `nvim`):
+    | Group | Packages | Use on |
+    |-------|----------|--------|
+    | core | `zsh git nvim tmux` | every machine, including headless servers |
+    | desktop | `hypr kitty quickshell waybar wofi swappy opencode theme claude wallpapers` | the Arch desktop, on top of core |
+
+    * **Simulate Deployment** (always do this first):
         ```bash
-        stow -nv zsh nvim
-        ```
-        To simulate deploying all dotfiles in the repository:
-        ```bash
-        stow -nv .
+        stow -nv zsh git nvim tmux                     # core only
+        stow -nv zsh git nvim tmux hypr kitty quickshell waybar wofi swappy opencode theme claude wallpapers
         ```
 
-    * **Perform Actual Deployment:**
-        If the simulation looks correct, proceed with the actual deployment.
+    * **Perform Actual Deployment:** run the same command without `-n`.
+        ```bash
+        stow zsh git nvim tmux
+        ```
+        To remove a package's symlinks: `stow -D <package>`.
 
-        To deploy specific directories:
-        ```bash
-        stow zsh nvim
-        ```
-        To deploy all dotfiles:
-        ```bash
-        stow .
-        ```
         *(**Important:** If you encounter errors about existing files, you may need to manually remove the old configuration files from your home directory before running Stow, or use `stow --adopt` with caution if you want Stow to manage existing files.)*
 
 4.  **Log Out and Log In:**
@@ -151,6 +147,6 @@ Before you begin, ensure you have the following installed:
 
 ## Superpowers (OpenCode Plugin)
 
-Superpowers is an agentic skills framework for OpenCode that provides structured workflows for software development. See `.config/opencode/README.md` for installation instructions.
+Superpowers is an agentic skills framework for OpenCode that provides structured workflows for software development. See `opencode/.config/opencode/README.md` for installation instructions.
 
 ---

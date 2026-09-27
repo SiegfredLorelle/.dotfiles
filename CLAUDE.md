@@ -12,21 +12,26 @@ These instructions are for AI agents (and humans) to ensure consistency and safe
 
 ## 1. Repository Structure & Navigation
 
-The repository structure maps directly to the target `$HOME` layout.
+Each top-level directory is a GNU Stow package whose contents mirror `$HOME`
+(e.g. `nvim/.config/nvim/` deploys to `~/.config/nvim/`). The repo root itself is
+not a package.
 
 ```text
 .dotfiles/
-├── .config/
-│   ├── hypr/          # Hyprland window manager (Hyprlang)
-│   ├── nvim/          # Neovim configuration (Lua)
-│   ├── tmux/          # Tmux terminal multiplexer (Conf)
-│   ├── quickshell/    # Desktop widgets/bars (QML/QtQuick)
-│   ├── kitty/         # Terminal emulator
-│   └── wofi/          # Application launcher (CSS)
-├── Pictures/assets/   # Wallpapers and icons
-├── .zshrc             # Zsh shell configuration
-└── .gitconfig         # Git configuration
+├── zsh/.zshrc                       # core
+├── git/.gitconfig                   # core
+├── nvim/.config/nvim/               # core: Neovim (Lua)
+├── tmux/.config/tmux/               # core: Tmux (Conf)
+├── hypr/.config/hypr/               # desktop: Hyprland (Lua)
+├── quickshell/.config/quickshell/   # desktop: bar/widgets (QML)
+├── kitty/ waybar/ wofi/ swappy/ opencode/
+├── theme/.config/                   # kdeglobals, xdg-desktop-portal
+├── claude/.claude/settings.json
+└── wallpapers/Pictures/assets/      # wallpapers and icons
 ```
+
+Core packages are what headless machines get; desktop packages are Arch-only.
+Adding a new app means creating a new `<app>/` package, not a dir under a shared `.config/`.
 
 **Agent Note**: Always use absolute paths. The root is `/home/asdasd/.dotfiles`.
 
@@ -36,16 +41,21 @@ Since this is a configuration repository, "building" implies deployment and "tes
 
 ### Deployment (GNU Stow)
 **CRITICAL**: Always perform a dry-run before deploying changes to verify path mapping.
+Never run `stow .` — it would treat the root as a package and create `~/nvim/`, `~/tmux/`, etc.
 ```bash
+CORE="zsh git nvim tmux"
+DESKTOP="hypr kitty quickshell waybar wofi swappy opencode theme claude wallpapers"
+
 # 1. Dry run (Safety Check)
-stow -nv .
+stow -nv $CORE $DESKTOP
 
 # 2. Deploy (Symlink files)
-stow .
+stow $CORE $DESKTOP        # headless machines: stow $CORE
 
 # 3. Clean/Undeploy (Remove symlinks)
-stow -D .
+stow -D <package>
 ```
+(In zsh, unquoted `$CORE` doesn't word-split; use bash, `${=CORE}`, or type the names.)
 
 ### Verification & Linting
 Run these commands to verify the integrity of specific configurations.
@@ -57,7 +67,7 @@ Run these commands to verify the integrity of specific configurations.
   ```
 - **Lint/Format**: Use `stylua` if available.
   ```bash
-  stylua --check .config/nvim/
+  stylua --check nvim/.config/nvim/
   ```
 - **Test Single File**: Open the file and source it.
   ```vim
@@ -67,7 +77,7 @@ Run these commands to verify the integrity of specific configurations.
 #### Quickshell (QML)
 - **Lint Single File**:
   ```bash
-  qmllint .config/quickshell/path/to/file.qml
+  qmllint quickshell/.config/quickshell/path/to/file.qml
   ```
 - **Run/Test**: Restart the process to see changes.
   ```bash
@@ -143,7 +153,7 @@ Comment to explain **why**, not **what** — the code already says what it does.
 
 > **Quickshell deep-dive**: singleton services, data collection (FileView,
 > Process + StdioCollector), timer polling, and the theming contract live in
-> [`.config/quickshell/CLAUDE.md`](.config/quickshell/CLAUDE.md). Read it before
+> [`quickshell/.config/quickshell/CLAUDE.md`](quickshell/.config/quickshell/CLAUDE.md). Read it before
 > editing QML.
 
 ### Hyprlang (Hyprland Config)
@@ -178,7 +188,7 @@ Comment to explain **why**, not **what** — the code already says what it does.
 ### Phase 1: Analyze
 1. **Read `CLAUDE.md`**: You are reading it now.
 2. **Explore**: Use `ls -R` or `find` to locate relevant config files.
-3. **Context**: Read surrounding files to understand specific plugin configurations or theme variables (especially `.config/quickshell/Theme/Theme.qml`).
+3. **Context**: Read surrounding files to understand specific plugin configurations or theme variables (especially `quickshell/.config/quickshell/Theme/Theme.qml`).
 
 ### Phase 2: Implementation
 1. **Backups**: Do not create `.bak` files. Rely on `git` for version control.
@@ -225,10 +235,10 @@ Always leave committing to the user. Present staged changes and suggest an appro
 ## 6. Theme & Color Palette
 
 The UI theme (colors, fonts, spacing) is defined in
-[`.config/quickshell/Theme/Theme.qml`](.config/quickshell/Theme/Theme.qml) — the
+[`quickshell/.config/quickshell/Theme/Theme.qml`](quickshell/.config/quickshell/Theme/Theme.qml) — the
 **single source of truth**. Never hardcode hex values; reference `Theme.*`
 properties. Semantic usage guidance lives in
-[`.config/quickshell/CLAUDE.md`](.config/quickshell/CLAUDE.md).
+[`quickshell/.config/quickshell/CLAUDE.md`](quickshell/.config/quickshell/CLAUDE.md).
 
 ---
 *Generated for agentic coding context.*
