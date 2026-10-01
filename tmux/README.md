@@ -26,8 +26,12 @@ sudo dnf install tmux git               # Fedora
    ```bash
    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
    ```
-2. Start tmux and press `prefix + I` (capital i) to install the plugins: sensible,
-   vim-tmux-navigator, yank, resurrect, continuum.
+2. Start tmux and press `Ctrl+b`, release it, then press `Shift+i`. This config doesn't
+   change the prefix, so it's the default `Ctrl+b`, not Super. That installs the plugins:
+   sensible, vim-tmux-navigator, yank, resurrect, continuum. Or skip the keybind:
+   ```bash
+   ~/.config/tmux/plugins/tpm/bin/install_plugins
+   ```
 
 ## Verify
 
