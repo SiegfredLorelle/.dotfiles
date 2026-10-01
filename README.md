@@ -52,39 +52,18 @@ Before you begin, ensure you have the following installed:
     ```bash
     sudo pacman -S stow
     ```
-3.  **Required Applications:** To fully utilize these dotfiles, you'll need to install the corresponding applications. If an application isn't installed, Stow will still create the symlink, but the configuration won't take effect until the application is present.
+3.  **Package dependencies:** Every package has its own `README.md` that lists the
+    tools it needs, with install commands, and the manual steps to run after stowing.
+    Core packages include Arch, Debian/Ubuntu and Fedora commands; desktop packages are
+    Arch only. Stow skips these READMEs, so they never end up in `$HOME`.
 
-    For example, if you're using `zsh`, `hyprland`, and `neovim`, you would install them like so:
+    | Group | Package READMEs |
+    |-------|-----------------|
+    | core | [zsh](zsh/README.md) · [git](git/README.md) · [nvim](nvim/README.md) · [tmux](tmux/README.md) |
+    | desktop | [hypr](hypr/README.md) · [quickshell](quickshell/README.md) · [kitty](kitty/README.md) · [waybar](waybar/README.md) · [wofi](wofi/README.md) · [swappy](swappy/README.md) · [opencode](opencode/README.md) · [theme](theme/README.md) · [claude](claude/README.md) · [wallpapers](wallpapers/README.md) |
 
-    ```bash
-    sudo pacman -S zsh hyprland kitty wofi
-    ```
-
-    #### Before proceeding make sure the following are installed:
-
-    - npm
-    - yarn
-
-    ```bash
-    sudo pacman -S yarn npm
-    ```
-
-    #### screenshots:
-
-    Install tmux and tmux plugin manager (tpm)
-
-    ```bash
-    sudo pacman -S hyprshot swappy
-    ```
-
-    #### tmux:
-
-    Install tmux and tmux plugin manager (tpm)
-
-    ```bash
-    sudo pacman -S tmux
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    ```
+    nvim has the most to install: `make`, a C compiler, Node/npm, Yarn, Python venv,
+    ripgrep and sqlite are all needed before its first launch.
 
 ---
 
@@ -140,7 +119,11 @@ Before you begin, ensure you have the following installed:
 
         *(**Important:** If you encounter errors about existing files, you may need to manually remove the old configuration files from your home directory before running Stow, or use `stow --adopt` with caution if you want Stow to manage existing files.)*
 
-4.  **Log Out and Log In:**
+4.  **Run each package's post-stow steps:** for example, the Lazy/Mason sync for nvim,
+    TPM for tmux and `chsh` for zsh. They're listed under "After `stow <pkg>`" in each
+    package's README.
+
+5.  **Log Out and Log In:**
     After deploying your dotfiles, it's crucial to **log out of your current session and then log back in**. This ensures that all changes, especially those related to your shell and desktop environment configurations, take full effect.
 
 ---

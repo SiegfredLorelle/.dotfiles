@@ -33,6 +33,10 @@ not a package.
 Core packages are what headless machines get; desktop packages are Arch-only.
 Adding a new app means creating a new `<app>/` package, not a dir under a shared `.config/`.
 
+Each package has a root `<pkg>/README.md` listing its external dependencies and
+post-stow steps (Stow ignores package-root `README.*`). When a config change adds a
+dependency (new binary, build step, font, LSP), update that README in the same change.
+
 **Agent Note**: Always use absolute paths. The root is `/home/asdasd/.dotfiles`.
 
 ## 2. Build, Lint, and Test Commands
