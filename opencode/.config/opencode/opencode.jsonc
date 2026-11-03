@@ -1,9 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // NOTE: Superpowers plugin is managed externally
-  // Install/update separately via: ~/.dotfiles/opencode/.config/opencode/scripts/install-superpowers.sh
-  // See .config/opencode/README.md for details
-  
   // TUI-specific settings for the terminal interface
   "tui": {
     "scroll_speed": 3,
