@@ -22,6 +22,8 @@ not a package.
 ├── git/.gitconfig                   # core
 ├── nvim/.config/nvim/               # core: Neovim (Lua)
 ├── tmux/.config/tmux/               # core: Tmux (Conf)
+├── herdr/.config/herdr/             # core: herdr (TOML)
+├── herdr-app/.config/herdr-app/     # desktop: herdr GUI keys + mods (JSON, JS)
 ├── hypr/.config/hypr/               # desktop: Hyprland (Lua)
 ├── quickshell/.config/quickshell/   # desktop: bar/widgets (QML)
 ├── kitty/ waybar/ wofi/ swappy/ opencode/
@@ -47,8 +49,8 @@ Since this is a configuration repository, "building" implies deployment and "tes
 **CRITICAL**: Always perform a dry-run before deploying changes to verify path mapping.
 Never run `stow .` — it would treat the root as a package and create `~/nvim/`, `~/tmux/`, etc.
 ```bash
-CORE="zsh git nvim tmux"
-DESKTOP="hypr kitty quickshell waybar wofi swappy opencode theme claude wallpapers"
+CORE="zsh git nvim tmux herdr"
+DESKTOP="hypr herdr-app kitty quickshell waybar wofi swappy opencode theme claude wallpapers"
 
 # 1. Dry run (Safety Check)
 stow -nv $CORE $DESKTOP
