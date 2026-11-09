@@ -3,7 +3,7 @@
 Herdr desktop app (`herdr-app`) keybindings and mods. Deploys into `~/.config/herdr-app`.
 The terminal version of herdr is configured in the separate `herdr` package.
 
-Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,picker-vim,tmux-status}/` are tracked. The app writes everything else in
+Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,picker-vim,tmux-status,copy-mode}/` are tracked. The app writes everything else in
 `~/.config/herdr-app/` itself, including layouts, state, sockets, and the shipped mods.
 
 ## Dependencies
@@ -11,6 +11,7 @@ Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,pick
 | Tool | Needed for | Required? |
 |------|------------|-----------|
 | `herdr-app` + `herdr-core` | reads `~/.config/herdr-app` | yes |
+| `nvim` with `clipboard=unnamedplus`, `wl-copy` | copy mode (`Ctrl+b [`) yanks to the system clipboard | yes |
 
 ## Install
 
@@ -52,6 +53,21 @@ herdr-app status                                   # "errors": []
 The app has no prefix keys, so `mods/prefix` adds one. `Ctrl+b` opens a small popup.
 The next key you press runs a command (tmux keys first, then the herdr terminal app's
 keys), and Esc cancels. The key map is `ACTIONS` in `mods/prefix/main.js`.
+
+## Copy mode (`Ctrl+b [`)
+
+herdr has no copy mode, so `mods/copy-mode` imitates tmux's. It writes the focused
+terminal's screen and up to 10,000 lines of scrollback to
+`~/.cache/herdr-copy-mode/<terminal>.txt` and opens that file in Neovim in a new
+`copy` tab. Use vim motions and `y` to copy. `q`, `Esc` or `:q` closes the tab and
+returns you to the tab you started from. `Ctrl+b /` searches in place instead.
+
+It opens a tab rather than a popup because herdr can't give the keyboard to a terminal
+inside a dialog. The first read of an idle agent's history takes about 3 seconds.
+
+While an agent is working, `hc read` returns only its screen, not its history, and
+ends the file with an `[hc]` note saying so. Wait until the agent stops if you need
+the scrollback.
 
 ## `picker-vim`
 

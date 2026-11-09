@@ -61,7 +61,8 @@ const ACTIONS = {
     s: ["mod.open", { name: "picker-vim" }],
     w: ["mod.open", { name: "picker-vim" }],
     b: ["layout.toggle", { id: "sidebar" }],
-    "[": ["terminal.search"],
+    "[": ["mod.open", { name: "copy-mode" }],
+    "/": ["terminal.search"],
     "]": ["terminal.paste"],
     "?": ["app.help"],
 };
