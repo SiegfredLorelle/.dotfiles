@@ -38,7 +38,7 @@ sidebar and borders to the same One Dark colors as the footer. Picking a theme i
 app overrides it. To get it back, set `"theme": "tmux"` on the layout root again.
 
 Removing the top bar also removes the Files/Changes panel buttons and the window
-buttons. Use the command palette (`Ctrl+Shift+P`) for those.
+buttons. `Ctrl+b f` and `Ctrl+b g` open or close the Files and Changes panels instead.
 
 ## Verify
 

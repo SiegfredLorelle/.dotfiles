@@ -3,11 +3,36 @@
 
 import { View, div } from "gpui-kit";
 import { h_flex } from "gpui-base";
-import { run, props, closeOverlay, theme } from "herdr";
+import { run, props, closeOverlay, theme, layout } from "herdr";
+
+function findNode(node, id) {
+    if (node?.id === id) return node;
+    for (const child of node?.children ?? []) {
+        const found = findNode(child, id);
+        if (found) return found;
+    }
+    return null;
+}
+
+// The tmux layout dropped the tab bar that held the Files/Changes buttons, so these
+// keys stand in for them: open the panel on that view, or close it if already showing.
+function togglePanel(view) {
+    const root = layout();
+    const panel = findNode(root, "panel");
+    if (!panel) return;
+    if (!panel.hidden && findNode(root, "panel-body")?.active === view) {
+        run("layout.hide", { id: "panel" });
+        return;
+    }
+    run("layout.select", { stack: "panel-body", child: view });
+    run("layout.show", { id: "panel" });
+}
 
 // Keys follow tmux first, then the herdr terminal app where tmux has no binding.
 const ACTIONS = {
     c: ["tab.new"],
+    f: () => togglePanel("files"),
+    g: () => togglePanel("changes"),
     '"': ["pane.split", { direction: "down" }],
     "%": ["pane.split", { direction: "right" }],
     "-": ["pane.split", { direction: "down" }],
@@ -60,7 +85,9 @@ export default class Prefix extends View {
                 cx.stop_propagation();
                 closeOverlay(props().overlay);
                 const action = ACTIONS[e.key_char] ?? ACTIONS[e.key];
-                if (action && e.key !== "escape") run(action[0], action[1] ?? {});
+                if (!action || e.key === "escape") return;
+                if (typeof action === "function") action();
+                else run(action[0], action[1] ?? {});
             })
             .size_full()
             .px(14)
