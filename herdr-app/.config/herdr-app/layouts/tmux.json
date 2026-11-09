@@ -1,10 +1,11 @@
 {
   "id": "root",
+  "type": "row",
+  "theme": "tmux",
   "cloned_from": {
     "name": "main",
     "version": "0.1.14"
   },
-  "type": "row",
   "children": [
     {
       "id": "sidebar",

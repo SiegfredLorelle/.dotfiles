@@ -3,7 +3,7 @@
 Herdr desktop app (`herdr-app`) keybindings and mods. Deploys into `~/.config/herdr-app`.
 The terminal version of herdr is configured in the separate `herdr` package.
 
-Only `keys.json`, `layouts/tmux.json` and `mods/{prefix,picker-vim,tmux-status}/` are tracked. The app writes everything else in
+Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,picker-vim,tmux-status}/` are tracked. The app writes everything else in
 `~/.config/herdr-app/` itself, including layouts, state, sockets, and the shipped mods.
 
 ## Dependencies
@@ -31,6 +31,11 @@ and the footer is the `tmux-status` mod, which copies the tmux status line: the 
 name, tabs with Nerd Font icons (the active tab is magenta), and the hostname. Its colors
 and icon mapping come from `tmux/.config/tmux/tmux.conf` and `get-window-icon.sh`, so
 change them in both places. The footer needs JetBrainsMono Nerd Font.
+
+The layout uses `themes/tmux.json`. The theme shares its name with the layout, so it
+belongs to that layout and doesn't show up for other layouts. It sets the terminals,
+sidebar and borders to the same One Dark colors as the footer. Picking a theme in the
+app overrides it. To get it back, set `"theme": "tmux"` on the layout root again.
 
 Removing the top bar also removes the Files/Changes panel buttons and the window
 buttons. Use the command palette (`Ctrl+Shift+P`) for those.
