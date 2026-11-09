@@ -1,0 +1,23 @@
+# herdr config, ported from tmux/.config/tmux/tmux.conf. Only non-default values live here.
+onboarding = false
+
+[theme]
+# Matches the One Dark palette used in tmux and kitty.
+name = "one-dark"
+
+[keys]
+# tmux muscle memory: prefix+r reloads, so resize mode moves to shift+r.
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+# tmux split keys: " stacks panes, % puts them side by side.
+split_horizontal = "prefix+quote"
+split_vertical = "prefix+percent"
+
+[ui]
+accent = "#c678dd"
+tab_bar_position = "bottom"
+tab_bar_right = [{ type = "hostname" }]
+
+[experimental]
+# Replaces tmux-resurrect/continuum scrollback restore across server restarts.
+pane_history = true
