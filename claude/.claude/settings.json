@@ -1,5 +1,6 @@
 {
   "theme": "dark",
   "model": "opus[1m]",
-  "includeCoAuthoredBy": false
+  "includeCoAuthoredBy": false,
+  "autoMemoryEnabled": false
 }
