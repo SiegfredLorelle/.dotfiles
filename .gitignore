@@ -9,3 +9,7 @@ __pycache__/
 
 # Local config (contains sensitive data)
 .gitconfig.local
+
+# Editor typings herdr-app writes into each mod folder
+herdr-app/.config/herdr-app/mods/*/gpui-kit.d.ts
+herdr-app/.config/herdr-app/mods/*/jsconfig.json
