@@ -1,7 +1,7 @@
 // Footer that mirrors the tmux status line in tmux/.config/tmux/tmux.conf:
-// space name pill, tabs with nerd-font icons (active one magenta), host pill.
+// space name pill, tabs with herdr's program icons (active one magenta), host pill.
 
-import { View, div } from "gpui-kit";
+import { View, div, svg } from "gpui-kit";
 import { h_flex } from "gpui-base";
 import { spaces, panes, run, exec } from "herdr";
 
@@ -11,15 +11,6 @@ const LBG = "#3F4451";
 const LFG = "#abb2bf";
 const MAGENTA = "#c678dd";
 const FONT = "JetBrainsMono Nerd Font";
-
-// Same mapping as tmux/.config/tmux/scripts/get-window-icon.sh.
-function icon(name) {
-    if (["nvim", "vim", "neovim"].includes(name)) return "";
-    if (["zsh", "bash", "terminal", "shell"].includes(name)) return "";
-    if (["tmux", "[tmux]"].includes(name)) return "";
-    if (name === "git") return "";
-    return "";
-}
 
 export default class TmuxStatus extends View {
     init(_props, cx) {
@@ -47,7 +38,8 @@ export default class TmuxStatus extends View {
                 .cursor_pointer()
                 .when(c.active, (el) => el.bg(MAGENTA).text_color(BG).font_weight(700))
                 .on_click(() => run("tab.select", { id: c.id }))
-                .child(icon(name.toLowerCase()))
+                // svg() masks even multi-color icons (e.g. Claude's) so they read like tmux's glyphs.
+                .child(svg(pane?.program?.icon ?? "icons/shell.svg").size(13).flex_none().text_color(c.active ? BG : LFG))
                 .child(c.zoomed ? `${name} Z` : name);
         };
         return h_flex()

@@ -29,9 +29,10 @@ See https://herdr.dev. The binaries live in `~/.local/bin`.
 
 This is a copy of the app's `main` layout with two changes. The top tab bar is removed,
 and the footer is the `tmux-status` mod, which copies the tmux status line: the space
-name, tabs with Nerd Font icons (the active tab is magenta), and the hostname. Its colors
-and icon mapping come from `tmux/.config/tmux/tmux.conf` and `get-window-icon.sh`, so
-change them in both places. The footer needs JetBrainsMono Nerd Font.
+name, tabs with program icons (the active tab is magenta), and the hostname. Its colors
+come from `tmux/.config/tmux/tmux.conf`, so change them in both places. The icons are
+herdr's own program icons (the ones the sidebar shows), not `get-window-icon.sh`'s Nerd
+Font glyphs. The footer needs JetBrainsMono Nerd Font.
 
 The layout uses `themes/tmux.json`. The theme shares its name with the layout, so it
 belongs to that layout and doesn't show up for other layouts. It sets the terminals,
