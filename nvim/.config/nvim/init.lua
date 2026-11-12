@@ -42,4 +42,5 @@ require("lazy").setup({
     require("plugins.tmux-navigator"),
     require("plugins.markdown-preview"),
     require("plugins.obsidian"),
+    require("plugins.persistence"),
 })
