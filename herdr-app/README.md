@@ -25,6 +25,15 @@ See https://herdr.dev. The binaries live in `~/.local/bin`.
 3. Switch to the tmux layout with `herdr-app do layout.switch --name tmux`, or cycle
    layouts with `Ctrl+Shift+L`.
 
+## `keys.json` on Linux and macOS
+
+`keys.json` has no per-OS sections, so one file holds both sets: Linux uses the
+`ctrl`/`alt` binds, macOS the stock `cmd` binds. The other OS's set doesn't get in
+the way. Option types characters on macOS, and on Linux `cmd` means Super, which
+Hyprland takes first for its own binds. `Ctrl+1-9` selects tabs on both, so macOS
+spaces moved to `Cmd+Option+1-9`. In a terminal, `Alt+←/→` jump by word, which
+overrides the Linux pane binds there (`Alt+h/l` still move between panes).
+
 ## The `tmux` layout
 
 This is a copy of the app's `main` layout with two changes. The top tab bar is removed,
