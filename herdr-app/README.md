@@ -12,6 +12,13 @@ Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,pick
 |------|------------|-----------|
 | `herdr-app` + `herdr-core` | reads `~/.config/herdr-app` | yes |
 | `nvim` with `clipboard=unnamedplus`, `wl-copy` | copy mode (`Ctrl+b [`) yanks to the system clipboard | yes |
+| JetBrainsMono Nerd Font | `tmux-status` footer text and icons | yes |
+
+Install the font before you use the `tmux` layout. Otherwise the footer falls back to
+the system font. Restart the app after you install it.
+
+- Arch: `sudo pacman -S ttf-jetbrains-mono-nerd`
+- macOS: `brew install --cask font-jetbrains-mono-nerd-font`
 
 ## Install
 
