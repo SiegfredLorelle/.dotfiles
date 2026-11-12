@@ -3,6 +3,7 @@
 !.gitignore
 !settings.json
 !CLAUDE.md
+!statusline.sh
 !commands/
 !commands/**
 !agents/

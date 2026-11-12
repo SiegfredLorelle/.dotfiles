@@ -2,5 +2,9 @@
   "theme": "dark",
   "model": "opus[1m]",
   "includeCoAuthoredBy": false,
-  "autoMemoryEnabled": false
+  "autoMemoryEnabled": false,
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  }
 }
