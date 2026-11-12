@@ -10,6 +10,7 @@ Do not edit these files in place; if you change one, note it under "Local modifi
 | [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) | `2c606141936f1eeef17fa3043a72095b4765b9c2` | no LICENSE file (SKILL.md frontmatter says MIT) |
 | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | MIT, see `LICENSE-mattpocock` |
 | [cursor/plugins](https://github.com/cursor/plugins) (`pstack/`) | `ae5650febf4320793844c12c4adaa937f417f8da` | MIT, see `LICENSE-pstack` |
+| [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill) | `c1c8a8c1471069fb0e188eeaff69b8e8db6564a8` | MIT, see `LICENSE-cloudflare-security-audit` |
 
 ## Files
 
@@ -39,6 +40,7 @@ Do not edit these files in place; if you change one, note it under "Local modifi
 | `skills/ketchup/` | cursor/plugins | `pstack/skills/ketchup/` |
 | `skills/create-verification-skill/` | cursor/plugins | `pstack/skills/create-verification-skill/` |
 | `skills/maintain-verification-skill/` | cursor/plugins | `pstack/skills/maintain-verification-skill/` |
+| `skills/security-audit/` | cloudflare/security-audit-skill | `skills/security-audit/` |
 
 ## Checking for upstream changes
 
@@ -47,11 +49,12 @@ T=$(mktemp -d)
 git clone -q --depth 1 https://github.com/mattpocock/skills.git "$T/matt"
 git clone -q --depth 1 https://github.com/cursor/plugins.git "$T/cursor"
 git clone -q --depth 1 https://github.com/forrestchang/andrej-karpathy-skills.git "$T/karpathy"
+git clone -q --depth 1 https://github.com/cloudflare/security-audit-skill.git "$T/cloudflare"
 cd ~/.dotfiles/claude/.claude
 diff "$T/karpathy/CLAUDE.md" CLAUDE.md
 for d in skills/*/; do
   n=$(basename "$d")
-  src=$(ls -d "$T"/matt/skills/*/"$n" "$T/cursor/pstack/skills/$n" 2>/dev/null | head -1)
+  src=$(ls -d "$T"/matt/skills/*/"$n" "$T/cursor/pstack/skills/$n" "$T/cloudflare/skills/$n" 2>/dev/null | head -1)
   [ -n "$src" ] && diff -r "$src" "$d"
 done
 # Upstream changelogs: git -C "$T/matt" log --oneline 4ae2317..HEAD -- skills/
