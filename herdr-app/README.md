@@ -75,16 +75,17 @@ keys), and Esc cancels. The key map is `ACTIONS` in `mods/prefix/main.js`.
 
 herdr has no copy mode, so `mods/copy-mode` imitates tmux's. It writes the focused
 terminal's screen and up to 10,000 lines of scrollback to
-`~/.cache/herdr-copy-mode/<terminal>.txt` and opens that file in Neovim in a new
-`copy` tab. Use vim motions and `y` to copy. `q`, `Esc` or `:q` closes the tab and
-returns you to the tab you started from. `Ctrl+b /` searches in place instead.
+`~/.cache/herdr-copy-mode/<terminal>.txt` and opens that file in Neovim in the same pane,
+using `terminal.show` to swap it in for the terminal. Use vim motions and `y` to copy.
+`q`, `Esc` or `:q` puts the original terminal back. `Ctrl+b /` searches in place instead.
 
-It opens a tab rather than a popup because herdr can't give the keyboard to a terminal
-inside a dialog. The first read of an idle agent's history takes about 3 seconds.
+Neovim runs in a terminal of its own with no pane (`hc run --bg --rm`), which removes
+itself when Neovim exits.
 
-While an agent is working, `hc read` returns only its screen, not its history, and
-ends the file with an `[hc]` note saying so. Wait until the agent stops if you need
-the scrollback.
+While an agent is working, `hc read` waits about 25 seconds before it returns just the
+screen. Copy mode gives up on the history after 1.5 seconds and opens the screen alone,
+with a `[copy-mode]` note on the last line. Wait until the agent stops if you need the
+scrollback.
 
 ## `picker-vim`
 
