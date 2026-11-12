@@ -3,7 +3,7 @@
 Herdr desktop app (`herdr-app`) keybindings and mods. Deploys into `~/.config/herdr-app`.
 The terminal version of herdr is configured in the separate `herdr` package.
 
-Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,picker-vim,tmux-status,copy-mode}/` are tracked. The app writes everything else in
+Only `keys.json`, `layouts/tmux.json`, `themes/tmux.json` and `mods/{prefix,picker-vim,space-picker,tmux-status,copy-mode}/` are tracked. The app writes everything else in
 `~/.config/herdr-app/` itself, including layouts, state, sockets, and the shipped mods.
 
 ## Dependencies
@@ -89,14 +89,20 @@ the scrollback.
 ## `picker-vim`
 
 This is a copy of the app's own `picker` mod with `Ctrl+j`/`Ctrl+k` added for moving
-the selection. Plain `j`/`k` stay as text for the filter. `Ctrl+b s` and `Ctrl+b w`
-open it. The copy was made from picker 0.1.14 (see `cloned_from` in `mod.json`), so it
+the selection. Plain `j`/`k` stay as text for the filter. `Ctrl+b w` opens it, like
+tmux `choose-window`. The copy was made from picker 0.1.14 (see `cloned_from` in `mod.json`), so it
 won't pick up later changes to the app's picker. To update it, clone the new version and
 add the `ctrl+j/k` lines again:
 
 ```bash
 herdr-app do mod.clone --name picker --as picker-vim-new
 ```
+
+## `space-picker`
+
+`Ctrl+b s` opens it, like tmux `choose-session`. It lists spaces only, without their
+tabs. Type to filter, move with `Ctrl+j`/`Ctrl+k` or the arrows, and press Enter to
+switch. Its space colors use the same code as the app's picker, so the chips match.
 
 ## Gotchas
 

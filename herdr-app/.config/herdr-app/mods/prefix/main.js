@@ -58,7 +58,7 @@ const ACTIONS = {
     W: ["space.rename"],
     "(": ["space.prev"],
     ")": ["space.next"],
-    s: ["mod.open", { name: "picker-vim" }],
+    s: ["mod.open", { name: "space-picker" }],
     w: ["mod.open", { name: "picker-vim" }],
     b: ["layout.toggle", { id: "sidebar" }],
     "[": ["mod.open", { name: "copy-mode" }],
