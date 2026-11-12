@@ -1,5 +1,6 @@
-// tmux choose-session for herdr-app: lists spaces only (picker-vim lists tabs). Type to
-// filter, ↑/↓ or ctrl+j/k and Enter to go, Esc to leave.
+// tmux choose-session for herdr-app: lists spaces only (picker-vim lists tabs), grouped by
+// machine like the sidebar once more than one shows. Type to filter, ↑/↓ or ctrl+j/k and
+// Enter to go, Esc to leave.
 
 import { View, div, svg } from "gpui-kit";
 import { v_flex, h_flex, InputState, Input } from "gpui-base";
@@ -47,7 +48,12 @@ export default class SpacePicker extends View {
 
   rows() {
     const f = this.filter.toLowerCase();
-    return spaces().filter((w) => !f || w.name.toLowerCase().includes(f));
+    // Sidebar order: this computer first, then remote machines by name. Sorting here keeps
+    // the arrow keys moving in the order the rows are drawn.
+    const key = (w) => (w.machine === null ? "" : `\u0001${w.machine}`);
+    return spaces()
+      .filter((w) => !f || w.name.toLowerCase().includes(f))
+      .sort((a, b) => key(a).localeCompare(key(b)) || a.index - b.index);
   }
 
   go(w) {
@@ -67,6 +73,10 @@ export default class SpacePicker extends View {
     if (this.at === null) this.at = Math.max(0, rows.findIndex((w) => w.active));
     this.at = Math.max(0, Math.min(this.at, rows.length - 1));
     const sel = rows[this.at];
+
+    const grouped = new Set(rows.map((w) => w.machine)).size > 1;
+    const header = (m) =>
+      div().id(`sp-machine-${m ?? "local"}`).mx(4).px(10).pt(8).pb(2).flex_none().text_size(11).text_color(t.dim).child(m ?? "This computer");
 
     const row = (w) =>
       h_flex()
@@ -114,6 +124,6 @@ export default class SpacePicker extends View {
           .child(svg("mods/workspace-chrome/search.svg").size(15).text_color(t.dim))
           .child(Input.new(this.input).flex_1().h_full().text_size(12.8).text_color(t.foreground)),
       )
-      .child(v_flex().id("sp-list").max_h(320).mb(6).overflow_y_scroll().children(rows.map(row)));
+      .child(v_flex().id("sp-list").max_h(320).mb(6).overflow_y_scroll().children(rows.flatMap((w, i) => (grouped && (i === 0 || rows[i - 1].machine !== w.machine) ? [header(w.machine), row(w)] : [row(w)]))));
   }
 }

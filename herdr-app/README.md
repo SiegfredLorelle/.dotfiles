@@ -45,7 +45,8 @@ overrides the Linux pane binds there (`Alt+h/l` still move between panes).
 
 This is a copy of the app's `main` layout with two changes. The top tab bar is removed,
 and the footer is the `tmux-status` mod, which copies the tmux status line: the space
-name, tabs with program icons (the active tab is magenta), and the hostname. Its colors
+name, tabs with program icons (the active tab is magenta), and the active space's machine (the
+hostname when the space is on this computer). Its colors
 come from `tmux/.config/tmux/tmux.conf`, so change them in both places. The icons are
 herdr's own program icons (the ones the sidebar shows), not `get-window-icon.sh`'s Nerd
 Font glyphs. The footer needs JetBrainsMono Nerd Font.
@@ -102,7 +103,8 @@ herdr-app do mod.clone --name picker --as picker-vim-new
 ## `space-picker`
 
 `Ctrl+b s` opens it, like tmux `choose-session`. It lists spaces only, without their
-tabs. Type to filter, move with `Ctrl+j`/`Ctrl+k` or the arrows, and press Enter to
+tabs, grouped under a header per machine ("This computer" first) once spaces live on
+more than one. Type to filter, move with `Ctrl+j`/`Ctrl+k` or the arrows, and press Enter to
 switch. Its space colors use the same code as the app's picker, so the chips match.
 
 ## Gotchas

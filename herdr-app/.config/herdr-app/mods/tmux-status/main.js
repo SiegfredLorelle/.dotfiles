@@ -1,5 +1,6 @@
 // Footer that mirrors the tmux status line in tmux/.config/tmux/tmux.conf:
-// space name pill, tabs with herdr's program icons (active one magenta), host pill.
+// space name pill, tabs with herdr's program icons (active one magenta), and a pill naming
+// the active space's machine (this computer's hostname when it is local).
 
 import { View, div, svg } from "gpui-kit";
 import { h_flex } from "gpui-base";
@@ -52,6 +53,6 @@ export default class TmuxStatus extends View {
             .text_size(13)
             .child(pill(space?.name ?? ""))
             .child(h_flex().pl(24).gap(6).flex_1().min_w(0).items_center().children((space?.tabs ?? []).map(tab)))
-            .child(pill(this.host));
+            .child(pill(space?.machine ?? this.host));
     }
 }
