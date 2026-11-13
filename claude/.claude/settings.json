@@ -1,10 +1,7 @@
 {
-  "theme": "dark",
-  "model": "opus[1m]",
-  "includeCoAuthoredBy": false,
+  "attribution": { "commit": "", "pr": "", "sessionUrl": false },
+  "model": "opus",
   "autoMemoryEnabled": false,
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
-  }
+  "theme": "dark",
+  "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" }
 }
