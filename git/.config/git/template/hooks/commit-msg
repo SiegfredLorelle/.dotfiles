@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Copied into every new clone or `git init` via init.templateDir (see ../../../../.gitconfig).
+# Strips AI attribution from commit messages; human Co-Authored-By trailers are kept.
+# If pre-commit later installs its own commit-msg hook, it keeps this one as
+# commit-msg.legacy and still runs it.
+perl -i -ne 'print unless /^Co-Authored-By:.*(claude|anthropic\.com)/i || /^Claude-Session:/i || /Generated with \[?Claude Code/' "$1"

@@ -6,3 +6,8 @@
     # editor = code --wait
     # for neovim
     editor = nvim
+[init]
+	# Every new clone/init gets a copy of the hooks in here (strip AI attribution).
+	# Points into the repo, not the stowed ~/.config path: git copies a symlink as-is, and stow's relative link breaks inside .git/hooks.
+	# An existing repo picks them up with a re-run of `git init` inside it.
+	templateDir = ~/.dotfiles/git/.config/git/template
