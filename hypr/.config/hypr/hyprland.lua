@@ -24,7 +24,7 @@ hl.monitor({
 ----------------
 
 local terminal = "kitty"
-local fileManager = "dolphin"
+local fileManager = "nautilus"
 local menu = "wofi --show drun"
 
 ----------------

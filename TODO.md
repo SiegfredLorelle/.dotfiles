@@ -69,9 +69,6 @@
 - run fastfetch every open of the terminal?
 - style it
 
-## Dolphin
-- colors
-
 ## Wofi
 - run timeshift through it (have different command)
 

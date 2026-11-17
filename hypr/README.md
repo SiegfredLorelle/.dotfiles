@@ -17,7 +17,7 @@ Desktop only (Arch).
 | `brightnessctl` | brightness keys | optional (laptops) |
 | `hyprshot`, `swappy` | screenshot binds | optional |
 | `hyprpicker` | color picker bind | optional |
-| `dolphin`, `archlinux-xdg-menu` | file manager and its "Open with" menu | optional |
+| `nautilus`, `gvfs` (+ `gvfs-mtp`, `gvfs-smb`) | file manager; phones and network shares | optional |
 | `gnome-keyring` | secrets daemon | optional |
 | `qt6ct`, `adw-gtk3` | Qt and GTK dark theming | optional |
 
@@ -26,7 +26,7 @@ Desktop only (Arch).
 ```bash
 sudo pacman -S --needed hyprland kitty wofi swaync hypridle hyprpaper hyprlock \
     hyprpolkitagent xdg-desktop-portal-hyprland xdg-desktop-portal-gtk wireplumber \
-    playerctl brightnessctl hyprshot swappy hyprpicker dolphin archlinux-xdg-menu \
+    playerctl brightnessctl hyprshot swappy hyprpicker nautilus gvfs \
     gnome-keyring qt6ct adw-gtk-theme
 ```
 Quickshell has its own setup, covered in the [quickshell package](../quickshell/README.md).
