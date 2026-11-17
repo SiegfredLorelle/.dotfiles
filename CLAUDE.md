@@ -29,6 +29,7 @@ not a package.
 ├── kitty/ waybar/ wofi/ swappy/ opencode/
 ├── theme/.config/                   # kdeglobals, xdg-desktop-portal
 ├── claude/.claude/settings.json
+├── mimeapps/.config/mimeapps.list   # desktop: default applications
 └── wallpapers/Pictures/assets/      # wallpapers and icons
 ```
 
@@ -50,7 +51,7 @@ Since this is a configuration repository, "building" implies deployment and "tes
 Never run `stow .` — it would treat the root as a package and create `~/nvim/`, `~/tmux/`, etc.
 ```bash
 CORE="zsh git nvim tmux herdr"
-DESKTOP="hypr herdr-app kitty quickshell waybar wofi swappy opencode theme claude wallpapers"
+DESKTOP="hypr herdr-app kitty quickshell waybar wofi swappy opencode theme mimeapps claude wallpapers"
 
 # 1. Dry run (Safety Check)
 stow -nv $CORE $DESKTOP
