@@ -1,6 +1,10 @@
 [Default Applications]
 inode/directory=org.gnome.Nautilus.desktop
 image/png=swappy.desktop
+image/jpeg=swappy.desktop
+image/webp=swappy.desktop
+image/bmp=swappy.desktop
+image/tiff=swappy.desktop
 application/pdf=zen.desktop
 text/html=zen.desktop
 application/xhtml+xml=zen.desktop

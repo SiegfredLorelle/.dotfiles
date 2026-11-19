@@ -8,7 +8,8 @@ Deploys to `~/.config`.
 | Tool | Needed for | Required? |
 |------|------------|-----------|
 | `nautilus` | folders | optional |
-| `swappy` | PNG images | optional |
+| `swappy` | images (PNG, JPEG, WebP, BMP, TIFF) | optional |
+| `webp-pixbuf-loader` | WebP images in swappy | optional |
 | `zen-browser` (AUR) | web links, HTML, PDF | optional |
 
 ## Gotchas
