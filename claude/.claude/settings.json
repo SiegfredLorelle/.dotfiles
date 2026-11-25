@@ -3,5 +3,6 @@
   "model": "opus",
   "autoMemoryEnabled": false,
   "theme": "dark",
-  "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" }
+  "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" },
+  "idleCompaction": false
 }
